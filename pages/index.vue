@@ -1,3 +1,13 @@
+<script lang="ts" setup>
+const title = ref("TOP")
+</script>
+
 <template>
-  <div>音札ポータルへようこそ</div>
+  <div>
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
+
+    音札ポータルへようこそ
+  </div>
 </template>

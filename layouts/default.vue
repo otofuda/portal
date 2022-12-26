@@ -34,25 +34,36 @@ const navLinks = [
 
 <style lang="scss" scoped>
 .layout {
-  display: grid;
-  grid-template-columns: 300px 1fr;
+  display: flex;
+  flex-direction: column;
+  min-height: max-content;
 
   header {
-    grid-column: 1 / 3;
+    font-size: 2rem;
+    font-weight: bold;
   }
 
   nav {
-    ul li a {
-      color: $primary;
+    ul {
+      display: flex;
+      padding: 0;
+      li {
+        list-style: none;
+        margin-right: 1rem;
+        a {
+          color: $primary;
+        }
+      }
     }
   }
 
   main {
+    flex-grow: 1;
     color: $text;
   }
 
   footer {
-    grid-column: 1 / 3;
+    padding: 1rem 0;
     font-size: 0.75rem;
     color: $sub;
   }
