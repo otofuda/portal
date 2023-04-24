@@ -1,35 +1,17 @@
 # Otofuda Portal
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+- Nuxt 3.4.2
 
-## Setup
+**Dev server**
 
-Make sure to install the dependencies:
-
-```bash
-yarn install
+```sh
+npm install
+npm run dev
 ```
 
-## Development Server
+**SSG**
 
-Start the development server on http://localhost:3000
-
-```bash
-yarn dev
+```sh
+npm run generate
+npm run serve
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-yarn build
-```
-
-Locally preview production build:
-
-```bash
-yarn preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.

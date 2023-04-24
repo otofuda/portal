@@ -13,9 +13,23 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: [
-    '@nuxt/content'
+
+  devServer: {
+    port: 8080
+  },
+
+  // 環境変数
+  runtimeConfig: {
+    public: {
+      apiBase: '',
+      apiToken: ''
+    }
+  },
+
+  css: [
+    'normalize.css'
   ],
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -25,5 +39,5 @@ export default defineNuxtConfig({
         }
       }
     }
-  }
+  },
 })

@@ -4,12 +4,14 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "preview": "nuxt preview --port 8080",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/content": "^2.3.0",
-    "nuxt": "3.0.0",
+    "nuxt": "^3.4.2",
     "sass": "^1.56.1"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
   }
 }
