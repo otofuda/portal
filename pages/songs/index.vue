@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { SongInfo, SongsPayload } from '~/types/songs'
 
-const title = ref("楽曲一覧")
+const title = ref('楽曲一覧')
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending, error } = await useAsyncData<SongsPayload>('songs', () => {
@@ -11,7 +11,7 @@ const { data, pending, error } = await useAsyncData<SongsPayload>('songs', () =>
 })
 
 const songs = computed<SongInfo[]>(() => {
-  return data.value ? data.value.contents : [];
+  return data.value ? data.value.contents : []
 })
 </script>
 
@@ -32,6 +32,7 @@ const songs = computed<SongInfo[]>(() => {
     <div v-if="songs">
       <NuxtLink
         v-for="song in songs"
+        :key="`songs-${song.song_id}`"
         :to="`songs/${song.song_id}`"
         class="song"
       >

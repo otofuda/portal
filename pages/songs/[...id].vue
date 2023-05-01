@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { SongInfo, SongsPayload } from '@/types/songs';
+import { SongInfo, SongsPayload } from '@/types/songs'
 
-const route = useRoute();
-const runtimeConfig = useRuntimeConfig();
+const route = useRoute()
+const runtimeConfig = useRuntimeConfig()
 
 const { data, pending } = await useAsyncData<SongsPayload>('songs', () => {
   return $fetch(`${runtimeConfig.public.apiBase}api/v1/songs?limit=1000`, {
@@ -28,8 +28,10 @@ const title = ref(content.value?.name)
 
     <h1>{{ title }}</h1>
 
-    <div v-if="pending">Loading...</div>
-    
+    <div v-if="pending">
+      Loading...
+    </div>
+
     <article v-else-if="content">
       Artist: {{ content.artist }}
       <br>

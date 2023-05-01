@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NewsArticle, NewsPayload } from '~/types/news';
+import { NewsArticle, NewsPayload } from '~/types/news'
 
 const title = ref('お知らせ一覧')
 const searchWord = ref('')
@@ -13,7 +13,7 @@ const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
 })
 
 const contents = computed<NewsArticle[]>(() => {
-  return data.value ? data.value.contents : [];
+  return data.value ? data.value.contents : []
 })
 
 const filteredContents = computed<NewsArticle[]>(() => {
@@ -33,12 +33,15 @@ const filteredContents = computed<NewsArticle[]>(() => {
 
     <h1>{{ title }}</h1>
 
-    <input type="text" v-model="searchWord" />
+    <input v-model="searchWord" type="text">
 
-    <div v-if="pending">Loading...</div>
+    <div v-if="pending">
+      Loading...
+    </div>
 
     <NuxtLink
       v-for="article in filteredContents"
+      :key="`news-${article.id}`"
       :to="`news/${article.id}`"
       class="article"
     >

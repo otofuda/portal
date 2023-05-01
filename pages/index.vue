@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const title = ref("TOP")
+const title = ref('TOP')
 </script>
 
 <template>

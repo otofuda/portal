@@ -14,9 +14,11 @@ export default defineNuxtConfig({
     }
   },
 
-  devServer: {
-    port: 8080
-  },
+  modules: [
+    ['@nuxtjs/eslint-module', { lintOnStart: false }]
+  ],
+
+  devServer: { port: 8080 },
 
   // 環境変数
   runtimeConfig: {
@@ -26,9 +28,7 @@ export default defineNuxtConfig({
     }
   },
 
-  css: [
-    'normalize.css'
-  ],
+  css: ['normalize.css'],
 
   vite: {
     css: {
@@ -39,5 +39,5 @@ export default defineNuxtConfig({
         }
       }
     }
-  },
+  }
 })

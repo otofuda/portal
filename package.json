@@ -5,13 +5,18 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview --port 8080",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --fix"
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "@nuxtjs/eslint-module": "^4.0.2",
+    "eslint": "^8.39.0",
     "nuxt": "^3.4.2",
     "sass": "^1.56.1"
   },
   "dependencies": {
+    "@primer/css": "^21.0.1",
     "normalize.css": "^8.0.1"
   }
 }

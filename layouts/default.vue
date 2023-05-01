@@ -14,7 +14,7 @@ const navLinks = [
 
     <nav>
       <ul>
-        <li v-for="link in navLinks">
+        <li v-for="(link, i) in navLinks" :key="`navlink-${i}`">
           <NuxtLink :to="link.url">
             {{ link.title }}
           </NuxtLink>
@@ -23,7 +23,7 @@ const navLinks = [
     </nav>
 
     <main>
-      <slot/>
+      <slot />
     </main>
 
     <footer>
