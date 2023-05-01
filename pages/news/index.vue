@@ -7,7 +7,8 @@ const searchWord = ref('')
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/news?limit=1000`, {
+  return $fetch(`${runtimeConfig.public.apiBase}api/v1/news`, {
+    params: { limit: 1000, filters: 'for_portal[equals]true' },
     headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
   })
 })
@@ -26,27 +27,47 @@ const filteredContents = computed<NewsArticle[]>(() => {
 </script>
 
 <template>
-  <div>
+  <div class="news">
     <Head>
       <Title>{{ title }}</Title>
     </Head>
 
-    <h1>{{ title }}</h1>
+    <HeadingTitle>{{ title }}</HeadingTitle>
 
-    <input v-model="searchWord" type="text">
-
-    <div v-if="pending">
-      Loading...
+    <div class="news-search">
+      <input v-model="searchWord" type="text">
     </div>
 
-    <NuxtLink
-      v-for="article in filteredContents"
-      :key="`news-${article.id}`"
-      :to="`news/${article.id}`"
-      class="article"
-    >
-      <h2>{{ article.title }}</h2>
-      {{ article.createdAt }}
-    </NuxtLink>
+    <div class="news-list">
+      <div v-if="pending">
+        Loading...
+      </div>
+
+      <NewsLink
+        v-for="article in filteredContents"
+        :key="`news-${article.id}`"
+        :article="article"
+        class="article"
+      />
+    </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.news-search {
+  margin-top: 1rem;
+  padding: 0 1rem;
+  display: flex;
+
+  input {
+    font: inherit;
+    flex-grow: 1;
+    padding: 0.5rem;
+  }
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+}
+</style>

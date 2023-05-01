@@ -8,6 +8,6 @@ const title = ref('TOP')
       <Title>{{ title }}</Title>
     </Head>
 
-    音札ポータルへようこそ
+    <HeadingTitle>音札ポータルへようこそ</HeadingTitle>
   </div>
 </template>

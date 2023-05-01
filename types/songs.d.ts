@@ -18,4 +18,9 @@ export interface SongInfo {
   hard: number;
   createdAt: string;
   updatedAt: string;
+  jacket: {
+    url: string;
+    height: number;
+    width: number;
+  };
 }

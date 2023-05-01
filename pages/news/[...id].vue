@@ -5,7 +5,8 @@ const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/news?limit=1000`, {
+  return $fetch(`${runtimeConfig.public.apiBase}api/v1/news`, {
+    params: { limit: 1000, filters: 'for_portal[equals]true' },
     headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
   })
 })
@@ -27,7 +28,7 @@ const title = ref(content.value?.title)
       <Title>{{ title }}</Title>
     </Head>
 
-    <h1>{{ title }}</h1>
+    <HeadingTitle>{{ title }}</HeadingTitle>
 
     <div v-if="pending">
       Loading...
@@ -35,7 +36,7 @@ const title = ref(content.value?.title)
 
     <article
       v-else-if="content"
-      class=""
+      class="markdown-body article"
       v-html="content.content"
     />
 
@@ -44,3 +45,15 @@ const title = ref(content.value?.title)
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import "@primer/css/markdown/index.scss";
+
+.article {
+  padding: 1rem;
+
+  :deep(a) {
+    color: $primary;
+  }
+}
+</style>

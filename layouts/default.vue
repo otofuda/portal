@@ -39,17 +39,20 @@ const navLinks = [
   min-height: max-content;
 
   header {
-    font-size: 2rem;
-    font-weight: bold;
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
   }
 
   nav {
     ul {
       display: flex;
+      gap: 1rem;
+      justify-content: center;
       padding: 0;
+
       li {
         list-style: none;
-        margin-right: 1rem;
         a {
           color: $primary;
         }

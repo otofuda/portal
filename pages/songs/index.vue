@@ -5,7 +5,8 @@ const title = ref('楽曲一覧')
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending, error } = await useAsyncData<SongsPayload>('songs', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/songs?limit=1000`, {
+  return $fetch(`${runtimeConfig.public.apiBase}api/v1/songs`, {
+    params: { limit: 1000 },
     headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
   })
 })
@@ -21,28 +22,32 @@ const songs = computed<SongInfo[]>(() => {
       <Title>{{ title }}</Title>
     </Head>
 
-    <h1>{{ title }}</h1>
-
-    <div>音札の収録楽曲一覧</div>
+    <HeadingTitle>{{ title }}</HeadingTitle>
 
     <div v-if="pending">
       Loading...
     </div>
 
-    <div v-if="songs">
-      <NuxtLink
-        v-for="song in songs"
-        :key="`songs-${song.song_id}`"
-        :to="`songs/${song.song_id}`"
-        class="song"
-      >
-        <h2>{{ song.name }}</h2>
-        {{ song.artist }}
-      </NuxtLink>
-    </div>
-
     <div v-if="error">
       {{ error.name }}: {{ error.message }}
     </div>
+
+    <div v-if="songs" class="songs-list">
+      <SongLink
+        v-for="song in songs"
+        :key="`songs-${song.song_id}`"
+        :song="song"
+        class="song"
+      />
+    </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.songs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem;
+}
+</style>
