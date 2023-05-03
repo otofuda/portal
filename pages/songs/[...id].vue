@@ -18,7 +18,7 @@ const content = computed<SongInfo | null>(() => {
   }) || null
 })
 
-const title = ref(content.value?.name)
+const title = ref(`${content.value?.name} - 楽曲情報`)
 </script>
 
 <template>
@@ -27,24 +27,20 @@ const title = ref(content.value?.name)
       <Title>{{ title }}</Title>
     </Head>
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
-
     <div v-if="pending">
       Loading...
     </div>
 
-    <article v-else-if="content" class="song-info">
-      Artist: {{ content.artist }}
-      <br>
-      Illustrator: {{ content.illustrator }}
-      <br>
-      BPM: {{ content.dispbpm }}
-      <br>
-      楽曲レベル: {{ content.easy }} | {{ content.normal }} | {{ content.hard }}
-    </article>
+    <SongDetail v-else-if="content" :song="content" />
 
     <div v-else>
       Not Found
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.song-data {
+  margin: 1rem 1rem 0 1rem;
+}
+</style>

@@ -19,6 +19,13 @@ const content = computed<NewsArticle | null>(() => {
 })
 
 const title = ref(content.value?.title)
+
+const dateString = computed<string>(() => {
+  const article = content.value
+  if (!article) { return '' }
+  const date = new Date(article.createdAt)
+  return date.toLocaleDateString('ja')
+})
 </script>
 
 <!-- eslint-disable vue/no-v-html -->
@@ -30,18 +37,23 @@ const title = ref(content.value?.title)
 
     <HeadingTitle>{{ title }}</HeadingTitle>
 
-    <div v-if="pending">
+    <div v-if="pending" class="detail">
       Loading...
     </div>
 
-    <article
-      v-else-if="content"
-      class="markdown-body article"
-      v-html="content.content"
-    />
+    <template v-else-if="content">
+      <div class="detail">
+        {{ dateString }}
+      </div>
 
-    <div v-else>
-      Not Found
+      <article
+        class="markdown-body article"
+        v-html="content.content"
+      />
+    </template>
+
+    <div v-else class="detail">
+      記事が見つかりません
     </div>
   </div>
 </template>
@@ -49,8 +61,15 @@ const title = ref(content.value?.title)
 <style lang="scss" scoped>
 @import "@primer/css/markdown/index.scss";
 
+.detail {
+  margin-top: 1rem;
+  padding: 0 1rem;
+  color: $sub;
+}
+
 .article {
-  padding: 1rem;
+  padding: 0 1rem;
+  font-family: $fonts;
 
   :deep(a) {
     color: $primary;

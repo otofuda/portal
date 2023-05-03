@@ -69,6 +69,7 @@ const navLinks = [
     padding: 1rem 0;
     font-size: 0.75rem;
     color: $sub;
+    text-align: center;
   }
 }
 </style>

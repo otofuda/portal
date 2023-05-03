@@ -11,11 +11,26 @@ export interface SongInfo {
   name: string;
   artist: string;
   illustrator: string;
+  comment?: string;
   bpm: number;
   dispbpm: string;
+
   easy: number;
   normal: number;
   hard: number;
+
+  easy_nd: string;
+  normal_nd: string;
+  hard_nd: string;
+
+  easy_notes: number;
+  normal_notes: number;
+  hard_notes: number;
+
+  easy_video?: string;
+  normal_video?: string;
+  hard_video?: string;
+
   createdAt: string;
   updatedAt: string;
   jacket: {

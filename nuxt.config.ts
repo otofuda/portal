@@ -14,8 +14,14 @@ export default defineNuxtConfig({
     }
   },
 
+  // 使用するモジュール
   modules: [
-    ['@nuxtjs/eslint-module', { lintOnStart: false }]
+    ['@nuxtjs/eslint-module', { lintOnStart: false }],
+    ['@nuxtjs/google-fonts', {
+      families: {
+        'Zen+Kaku+Gothic+Antique': { wght: [400, 700] }
+      }
+    }]
   ],
 
   devServer: { port: 8080 },
@@ -35,7 +41,7 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         // 色変数のscss
         scss: {
-          additionalData: '@use "@/assets/_colors.scss" as *;'
+          additionalData: '@use "@/assets/_vars.scss" as *;'
         }
       }
     }

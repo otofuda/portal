@@ -47,7 +47,7 @@ const songs = computed<SongInfo[]>(() => {
 .songs-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   margin: 1rem;
 }
 </style>

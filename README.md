@@ -1,6 +1,7 @@
 # Otofuda Portal
 
-- Nuxt 3.4.2
+- Nuxt 3.4.3
+- Node.js v18
 
 **Dev server**
 
