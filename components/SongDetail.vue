@@ -92,12 +92,11 @@ const levels = computed<LevelInfo[]>(() => {
   color: $text;
   text-decoration: none;
   display: grid;
-  grid-template-columns: 5rem 1fr;
-  column-gap: 1rem;
+  grid-template-columns: 1fr;
 
   .jacket {
-    width: 100%;
-    grid-row: 1 / 5;
+    width: 320px;
+    max-width: 100%;
   }
 
   .title {

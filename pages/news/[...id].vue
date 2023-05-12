@@ -37,7 +37,7 @@ const dateString = computed<string>(() => {
 
     <HeadingTitle>{{ title }}</HeadingTitle>
 
-    <div v-if="pending" class="detail">
+    <div v-if="pending" class="loading">
       Loading...
     </div>
 

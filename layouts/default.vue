@@ -2,6 +2,8 @@
 const navLinks = [
   { title: 'TOP', url: '/' },
   { title: 'お知らせ', url: '/news' },
+  { title: 'キャラクター', url: '/characters' },
+  { title: 'マンガ', url: '/comics' },
   { title: '収録楽曲', url: '/songs' }
 ]
 </script>
@@ -27,6 +29,15 @@ const navLinks = [
     </main>
 
     <footer>
+      <div class="banners">
+        <a href="https://j.mp/otofuda" target="_blank" rel="noopener noreferrer">
+          <img src="~/assets/banners/banner_hp.png" alt="音札公式ホームページ">
+        </a>
+        <a href="https://j.mp/otfdyt" target="_blank" rel="noopener noreferrer">
+          <img src="~/assets/banners/banner_youtube.png" alt="YouTube公式チャンネル">
+        </a>
+      </div>
+
       © Otofuda Project
     </footer>
   </div>
@@ -45,16 +56,28 @@ const navLinks = [
   }
 
   nav {
+    display: flex;
+    justify-content: center;
+
     ul {
       display: flex;
-      gap: 1rem;
-      justify-content: center;
-      padding: 0;
+      justify-content: left;
+      overflow-x: auto;
+      padding: 1rem 0;
 
       li {
         list-style: none;
+        flex-shrink: 0;
+
         a {
+          padding: 0.25rem 0.5rem;
           color: $primary;
+          text-decoration: none;
+
+          &.router-link-active {
+            color: $bg;
+            background: $primary;
+          }
         }
       }
     }
@@ -70,6 +93,21 @@ const navLinks = [
     font-size: 0.75rem;
     color: $sub;
     text-align: center;
+    border-top: 1px solid #ccc;
+
+    .banners {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      a {
+        img {
+          width: 420px;
+          max-width: 75%;
+        }
+      }
+    }
   }
 }
 </style>
