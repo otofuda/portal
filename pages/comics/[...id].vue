@@ -22,7 +22,7 @@ const title = ref(content.value?.title)
 </script>
 
 <template>
-  <div>
+  <div class="comic">
     <Head>
       <Title>{{ title }}</Title>
     </Head>
@@ -45,15 +45,29 @@ const title = ref(content.value?.title)
       マンガが見つかりません
     </div>
 
-    <NuxtLink to="/comics">
-      戻る
-    </NuxtLink>
+    <div class="comic-menu">
+      <UButton
+        icon="i-heroicons-arrow-left"
+        size="lg"
+        color="primary"
+        variant="outline"
+        label="一覧にもどる"
+        to="/comics"
+      />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.comic-img {
-  width: calc(100% - 2rem);
-  margin: 1rem;
+.comic {
+  .comic-img {
+    width: calc(100% - 2rem);
+    max-width: 400px;
+    margin: 1rem;
+  }
+
+  .comic-menu {
+    padding: 1rem;
+  }
 }
 </style>

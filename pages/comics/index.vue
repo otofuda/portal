@@ -25,11 +25,11 @@ const comics = computed<ComicInfo[]>(() => {
 
     <HeadingTitle>{{ title }}</HeadingTitle>
 
-    <div class="comics-list">
-      <div v-if="pending">
-        Loading...
-      </div>
+    <div v-if="pending">
+      Loading...
+    </div>
 
+    <div class="comics-list">
       <ComicLink
         v-for="comic in comics"
         :key="`comic-${comic.id}`"
@@ -41,7 +41,9 @@ const comics = computed<ComicInfo[]>(() => {
 
 <style lang="scss" scoped>
 .comics-list {
-  display: flex;
-  flex-direction: column;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
 }
 </style>

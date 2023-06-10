@@ -1,28 +1,48 @@
-<script setup>
-const navLinks = [
-  { title: 'TOP', url: '/' },
-  { title: 'お知らせ', url: '/news' },
-  { title: 'キャラクター', url: '/characters' },
-  { title: 'マンガ', url: '/comics' },
-  { title: '収録楽曲', url: '/songs' }
-]
+<script lang="ts" setup>
+const viewport = useViewport()
+const showSpNav = ref<boolean>(false)
 </script>
 
 <template>
-  <div class="layout">
+  <div
+    class="layout"
+    :class="viewport.isLessThan('tablet') ? '--sp' : '--pc'"
+  >
     <header>
-      Otofuda Portal
+      <NuxtLink to="/" class="logo">
+        Otofuda Portal
+      </NuxtLink>
+
+      <div class="divider" />
+
+      <UButton
+        v-if="viewport.isLessThan('tablet')"
+        icon="i-heroicons-bars-3"
+        size="xl"
+        color="primary"
+        variant="ghost"
+        :padded="false"
+        @click="showSpNav = true"
+      />
     </header>
 
-    <nav>
-      <ul>
-        <li v-for="(link, i) in navLinks" :key="`navlink-${i}`">
-          <NuxtLink :to="link.url">
-            {{ link.title }}
-          </NuxtLink>
-        </li>
-      </ul>
+    <!-- ナビゲーション(PC用) -->
+    <nav v-if="viewport.isGreaterOrEquals('tablet')" class="nav --pc">
+      <NavLinkList />
     </nav>
+
+    <!-- ナビゲーション(スマホ用) -->
+    <USlideover v-model="showSpNav" class="nav --sp">
+      <UButton
+        icon="i-heroicons-x-mark"
+        size="xl"
+        color="primary"
+        variant="ghost"
+        trailing
+        @click="showSpNav = false"
+      />
+      <NavLinkList @close-nav="showSpNav = false" />
+    </USlideover>
 
     <main>
       <slot />
@@ -45,42 +65,44 @@ const navLinks = [
 
 <style lang="scss" scoped>
 .layout {
-  display: flex;
-  flex-direction: column;
-  min-height: max-content;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
 
-  header {
-    padding-top: 1rem;
-    font-size: 1.5rem;
-    text-align: center;
+  &.--sp {
+    display: flex;
+    flex-direction: column;
+    min-height: max-content;
   }
 
-  nav {
+  header {
+    grid-column: 1 / 3;
+    padding: 1rem;
     display: flex;
-    justify-content: center;
+    gap: 1rem;
+    align-items: center;
 
-    ul {
-      display: flex;
-      justify-content: left;
-      overflow-x: auto;
-      padding: 1rem 0;
-
-      li {
-        list-style: none;
-        flex-shrink: 0;
-
-        a {
-          padding: 0.25rem 0.5rem;
-          color: $primary;
-          text-decoration: none;
-
-          &.router-link-active {
-            color: $bg;
-            background: $primary;
-          }
-        }
-      }
+    .logo {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $primary;
     }
+
+    .divider {
+      height: 2px;
+      background: $primary;
+      flex-grow: 1;
+      opacity: 0.25;
+    }
+  }
+
+  .nav.--pc {
+    margin: 1rem;
+    padding: 1rem 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0.25rem 0.5rem 0 $border;
+    height: max-content;
   }
 
   main {
@@ -89,6 +111,7 @@ const navLinks = [
   }
 
   footer {
+    grid-column: 1 / 3;
     padding: 1rem 0;
     font-size: 0.75rem;
     color: $sub;
@@ -97,14 +120,18 @@ const navLinks = [
 
     .banners {
       display: flex;
+      align-items: center;
       flex-direction: column;
+      flex-wrap: wrap;
       gap: 1rem;
       margin-bottom: 1rem;
 
       a {
+        width: 420px;
+        max-width: 75%;
+
         img {
-          width: 420px;
-          max-width: 75%;
+          width: 100%;
         }
       }
     }

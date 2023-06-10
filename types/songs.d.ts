@@ -30,6 +30,9 @@ export interface SongInfo {
   easy_video?: string;
   normal_video?: string;
   hard_video?: string;
+  
+  for_ac?: boolean;
+  for_mb?: boolean;
 
   createdAt: string;
   updatedAt: string;

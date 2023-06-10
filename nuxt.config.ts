@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     head: {
       titleTemplate: '%s | 音札ポータル',
       meta: [
-        { name: 'description', content: '「音札」ポータルサイトです' }
+        { name: 'description', content: '「音札」ポータルサイトです' },
+        { name: 'robots', content: 'noindex' }
       ]
     }
   },
@@ -17,8 +18,11 @@ export default defineNuxtConfig({
   // 使用するモジュール
   modules: [
     ['@nuxtjs/eslint-module', { lintOnStart: false }],
+    ['@nuxthq/ui', {}],
+    ['nuxt-viewport', {}],
     ['@nuxtjs/google-fonts', {
       families: {
+        Inter: { wght: [400, 700] },
         'Zen+Kaku+Gothic+Antique': { wght: [400, 700] }
       }
     }]

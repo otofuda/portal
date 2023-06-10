@@ -27,6 +27,8 @@ const topics = computed<TopicInfo[]>(() => {
       音札ポータルへようこそ！
     </p>
 
+    <!-- <HeadingTitle>最新のお知らせ</HeadingTitle> -->
+
     <HeadingTitle>トピックス</HeadingTitle>
 
     <div class="topics">
@@ -52,13 +54,17 @@ const topics = computed<TopicInfo[]>(() => {
 
 .topics {
   display: flex;
+  flex-flow: row nowrap;
   align-items: center;
   overflow-x: scroll;
+  scroll-snap-type: x mandatory;
 
   .topic {
     margin: 1rem;
+    scroll-snap-align: center;
 
     img {
+      min-width: 300px;
       width: 300px;
     }
   }

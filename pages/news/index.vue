@@ -35,7 +35,13 @@ const filteredContents = computed<NewsArticle[]>(() => {
     <HeadingTitle>{{ title }}</HeadingTitle>
 
     <div class="news-search">
-      <input v-model="searchWord" type="text">
+      <UInput
+        v-model="searchWord"
+        icon="i-heroicons-magnifying-glass-20-solid"
+        size="lg"
+        color="primary"
+        trailing
+      />
     </div>
 
     <div class="news-list">
@@ -55,15 +61,8 @@ const filteredContents = computed<NewsArticle[]>(() => {
 
 <style lang="scss" scoped>
 .news-search {
-  margin-top: 1rem;
+  margin: 1.5rem 0;
   padding: 0 1rem;
-  display: flex;
-
-  input {
-    font: inherit;
-    flex-grow: 1;
-    padding: 0.5rem;
-  }
 }
 
 .news-list {
