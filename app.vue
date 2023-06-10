@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+onMounted(() => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+  }
+})
+</script>
+
 <template>
   <div>
     <NuxtLayout>

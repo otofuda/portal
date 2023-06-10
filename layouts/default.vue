@@ -1,16 +1,22 @@
 <script lang="ts" setup>
 const viewport = useViewport()
+const isSp = ref<boolean>(viewport.isLessThan('tablet'))
 const showSpNav = ref<boolean>(false)
+
+watch(viewport.breakpoint, () => {
+  isSp.value = viewport.isLessThan('tablet')
+})
 </script>
 
 <template>
   <div
     class="layout"
-    :class="viewport.isLessThan('tablet') ? '--sp' : '--pc'"
+    :class="{ '--sp': isSp }"
   >
     <header>
       <NuxtLink to="/" class="logo">
-        Otofuda Portal
+        <img class="icon" src="~/assets/icon.png" alt="音札ポータル">
+        <img class="type" src="~/assets/otofuda_portal.png" alt="音札ポータル">
       </NuxtLink>
 
       <div class="divider" />
@@ -21,7 +27,6 @@ const showSpNav = ref<boolean>(false)
         size="xl"
         color="primary"
         variant="ghost"
-        :padded="false"
         @click="showSpNav = true"
       />
     </header>
@@ -66,7 +71,7 @@ const showSpNav = ref<boolean>(false)
 <style lang="scss" scoped>
 .layout {
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
+  grid-template-columns: 16rem minmax(0, 1fr);
 
   &.--sp {
     display: flex;
@@ -78,14 +83,23 @@ const showSpNav = ref<boolean>(false)
     grid-column: 1 / 3;
     padding: 1rem;
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     align-items: center;
 
     .logo {
       margin: 0;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: $primary;
+      display: flex;
+      align-items: center;
+
+      .icon {
+        width: 3rem;
+      }
+
+      .type {
+        height: 3rem;
+        max-width: calc(100vw - 130px);
+        object-fit: contain;
+      }
     }
 
     .divider {

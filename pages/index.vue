@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { TopicInfo, TopicPayload } from '~/types/topics'
+import { NewsArticle, NewsPayload } from '~/types/news'
 
 const title = ref('TOP')
 
 const runtimeConfig = useRuntimeConfig()
 
-const { data } = await useAsyncData<TopicPayload>('topics', () => {
+const topicsData = await useAsyncData<TopicPayload>('topics', () => {
   return $fetch(`${runtimeConfig.public.apiBase}api/v1/topics`, {
     params: { limit: 1000 },
     headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
@@ -13,7 +14,18 @@ const { data } = await useAsyncData<TopicPayload>('topics', () => {
 })
 
 const topics = computed<TopicInfo[]>(() => {
-  return data.value ? data.value.contents : []
+  return topicsData.data.value ? topicsData.data.value.contents : []
+})
+
+const newsData = await useAsyncData<NewsPayload>('news', () => {
+  return $fetch(`${runtimeConfig.public.apiBase}api/v1/news`, {
+    params: { limit: 1000, filters: 'for_portal[equals]true' },
+    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
+  })
+})
+
+const latestNews = computed<NewsArticle | null>(() => {
+  return newsData.data.value ? newsData.data.value.contents.at(0) || null : null
 })
 </script>
 
@@ -26,8 +38,6 @@ const topics = computed<TopicInfo[]>(() => {
     <p class="welcome">
       音札ポータルへようこそ！
     </p>
-
-    <!-- <HeadingTitle>最新のお知らせ</HeadingTitle> -->
 
     <HeadingTitle>トピックス</HeadingTitle>
 
@@ -44,12 +54,21 @@ const topics = computed<TopicInfo[]>(() => {
         >
       </NuxtLink>
     </div>
+
+    <HeadingTitle>最新のお知らせ</HeadingTitle>
+
+    <NewsLink
+      v-if="latestNews"
+      :article="latestNews"
+      class="article"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .welcome {
   text-align: center;
+  margin: 1rem;
 }
 
 .topics {

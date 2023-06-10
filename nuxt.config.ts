@@ -11,6 +11,11 @@ export default defineNuxtConfig({
       meta: [
         { name: 'description', content: '「音札」ポータルサイトです' },
         { name: 'robots', content: 'noindex' }
+      ],
+      link: [
+        { rel: 'icon', href: '/maskable_icon_x512.png', type: 'image/png' },
+        { rel: 'apple-touch-icon', href: '/maskable_icon_x512.png' },
+        { rel: 'manifest', href: '/manifest.webmanifest' }
       ]
     }
   },
