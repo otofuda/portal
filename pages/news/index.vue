@@ -40,7 +40,13 @@ const filteredContents = computed<NewsArticle[]>(() => {
         icon="i-heroicons-magnifying-glass-20-solid"
         size="lg"
         color="primary"
-        trailing
+        placeholder="検索ワードを入力"
+      />
+
+      <UAlert
+        v-show="searchWord"
+        class="mt-3"
+        :title="`「${ searchWord }」で検索中`"
       />
     </div>
 

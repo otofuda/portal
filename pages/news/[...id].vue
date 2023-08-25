@@ -55,6 +55,17 @@ const dateString = computed<string>(() => {
     <div v-else class="detail">
       記事が見つかりません
     </div>
+
+    <div class="article-menu">
+      <UButton
+        icon="i-heroicons-arrow-left"
+        size="lg"
+        color="primary"
+        variant="outline"
+        label="一覧にもどる"
+        to="/news"
+      />
+    </div>
   </div>
 </template>
 
@@ -71,8 +82,16 @@ const dateString = computed<string>(() => {
   padding: 0 1rem;
   font-family: $fonts;
 
+  :deep(p) {
+    line-height: 2;
+  }
+
   :deep(a) {
     color: $primary;
   }
+}
+
+.article-menu {
+  padding: 1rem;
 }
 </style>

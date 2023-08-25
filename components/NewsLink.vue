@@ -34,7 +34,7 @@ const newsType = computed<[string, string]>(() => {
     <img class="image" :src="newsImage" :alt="props.article.title">
     <strong class="title">{{ props.article.title }}</strong>
     <div class="date">
-      <UBadge :color="newsType[0]" :label="newsType[1]" />
+      <UBadge :color="newsType[0]" :label="newsType[1]" variant="subtle" />
       {{ dateString }}
     </div>
   </NuxtLink>
