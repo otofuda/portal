@@ -1,17 +1,10 @@
 <script lang="ts" setup>
-const viewport = useViewport()
-const isSp = ref<boolean>(viewport.isLessThan('tablet'))
 const showSpNav = ref<boolean>(false)
-
-watch(viewport.breakpoint, () => {
-  isSp.value = viewport.isLessThan('tablet')
-})
 </script>
 
 <template>
   <div
     class="layout"
-    :class="{ '--sp': isSp }"
   >
     <header>
       <NuxtLink to="/" class="logo">
@@ -22,7 +15,6 @@ watch(viewport.breakpoint, () => {
       <div class="divider" />
 
       <UButton
-        v-if="viewport.isLessThan('tablet')"
         icon="i-heroicons-bars-3"
         size="xl"
         color="primary"
@@ -32,7 +24,7 @@ watch(viewport.breakpoint, () => {
     </header>
 
     <!-- ナビゲーション(PC用) -->
-    <nav v-if="viewport.isGreaterOrEquals('tablet')" class="nav --pc">
+    <nav class="nav --pc">
       <NavLinkList />
     </nav>
 
@@ -72,12 +64,6 @@ watch(viewport.breakpoint, () => {
 .layout {
   display: grid;
   grid-template-columns: 16rem minmax(0, 1fr);
-
-  &.--sp {
-    display: flex;
-    flex-direction: column;
-    min-height: max-content;
-  }
 
   header {
     grid-column: 1 / 3;
@@ -148,6 +134,18 @@ watch(viewport.breakpoint, () => {
           width: 100%;
         }
       }
+    }
+  }
+}
+
+@media (max-width: $spwidth) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+    min-height: max-content;
+
+    .nav.--pc {
+      display: none;
     }
   }
 }

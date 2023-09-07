@@ -9,15 +9,9 @@
 <style lang="scss" scoped>
 .heading {
   display: flex;
+  font-weight: bold;
   font-size: 1.5rem;
   padding: 0 1rem;
   margin: 0;
-
-  &::before {
-    content: '';
-    width: 0.5rem;
-    background: $primary;
-    margin-right: 0.5rem;
-  }
 }
 </style>

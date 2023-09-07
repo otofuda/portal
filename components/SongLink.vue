@@ -29,13 +29,15 @@ const jacketSrc = computed<string>(() => {
       <div class="difficulty">
         {{ props.song.hard }}
       </div>
-      <!-- 収録タイトル情報 -->
-      <!-- <UBadge v-if="props.song.for_ac">
+    </div>
+    <!-- 収録タイトル情報 -->
+    <div class="titles">
+      <UBadge v-if="props.song.for_ac" variant="subtle">
         音札
       </UBadge>
-      <UBadge v-if="props.song.for_mb" color="teal">
+      <UBadge v-if="props.song.for_mb" variant="subtle" color="teal">
         音札Étude
-      </UBadge> -->
+      </UBadge>
     </div>
   </NuxtLink>
 </template>
@@ -47,19 +49,21 @@ const jacketSrc = computed<string>(() => {
   display: grid;
   grid-template-columns: 5rem 1fr;
   grid-template-rows: auto auto 1fr;
-  column-gap: 0.5rem;
+  gap: 0.5rem;
 
   .jacket {
     width: 100%;
-    grid-row: 1 / 4;
+    grid-row: 1 / 5;
   }
 
   .title {
     font-size: 1.25rem;
+    line-height: 1;
   }
 
   .artist {
     color: $sub;
+    line-height: 1;
   }
 
   .info {
@@ -71,6 +75,7 @@ const jacketSrc = computed<string>(() => {
       font-weight: bold;
       text-align: center;
       width: 40px;
+      border-radius: 0.25rem;
 
       &:nth-child(1) {
         background-color: $e;
@@ -84,6 +89,11 @@ const jacketSrc = computed<string>(() => {
         background-color: $h;
       }
     }
+  }
+
+  .titles {
+    display: flex;
+    gap: 0.5rem;
   }
 }
 </style>

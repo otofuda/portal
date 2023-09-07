@@ -9,21 +9,22 @@
     "lint": "eslint . --fix"
   },
   "devDependencies": {
-    "@nuxthq/ui": "^2.7.0",
+    "@nuxt/ui": "^2.8.0",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/eslint-module": "^4.0.2",
     "@nuxtjs/google-fonts": "^3.0.0",
     "eslint": "^8.39.0",
-    "nuxt": "^3.6.5",
-    "nuxt-viewport": "^2.0.6",
+    "nuxt": "^3.7.1",
     "sass": "^1.56.1"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
     "@primer/css": "^21.0.1",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "pinia": "^2.1.6"
   },
   "volta": {
-    "node": "18.17.1",
-    "npm": "9.8.1"
+    "node": "20.5.0",
+    "npm": "10.0.0"
   }
 }

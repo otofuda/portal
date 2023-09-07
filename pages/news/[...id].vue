@@ -26,14 +26,21 @@ const dateString = computed<string>(() => {
   const date = new Date(article.createdAt)
   return date.toLocaleDateString('ja')
 })
+
+/** お知らせの画像(なければデフォルト画像) */
+const newsImage = computed<string>(() => {
+  return '/news_default.png'
+})
 </script>
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div>
+  <div class="news">
     <Head>
       <Title>{{ title }}</Title>
     </Head>
+
+    <img v-if="content" class="image" :src="newsImage" :alt="title">
 
     <HeadingTitle>{{ title }}</HeadingTitle>
 
@@ -71,6 +78,17 @@ const dateString = computed<string>(() => {
 
 <style lang="scss" scoped>
 @import "@primer/css/markdown/index.scss";
+
+.news {
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  margin-bottom: 1rem;
+  max-height: 25vh;
+  object-fit: contain;
+}
 
 .detail {
   margin-top: 1rem;

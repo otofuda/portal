@@ -5,8 +5,6 @@ const props = defineProps<{
   article: NewsArticle;
 }>()
 
-const viewport = useViewport()
-
 const dateString = computed<string>(() => {
   const date = new Date(props.article.createdAt)
   return date.toLocaleDateString('ja')
@@ -27,9 +25,6 @@ const newsType = computed<[string, string]>(() => {
   <NuxtLink
     :to="`news/${props.article.id}`"
     class="news-link"
-    :class="{
-      '--sp': viewport.isLessThan('tablet')
-    }"
   >
     <img class="image" :src="newsImage" :alt="props.article.title">
     <strong class="title">{{ props.article.title }}</strong>
@@ -53,6 +48,9 @@ const newsType = computed<[string, string]>(() => {
 
   .image {
     grid-row: 1 / 3;
+    max-height: 25vh;
+    object-fit: contain;
+    justify-self: center;
   }
 
   .title {
@@ -64,8 +62,11 @@ const newsType = computed<[string, string]>(() => {
     padding: 0.5rem 1rem;
     color: $sub;
   }
+}
 
-  &.--sp {
+@media (max-width: $spwidth) {
+  .news-link {
+
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
 

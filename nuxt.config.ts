@@ -23,8 +23,8 @@ export default defineNuxtConfig({
   // 使用するモジュール
   modules: [
     ['@nuxtjs/eslint-module', { lintOnStart: false }],
-    ['@nuxthq/ui', {}],
-    ['nuxt-viewport', {}],
+    ['@pinia/nuxt', {}],
+    ['@nuxt/ui', {}],
     ['@nuxtjs/google-fonts', {
       families: {
         Inter: { wght: [400, 700] },
