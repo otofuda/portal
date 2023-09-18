@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NewsArticle, NewsPayload } from '@/types/news'
+import { NewsArticle, NewsPayload, NewsTag, newsTags } from '@/types/news'
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
@@ -20,16 +20,28 @@ const content = computed<NewsArticle | null>(() => {
 
 const title = ref(content.value?.title)
 
+/** 公開日 */
 const dateString = computed<string>(() => {
   const article = content.value
   if (!article) { return '' }
-  const date = new Date(article.createdAt)
+  const date = new Date(article.date || article.createdAt)
   return date.toLocaleDateString('ja')
 })
 
 /** お知らせの画像(なければデフォルト画像) */
 const newsImage = computed<string>(() => {
-  return '/news_default.png'
+  const article = content.value
+  return article && article.thumbnail
+    ? article.thumbnail.url
+    : '/news_default.png'
+})
+
+/** お知らせの種類(色とラベル) */
+const tags = computed<NewsTag[]>(() => {
+  const article = content.value
+  return article && article.tags.length > 0
+    ? article.tags.map(tag => newsTags[tag])
+    : [newsTags['お知らせ']]
 })
 </script>
 
@@ -53,10 +65,24 @@ const newsImage = computed<string>(() => {
         {{ dateString }}
       </div>
 
+      <div class="detail">
+        <UBadge
+          v-for="tag in tags"
+          :key="`newsLink-${content.id}-tag-${tag.label}`"
+          :color="tag.color"
+          :label="tag.label"
+          size="md"
+        />
+      </div>
+
+      <ShareButtons :text="content.title" />
+
       <article
         class="markdown-body article"
         v-html="content.content"
       />
+
+      <ShareButtons :text="content.title" />
     </template>
 
     <div v-else class="detail">
@@ -82,22 +108,32 @@ const newsImage = computed<string>(() => {
 .news {
   display: flex;
   flex-direction: column;
-}
 
-.image {
-  margin-bottom: 1rem;
-  max-height: 25vh;
-  object-fit: contain;
-}
+  .image {
+    margin-bottom: 1rem;
+    object-fit: contain;
+  }
 
-.detail {
-  margin-top: 1rem;
-  padding: 0 1rem;
-  color: $sub;
+  > .heading {
+    margin-bottom: 1rem;
+  }
+
+  .detail {
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+    color: $sub;
+  }
+
+  .share {
+    margin-bottom: 1rem;
+  }
 }
 
 .article {
   padding: 0 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $border;
+  margin-bottom: 2rem;
   font-family: $fonts;
 
   :deep(p) {
@@ -107,9 +143,15 @@ const newsImage = computed<string>(() => {
   :deep(a) {
     color: $primary;
   }
+
+  :deep(img) {
+    border-radius: 0.5rem;
+  }
 }
 
 .article-menu {
+  display: flex;
+  justify-content: center;
   padding: 1rem;
 }
 </style>

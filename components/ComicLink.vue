@@ -21,7 +21,7 @@ const props = defineProps<{
   flex-direction: column;
   border-radius: 1rem;
   overflow: hidden;
-  background-color: #f8f8f8;
+  background-color: $bg-alt;
 
   .thumbnail {
     object-fit: cover;

@@ -8,6 +8,7 @@ onMounted(() => {
 
 <template>
   <div>
+    <TheBackground />
     <NuxtLayout>
       <NuxtLoadingIndicator color="#52a9ff" />
       <NuxtPage />

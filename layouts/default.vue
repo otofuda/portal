@@ -15,6 +15,7 @@ const showSpNav = ref<boolean>(false)
       <div class="divider" />
 
       <UButton
+        class="menu"
         icon="i-heroicons-bars-3"
         size="xl"
         color="primary"
@@ -46,16 +47,57 @@ const showSpNav = ref<boolean>(false)
     </main>
 
     <footer>
+      音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。
+
       <div class="banners">
         <a href="https://j.mp/otofuda" target="_blank" rel="noopener noreferrer">
           <img src="~/assets/banners/banner_hp.png" alt="音札公式ホームページ">
         </a>
-        <a href="https://j.mp/otfdyt" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.youtube.com/@user-iw6ic4jl4b" target="_blank" rel="noopener noreferrer">
           <img src="~/assets/banners/banner_youtube.png" alt="YouTube公式チャンネル">
         </a>
       </div>
 
-      © Otofuda Project
+      <div class="icons">
+        <UButton
+          icon="i-fa6-brands-x-twitter"
+          size="lg"
+          color="gray"
+          :ui="{ rounded: 'rounded-full' }"
+          variant="ghost"
+          to="https://twitter.com/otofuda"
+          target="_blank"
+        />
+        <UButton
+          icon="i-fa6-brands-instagram"
+          size="lg"
+          color="gray"
+          :ui="{ rounded: 'rounded-full' }"
+          variant="ghost"
+          to="https://www.instagram.com/otfdpr/"
+          target="_blank"
+        />
+        <UButton
+          icon="i-fa6-brands-youtube"
+          size="lg"
+          color="gray"
+          :ui="{ rounded: 'rounded-full' }"
+          variant="ghost"
+          to="https://www.youtube.com/@user-iw6ic4jl4b"
+          target="_blank"
+        />
+        <UButton
+          icon="i-fa6-brands-github"
+          size="lg"
+          color="gray"
+          :ui="{ rounded: 'rounded-full' }"
+          variant="ghost"
+          to="https://github.com/otofuda"
+          target="_blank"
+        />
+      </div>
+
+      © 音札プロジェクト
     </footer>
   </div>
 </template>
@@ -63,7 +105,8 @@ const showSpNav = ref<boolean>(false)
 <style lang="scss" scoped>
 .layout {
   display: grid;
-  grid-template-columns: 16rem minmax(0, 1fr);
+  grid-template-columns: 16rem minmax(0, $spwidth);
+  justify-content: center;
 
   header {
     grid-column: 1 / 3;
@@ -94,6 +137,10 @@ const showSpNav = ref<boolean>(false)
       flex-grow: 1;
       opacity: 0.25;
     }
+
+    .menu {
+      display: none;
+    }
   }
 
   .nav.--pc {
@@ -103,9 +150,12 @@ const showSpNav = ref<boolean>(false)
     overflow: hidden;
     box-shadow: 0 0.25rem 0.5rem 0 $border;
     height: max-content;
+    position: sticky;
+    top: 2rem;
   }
 
   main {
+    max-width: $spwidth;
     flex-grow: 1;
     color: $text;
   }
@@ -116,7 +166,7 @@ const showSpNav = ref<boolean>(false)
     font-size: 0.75rem;
     color: $sub;
     text-align: center;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid $border;
 
     .banners {
       display: flex;
@@ -124,16 +174,25 @@ const showSpNav = ref<boolean>(false)
       flex-direction: column;
       flex-wrap: wrap;
       gap: 1rem;
-      margin-bottom: 1rem;
+      margin: 1rem 0;
 
       a {
-        width: 420px;
+        width: 360px;
         max-width: 75%;
 
         img {
+          border-radius: 00.5rem;
           width: 100%;
         }
       }
+    }
+
+    .icons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
   }
 }
@@ -146,6 +205,10 @@ const showSpNav = ref<boolean>(false)
 
     .nav.--pc {
       display: none;
+    }
+
+    header .menu {
+      display: inline-flex;
     }
   }
 }

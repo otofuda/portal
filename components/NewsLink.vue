@@ -1,23 +1,28 @@
 <script lang="ts" setup>
-import { NewsArticle } from '~/types/news'
+import { NewsArticle, NewsTag, newsTags } from '~/types/news'
 
 const props = defineProps<{
   article: NewsArticle;
 }>()
 
+/** 公開日 */
 const dateString = computed<string>(() => {
-  const date = new Date(props.article.createdAt)
+  const article = props.article
+  const date = new Date(article.date || article.createdAt)
   return date.toLocaleDateString('ja')
 })
 
 /** お知らせの画像(なければデフォルト画像) */
 const newsImage = computed<string>(() => {
-  return '/news_default.png'
+  const article = props.article
+  return article.thumbnail ? article.thumbnail.url : '/news_default.png'
 })
 
-/** お知らせの種類(色とラベルのタプル) */
-const newsType = computed<[string, string]>(() => {
-  return ['primary', 'お知らせ']
+/** お知らせの種類(色とラベル) */
+const tags = computed<NewsTag[]>(() => {
+  return props.article.tags.length > 0
+    ? props.article.tags.map(tag => newsTags[tag])
+    : [newsTags['お知らせ']]
 })
 </script>
 
@@ -29,7 +34,13 @@ const newsType = computed<[string, string]>(() => {
     <img class="image" :src="newsImage" :alt="props.article.title">
     <strong class="title">{{ props.article.title }}</strong>
     <div class="date">
-      <UBadge :color="newsType[0]" :label="newsType[1]" variant="subtle" />
+      <UBadge
+        v-for="tag in tags"
+        :key="`newsLink-${props.article.id}-tag-${tag.label}`"
+        :color="tag.color"
+        :label="tag.label"
+        size="md"
+      />
       {{ dateString }}
     </div>
   </NuxtLink>
@@ -43,13 +54,13 @@ const newsType = computed<[string, string]>(() => {
   grid-template-columns: 250px 1fr;
   grid-template-rows: auto 1fr;
   margin: 0 1rem 1rem 1rem;
-  border-radius: 1rem;
   overflow: hidden;
 
   .image {
     grid-row: 1 / 3;
     max-height: 25vh;
     object-fit: contain;
+    align-self: stretch;
     justify-self: center;
   }
 
@@ -59,8 +70,12 @@ const newsType = computed<[string, string]>(() => {
   }
 
   .date {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem 1rem 1rem;
     color: $sub;
+  }
+
+  &:hover {
+    background-color: $bg-alt;
   }
 }
 

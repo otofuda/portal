@@ -24,7 +24,9 @@ export default defineNuxtConfig({
   modules: [
     ['@nuxtjs/eslint-module', { lintOnStart: false }],
     ['@pinia/nuxt', {}],
-    ['@nuxt/ui', {}],
+    ['@nuxt/ui', {
+      icons: ['fa6-brands']
+    }],
     ['@nuxtjs/google-fonts', {
       families: {
         Inter: { wght: [400, 700] },
