@@ -32,15 +32,15 @@ export interface NewsPayload {
 export const newsTags: Record<NewsTagString, NewsTag> = {
   お知らせ: {
     label: 'お知らせ',
-    color: 'primary'
+    color: 'sky'
   },
   イベント情報: {
     label: 'イベント情報',
-    color: 'rose'
+    color: 'green'
   },
   ゲーム情報: {
     label: 'ゲーム情報',
-    color: 'blue'
+    color: 'sky'
   },
   おとふだNET: {
     label: 'おとふだNET',

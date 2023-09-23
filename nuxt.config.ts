@@ -47,6 +47,10 @@ export default defineNuxtConfig({
 
   css: ['normalize.css'],
 
+  colorMode: {
+    preference: 'light'
+  },
+
   vite: {
     css: {
       preprocessorOptions: {

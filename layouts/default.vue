@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const route = useRoute()
 const showSpNav = ref<boolean>(false)
 </script>
 
@@ -24,11 +25,6 @@ const showSpNav = ref<boolean>(false)
       />
     </header>
 
-    <!-- ナビゲーション(PC用) -->
-    <nav class="nav --pc">
-      <NavLinkList />
-    </nav>
-
     <!-- ナビゲーション(スマホ用) -->
     <USlideover v-model="showSpNav" class="nav --sp">
       <UButton
@@ -41,6 +37,17 @@ const showSpNav = ref<boolean>(false)
       />
       <NavLinkList @close-nav="showSpNav = false" />
     </USlideover>
+
+    <ClientOnly>
+      <Transition name="hero">
+        <TheHero v-if="route.name === 'index'" />
+      </Transition>
+    </ClientOnly>
+
+    <!-- ナビゲーション(PC用) -->
+    <nav class="nav --pc">
+      <NavLinkList />
+    </nav>
 
     <main>
       <slot />
@@ -105,7 +112,7 @@ const showSpNav = ref<boolean>(false)
 <style lang="scss" scoped>
 .layout {
   display: grid;
-  grid-template-columns: 16rem minmax(0, $spwidth);
+  grid-template-columns: 20rem minmax(0, $spwidth);
   justify-content: center;
 
   header {
@@ -143,7 +150,13 @@ const showSpNav = ref<boolean>(false)
     }
   }
 
+  .hero {
+    grid-column: 1 / 3;
+  }
+
   .nav.--pc {
+    grid-column: 1 / 2;
+    background: $bg;
     margin: 1rem;
     padding: 1rem 0;
     border-radius: 1rem;
@@ -155,6 +168,7 @@ const showSpNav = ref<boolean>(false)
   }
 
   main {
+    grid-column: 2 / 3;
     max-width: $spwidth;
     flex-grow: 1;
     color: $text;

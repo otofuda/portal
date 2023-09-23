@@ -1,10 +1,16 @@
 <script lang="ts" setup>
-const navLinks = [
-  { title: 'TOP', url: '/' },
-  { title: 'お知らせ', url: '/news' },
-  { title: 'キャラクター', url: '/characters' },
-  { title: 'マンガ', url: '/comics' },
-  { title: '収録楽曲', url: '/songs' }
+interface NavLink {
+  title: string;
+  class?: string;
+  url: string;
+}
+
+const navLinks: NavLink[] = [
+  { title: 'TOP', class: 'top', url: '/' },
+  { title: 'お知らせ', class: 'news', url: '/news' },
+  { title: 'キャラクター', class: 'character', url: '/characters' },
+  { title: '収録楽曲', class: 'songs', url: '/songs' },
+  { title: 'マンガ', class: 'comics', url: '/comics' }
 ]
 
 const emit = defineEmits<{(e: 'close-nav'): void}>()
@@ -14,7 +20,11 @@ const emit = defineEmits<{(e: 'close-nav'): void}>()
   <div class="nav-links">
     <ul>
       <li v-for="(link, i) in navLinks" :key="`navlink-${i}`">
-        <NuxtLink :to="link.url" @click="emit('close-nav')">
+        <NuxtLink
+          :to="link.url"
+          :class="`--${link.class || 'other'}`"
+          @click="emit('close-nav')"
+        >
           {{ link.title }}
         </NuxtLink>
       </li>
@@ -34,13 +44,49 @@ ul {
 
     a {
       display: block;
-      padding: 0.5rem 0.5rem;
-      color: $primary;
+      color: transparent;
       text-decoration: none;
+      aspect-ratio: 1438 / 380;
+      background-size: contain;
 
-      &.router-link-active {
-        color: $bg;
-        background: $primary;
+      &.--top {
+        background-image: url("~/assets/nav/top_1.png");
+
+        &.router-link-active {
+          background-image: url("~/assets/nav/top_2.png");
+        }
+      }
+
+      &.--news {
+        background-image: url("~/assets/nav/news_1.png");
+
+        &.router-link-active {
+          background-image: url("~/assets/nav/news_2.png");
+        }
+      }
+
+      &.--character {
+        background-image: url("~/assets/nav/character_1.png");
+
+        &.router-link-active {
+          background-image: url("~/assets/nav/character_2.png");
+        }
+      }
+
+      &.--songs {
+        background-image: url("~/assets/nav/songs_1.png");
+
+        &.router-link-active {
+          background-image: url("~/assets/nav/songs_2.png");
+        }
+      }
+
+      &.--comics {
+        background-image: url("~/assets/nav/comics_1.png");
+
+        &.router-link-active {
+          background-image: url("~/assets/nav/comics_2.png");
+        }
       }
     }
   }

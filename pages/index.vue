@@ -35,10 +35,6 @@ const latestNews = computed<NewsArticle | null>(() => {
       <Title>{{ title }}</Title>
     </Head>
 
-    <p class="welcome">
-      音札ポータルへようこそ！
-    </p>
-
     <HeadingTitle>トピックス</HeadingTitle>
 
     <div class="topics">
@@ -66,11 +62,6 @@ const latestNews = computed<NewsArticle | null>(() => {
 </template>
 
 <style lang="scss" scoped>
-.welcome {
-  text-align: center;
-  margin: 1rem;
-}
-
 .topics {
   display: flex;
   flex-flow: row nowrap;
