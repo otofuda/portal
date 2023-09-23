@@ -41,10 +41,10 @@ onUnmounted(() => {
     </div>
 
     <div class="buttons">
-      <a href="">
+      <a href="https://j.mp/otofuda" target="_blank">
         <img class="--arcade" src="~/assets/button_arcade.png">
       </a>
-      <a href="">
+      <a href="https://etude.otofuda.com/" target="_blank">
         <img class="--etude" src="~/assets/button_etude.png">
       </a>
     </div>
@@ -56,7 +56,8 @@ onUnmounted(() => {
   position: relative;
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  margin-bottom: 8rem;
+  padding-bottom: 8rem;
+  overflow: hidden;
 
   > .character {
     position: relative;
@@ -81,19 +82,20 @@ onUnmounted(() => {
   .text {
     position: absolute;
     justify-self: center;
-    bottom: 20%;
+    bottom: 32%;
     background: $bg;
     padding: 0 0.5rem;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: $bg;
     background: linear-gradient(135deg, $green, $blue);
-    box-shadow: 0 0.5rem 1rem rgba($blue, 0.25);
+    text-shadow: 0 0.25rem 0.5rem rgba($text, 0.25);
+    box-shadow: 0 0.5rem 1rem -0.25rem rgba($blue, 0.5);
   }
 
   .buttons {
     position: absolute;
-    bottom: -4rem;
+    bottom: 2rem;
     display: flex;
     padding: 0 5%;
     gap: 5%;
@@ -111,13 +113,16 @@ onUnmounted(() => {
 @media (max-width: $spwidth) {
   .hero {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 5% 5% 5% 5% 5%;
-    margin-bottom: 0;
+    grid-template-rows: auto auto auto auto auto;
+    margin-top: -10%;
+    margin-bottom: 1rem;
+    padding: 0;
 
     > .character {
       position: static;
       min-width: 115%;
       top: 0;
+      margin-bottom: -160%;
 
       &.--shuon {
         grid-column: 2;
@@ -141,17 +146,24 @@ onUnmounted(() => {
         grid-column: 1;
         grid-row: 5;
         z-index: 5;
+        margin-bottom: 30%;
       }
     }
 
     .text {
-      bottom: 20rem;
+      top: 20rem;
+      bottom: unset;
+      z-index: 10;
+      writing-mode: vertical-rl;
+      font-size: 2rem;
+      padding: 1rem 0;
     }
 
     .buttons {
-      bottom: 2rem;
+      bottom: 1rem;
       flex-direction: column;
       gap: 1rem;
+      z-index: 10;
     }
   }
 }

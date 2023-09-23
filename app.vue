@@ -1,8 +1,12 @@
 <script lang="ts" setup>
+import * as Swiper from 'swiper/element/bundle'
+
 onMounted(() => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js', { scope: '/' })
   }
+
+  Swiper.register()
 })
 </script>
 

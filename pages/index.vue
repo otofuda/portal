@@ -24,8 +24,8 @@ const newsData = await useAsyncData<NewsPayload>('news', () => {
   })
 })
 
-const latestNews = computed<NewsArticle | null>(() => {
-  return newsData.data.value ? newsData.data.value.contents.at(0) || null : null
+const latestNews = computed<NewsArticle[]>(() => {
+  return newsData.data.value ? newsData.data.value.contents.slice(0, 5) : []
 })
 </script>
 
@@ -37,7 +37,26 @@ const latestNews = computed<NewsArticle | null>(() => {
 
     <HeadingTitle>トピックス</HeadingTitle>
 
-    <div class="topics">
+    <swiper-container
+      class="topics"
+      :space-between="20"
+      :centered-slides="true"
+      navigation="true"
+    >
+      <swiper-slide
+        v-for="topic in topics"
+        :key="`topic-${topic.id}`"
+      >
+        <NuxtLink
+          :to="topic.link"
+          class="topic"
+        >
+          <img
+            :src="`${topic.image}?format=jpg&name=large`"
+            :alt="topic.alt"
+          >
+        </NuxtLink>
+      </swiper-slide>
       <NuxtLink
         v-for="topic in topics"
         :key="`topic-${topic.id}`"
@@ -49,34 +68,61 @@ const latestNews = computed<NewsArticle | null>(() => {
           :alt="topic.alt"
         >
       </NuxtLink>
-    </div>
+    </swiper-container>
 
     <HeadingTitle>最新のお知らせ</HeadingTitle>
 
-    <NewsLink
-      v-if="latestNews"
-      :article="latestNews"
-      class="article"
-    />
+    <swiper-container
+      class="latest-news"
+      :space-between="20"
+      pagination="true"
+    >
+      <swiper-slide
+        v-for="news in latestNews"
+        :key="`latest-news-${news.id}`"
+      >
+        <NewsLink :article="news" />
+      </swiper-slide>
+    </swiper-container>
+
+    <div class="menu">
+      <UButton
+        icon="i-heroicons-newspaper"
+        size="lg"
+        color="primary"
+        variant="outline"
+        label="すべてのお知らせを見る"
+        to="/news"
+      />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.heading {
+  margin: 1rem 0;
+  justify-content: center;
+}
+
 .topics {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
+  --swiper-theme-color: #ffffff;
 
   .topic {
-    margin: 1rem;
-    scroll-snap-align: center;
-
-    img {
-      min-width: 300px;
-      width: 300px;
-    }
+    height: 100%;
+    display: flex;
+    justify-content: center;
   }
+}
+
+.latest-news {
+  --swiper-pagination-color: #202020;
+  margin-bottom: 1rem;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 </style>
