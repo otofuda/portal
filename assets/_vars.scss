@@ -11,6 +11,12 @@ $e: #25ca25;
 $n: #ffb223;
 $h: #ff0984;
 
+$etude-gradient: linear-gradient(135deg, rgba(146,208,80,1) 0%, rgba(76,175,80,1) 100%);
+$otofuda-gradient: linear-gradient(135deg, #14ea19 0%, #47caff 100%);
+$color-easy-gradient: linear-gradient(135deg, rgba(76,175,80,1) 0%, rgba(146,208,80,1) 100%);
+$color-normal-gradient: linear-gradient(135deg, rgba(255,152,0,1) 0%, rgba(255,192,0,1) 100%);
+$color-hard-gradient: linear-gradient(135deg, rgba(255,9,132,1) 0%, rgba(255,102,153,1) 100%);
+
 $fonts:
   'Inter',
   'Zen Kaku Gothic Antique',

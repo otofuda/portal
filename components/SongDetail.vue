@@ -11,7 +11,6 @@ const jacketSrc = computed<string>(() => {
 })
 
 interface LevelInfo {
-  color: string;
   difficulty: number;
   nd: string;
   notes: number;
@@ -21,21 +20,18 @@ interface LevelInfo {
 const levels = computed<LevelInfo[]>(() => {
   return [
     {
-      color: '#25ca25',
       difficulty: props.song.easy,
       nd: props.song.easy_nd,
       notes: props.song.easy_notes,
       video: props.song.easy_video
     },
     {
-      color: '#ffb223',
       difficulty: props.song.normal,
       nd: props.song.normal_nd,
       notes: props.song.normal_notes,
       video: props.song.normal_video
     },
     {
-      color: '#ff0984',
       difficulty: props.song.hard,
       nd: props.song.hard_nd,
       notes: props.song.hard_notes,
@@ -47,7 +43,11 @@ const levels = computed<LevelInfo[]>(() => {
 
 <template>
   <div class="song-data">
-    <img class="jacket" :src="jacketSrc">
+    <img
+      class="jacket"
+      :src="jacketSrc"
+      :style="{ boxShadow: `0 0.75rem 1rem 0 rgba(${props.song.color}, 0.5)` }"
+    >
 
     <strong class="title">{{ props.song.name }}</strong>
 
@@ -55,8 +55,37 @@ const levels = computed<LevelInfo[]>(() => {
       {{ props.song.artist }}
     </div>
 
-    <div v-if="props.song.comment" class="comment">
+    <div v-if="props.song.comment || $props.song.copyright" class="comment">
       {{ props.song.comment }}
+
+      <div v-if="props.song.copyright" class="copyright">
+        {{ props.song.copyright }}
+      </div>
+    </div>
+
+    <div class="links">
+      <UButton
+        v-if="$props.song.youtube_music"
+        :to="$props.song.youtube_music"
+        target="_blank"
+        color="primary"
+        variant="outline"
+        icon="i-heroicons-musical-note"
+      >
+        楽曲を聴く
+        <UIcon name="i-heroicons-arrow-top-right-on-square" />
+      </UButton>
+      <UButton
+        v-if="$props.song.youtube_chart"
+        :to="$props.song.youtube_chart"
+        target="_blank"
+        color="rose"
+        variant="outline"
+        icon="i-fa6-brands-youtube"
+      >
+        譜面攻略動画を見る
+        <UIcon name="i-heroicons-arrow-top-right-on-square" />
+      </UButton>
     </div>
 
     <div class="levels">
@@ -65,24 +94,44 @@ const levels = computed<LevelInfo[]>(() => {
         :key="`song-level-${i}`"
         class="level"
       >
-        <span class="level-number" :style="{ background: level.color }">
+        <!-- 楽曲レベル -->
+        <span class="level-number">
           {{ level.difficulty }}
         </span>
-        <span class="level-nd">
-          {{ level.nd }}
-        </span>
-        <span class="level-notes">
-          {{ level.notes }}
-        </span>
-        <NuxtLink
-          v-if="level.video"
-          :to="level.video"
-          class="level-video"
-          target="_blank"
-        >
-          譜面動画を視聴
-        </NuxtLink>
+
+        <div class="level-detail">
+          <label class="level-label">譜面制作</label>
+          <span class="level-nd">
+            {{ level.nd }}
+          </span>
+          <label class="level-label">ノーツ数</label>
+          <span class="level-notes">
+            {{ level.notes }}
+          </span>
+
+          <UButton
+            v-if="level.video"
+            :to="level.video"
+            target="_blank"
+            color="rose"
+            variant="solid"
+            icon="i-fa6-brands-youtube"
+          >
+            譜面紹介動画を見る
+          </UButton>
+        </div>
       </div>
+    </div>
+
+    <div class="menu">
+      <UButton
+        icon="i-heroicons-arrow-left"
+        size="lg"
+        color="primary"
+        variant="outline"
+        label="一覧にもどる"
+        to="/songs"
+      />
     </div>
   </div>
 </template>
@@ -93,71 +142,124 @@ const levels = computed<LevelInfo[]>(() => {
   text-decoration: none;
   display: grid;
   grid-template-columns: 1fr;
+  padding-bottom: 2rem;
 
   .jacket {
     width: 320px;
     max-width: 100%;
+    border-radius: 1.5rem;
+    justify-self: center;
+    margin-bottom: 1.5rem;
   }
 
   .title {
     font-size: 2rem;
+    justify-self: center;
   }
 
   .artist {
-    color: $sub;
+    justify-self: center;
+    margin-bottom: 1rem;
   }
 
   .comment {
-    color: $sub;
+    justify-self: stretch;
+    padding: 1rem;
+    background: $bg-alt;
+    text-align: center;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .copyright {
+      color: $sub;
+      font-size: 0.75rem;
+    }
+  }
+
+  .links {
+    justify-self: center;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
 
   .levels {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 2rem;
+    margin-bottom: 2rem;
 
     .level {
       display: grid;
       align-items: flex-start;
-      grid-template-columns: 4rem 1fr;
-      column-gap: 0.5rem;
+      grid-template-columns: 5rem 1fr;
+      column-gap: 1rem;
 
       .level-number {
-        flex-shrink: 0;
         color: $bg;
         font-size: 1.5rem;
         font-weight: bold;
         text-align: center;
-        padding: 0.25rem 0;
-        grid-row: 1 / 4;
+        padding: 0.5rem;
+        border: 0.2rem solid rgba($bg, 0.75);
+        border-radius: 0.5rem;
+        box-shadow: 0 0.25rem 0.75rem 0 rgba($text, 0.25);
+      }
+
+      &:nth-child(1) .level-number {
+        background: $color-easy-gradient;
+      }
+
+      &:nth-child(2) .level-number {
+        background: $color-normal-gradient;
+      }
+
+      &:nth-child(3) .level-number {
+        background: $color-hard-gradient;
+      }
+
+      .level-detail {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 0.5rem;
+      }
+
+      .level-label {
+        justify-self: start;
+        width: 6rem;
+        font-size: 0.75rem;
+        text-align: center;
+        padding: 0.125rem;
+        color: $bg;
+        background: $text;
+        clip-path: polygon(
+          0% 50%,
+          10% 0,
+          90% 0,
+          100% 50%,
+          100% 50%,
+          90% 100%,
+          10% 100%,
+          0% 50%
+        );
       }
 
       .level-nd {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-
-        &::before {
-          content: '譜面制作';
-          font-size: 0.75rem;
-          color: $bg;
-          background: $text;
-          padding: 0 0.5rem;
-        }
       }
 
       .level-notes {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-
-        &::before {
-          content: 'ノーツ数';
-          font-size: 0.75rem;
-          color: $bg;
-          background: $text;
-          padding: 0 0.5rem;
-        }
       }
 
       .level-video {
@@ -169,6 +271,11 @@ const levels = computed<LevelInfo[]>(() => {
         padding: 0.25rem 0.5rem;
       }
     }
+  }
+
+  .menu {
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

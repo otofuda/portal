@@ -8,7 +8,7 @@ const props = defineProps<{
 
 <template>
   <NuxtLink :to="`comics/${props.comic.id}`" class="comic-link">
-    <img class="thumbnail" :src="props.comic.image.url" :alt="props.comic.title">
+    <img class="thumbnail" :src="`${props.comic.image.url}?w=320`" :alt="props.comic.title">
     <strong class="title">{{ props.comic.title }}</strong>
   </NuxtLink>
 </template>
@@ -26,7 +26,7 @@ const props = defineProps<{
   .thumbnail {
     object-fit: cover;
     object-position: top center;
-    aspect-ratio: 0.95;
+    aspect-ratio: 0.99;
   }
 
   .title {

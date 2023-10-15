@@ -1,10 +1,3 @@
-export interface SongsPayload {
-  contents: SongInfo[];
-  totalCount: number;
-  offset: number;
-  limit: number;
-}
-
 export interface SongInfo {
   id: string;
   song_id: string;
@@ -12,8 +5,10 @@ export interface SongInfo {
   artist: string;
   illustrator: string;
   comment?: string;
+  copyright?: string;
   bpm: number;
   dispbpm: string;
+  color: string;
 
   easy: number;
   normal: number;
@@ -30,7 +25,7 @@ export interface SongInfo {
   easy_video?: string;
   normal_video?: string;
   hard_video?: string;
-  
+
   for_ac?: boolean;
   for_mb?: boolean;
 
@@ -41,4 +36,14 @@ export interface SongInfo {
     height: number;
     width: number;
   };
+
+  youtube_music?: string;
+  youtube_chart?: string;
+}
+
+export interface SongsPayload {
+  contents: SongInfo[];
+  totalCount: number;
+  offset: number;
+  limit: number;
 }

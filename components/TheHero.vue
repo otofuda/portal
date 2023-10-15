@@ -36,6 +36,10 @@ onUnmounted(() => {
     <img class="character --hirono" src="~/assets/characters/hirono.png">
     <img class="character --shuon" src="~/assets/characters/shuon.png">
 
+    <div class="copy">
+      <span>これまでにない、新感覚<wbr>「対戦型音楽カードゲーム」</span>
+    </div>
+
     <div class="text">
       花札 × 対戦 × 音楽
     </div>
@@ -79,11 +83,29 @@ onUnmounted(() => {
     }
   }
 
+  .copy {
+    position: absolute;
+    justify-self: center;
+    bottom: 30%;
+    padding: 0.25rem 0.5rem;
+    background: rgba($bg, 0.8);
+    backdrop-filter: blur(0.5rem);
+    box-shadow: 0 0.25rem 0.5rem -0.25rem rgba($green, 0.5);
+
+    > span {
+      font-weight: bold;
+      font-size: 1rem;
+      color: transparent;
+      background-image: linear-gradient(135deg, $green, $blue);
+      background-clip: text;
+      background-origin: border-box;
+    }
+  }
+
   .text {
     position: absolute;
     justify-self: center;
-    bottom: 32%;
-    background: $bg;
+    bottom: calc(30% + 2.5rem);
     padding: 0 0.5rem;
     font-weight: bold;
     font-size: 2rem;
@@ -148,6 +170,20 @@ onUnmounted(() => {
         z-index: 5;
         margin-bottom: 30%;
       }
+    }
+
+    .copy {
+      top: 4rem;
+      height: 12rem;
+      z-index: 10;
+      bottom: unset;
+      writing-mode: vertical-rl;
+      font-size: 1rem;
+      word-break: keep-all;
+      background: transparent;
+      backdrop-filter: none;
+      box-shadow: none;
+      transform: skewY(-10deg);
     }
 
     .text {

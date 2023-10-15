@@ -13,7 +13,13 @@ const jacketSrc = computed<string>(() => {
 
 <template>
   <NuxtLink :to="`songs/${props.song.song_id}`" class="song-link">
-    <img class="jacket" :src="jacketSrc">
+    <!-- ジャケット -->
+    <img
+      class="jacket"
+      :src="jacketSrc"
+      :style="{ boxShadow: `0 0.5rem 0.75rem 0 rgba(${props.song.color}, 0.5)` }"
+    >
+
     <strong class="title">{{ props.song.name }}</strong>
     <div class="artist">
       {{ props.song.artist }}
@@ -30,12 +36,26 @@ const jacketSrc = computed<string>(() => {
         {{ props.song.hard }}
       </div>
     </div>
+
     <!-- 収録タイトル情報 -->
     <div class="titles">
-      <UBadge v-if="props.song.for_ac" variant="subtle">
+      <!-- 音札(AC) -->
+      <UBadge v-if="props.song.for_ac" variant="subtle" class="badge">
+        <UIcon name="i-heroicons-musical-note" />
         音札
       </UBadge>
-      <UBadge v-if="props.song.for_mb" variant="subtle" color="teal">
+      <UBadge v-else color="gray" variant="soft" class="badge --d">
+        <UIcon name="i-heroicons-minus" />
+        音札
+      </UBadge>
+
+      <!-- 音札Étude -->
+      <UBadge v-if="props.song.for_mb" color="teal" variant="subtle" class="badge">
+        <UIcon name="i-heroicons-musical-note" />
+        音札Étude
+      </UBadge>
+      <UBadge v-else color="gray" variant="soft" class="badge --d">
+        <UIcon name="i-heroicons-minus" />
         音札Étude
       </UBadge>
     </div>
@@ -46,14 +66,22 @@ const jacketSrc = computed<string>(() => {
 .song-link {
   color: $text;
   text-decoration: none;
+  padding: 0.5rem 0;
   display: grid;
-  grid-template-columns: 5rem 1fr;
+  grid-template-columns: 6rem 1fr;
   grid-template-rows: auto auto 1fr;
-  gap: 0.5rem;
+  row-gap: 0.5rem;
+  column-gap: 1rem;
+
+  &:hover .title {
+    text-decoration: underline;
+  }
 
   .jacket {
     width: 100%;
+    aspect-ratio: 1;
     grid-row: 1 / 5;
+    border-radius: 0.5rem;
   }
 
   .title {
@@ -75,18 +103,18 @@ const jacketSrc = computed<string>(() => {
       font-weight: bold;
       text-align: center;
       width: 40px;
-      border-radius: 0.25rem;
+      border-radius: 0.3rem;
 
       &:nth-child(1) {
-        background-color: $e;
+        background: $color-easy-gradient;
       }
 
       &:nth-child(2) {
-        background-color: $n;
+        background: $color-normal-gradient;
       }
 
       &:nth-child(3) {
-        background-color: $h;
+        background: $color-hard-gradient;
       }
     }
   }
@@ -94,6 +122,14 @@ const jacketSrc = computed<string>(() => {
   .titles {
     display: flex;
     gap: 0.5rem;
+
+    .badge {
+      gap: 0.25rem;
+
+      &.--d {
+        opacity: 0.5;
+      }
+    }
   }
 }
 </style>
