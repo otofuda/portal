@@ -11,7 +11,7 @@ const onTweet = () => {
 
 <template>
   <div class="share">
-    <UBadge color="gray" variant="soft">
+    <UBadge color="gray">
       共有
     </UBadge>
     <!-- X(Twitter) -->

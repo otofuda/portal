@@ -10,6 +10,17 @@ const title = ref('キャラクター')
 
     <HeadingTitle>{{ title }}</HeadingTitle>
 
-    <p>🏗️ 工事中</p>
+    <p class="caution">
+      🏗️ このページは工事中です
+    </p>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.characters {
+  .caution {
+    text-align: center;
+    margin-top: 2rem;
+  }
+}
+</style>

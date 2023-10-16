@@ -33,17 +33,18 @@ const title = ref(content.value?.title)
       Loading...
     </div>
 
-    <div v-else-if="content">
+    <div v-else-if="content" class="comic-img">
       <img
         :src="content.image.url"
         :alt="title"
-        class="comic-img"
       >
     </div>
 
     <div v-else class="error">
       マンガが見つかりません
     </div>
+
+    <ShareButtons v-if="content" :text="content.title" />
 
     <div class="comic-menu">
       <UButton
@@ -61,12 +62,23 @@ const title = ref(content.value?.title)
 <style lang="scss" scoped>
 .comic {
   .comic-img {
-    width: calc(100% - 2rem);
-    max-width: 400px;
-    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+
+    img {
+      width: calc(100% - 2rem);
+      max-width: 400px;
+    }
+  }
+
+  .share {
+    margin-bottom: 1rem;
   }
 
   .comic-menu {
+    display: flex;
+    justify-content: center;
     padding: 1rem;
   }
 }

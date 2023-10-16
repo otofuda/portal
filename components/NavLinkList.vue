@@ -1,14 +1,15 @@
 <script lang="ts" setup>
 interface NavLink {
   title: string;
-  class?: string;
+  class: string;
   url: string;
+  disabled?: boolean;
 }
 
 const navLinks: NavLink[] = [
   { title: 'TOP', class: 'top', url: '/' },
   { title: 'お知らせ', class: 'news', url: '/news' },
-  { title: 'キャラクター', class: 'character', url: '/characters' },
+  { title: 'キャラクター', class: 'character', url: '/characters', disabled: true },
   { title: '収録楽曲', class: 'songs', url: '/songs' },
   { title: 'マンガ', class: 'comics', url: '/comics' }
 ]
@@ -21,8 +22,8 @@ const emit = defineEmits<{(e: 'close-nav'): void}>()
     <ul>
       <li v-for="(link, i) in navLinks" :key="`navlink-${i}`">
         <NuxtLink
-          :to="link.url"
-          :class="`--${link.class || 'other'}`"
+          :to="link.disabled ? undefined : link.url"
+          :class="`--${link.class}`"
           @click="emit('close-nav')"
         >
           {{ link.title }}
@@ -66,6 +67,7 @@ ul {
       }
 
       &.--character {
+        opacity: 0.5;
         background-image: url("~/assets/nav/character_1.png");
 
         &.router-link-active {

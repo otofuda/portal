@@ -45,7 +45,7 @@ onUnmounted(() => {
     </div>
 
     <div class="buttons">
-      <a href="https://j.mp/otofuda" target="_blank">
+      <a href="https://arcade.otofuda.com" target="_blank">
         <img class="--arcade" src="~/assets/button_arcade.png">
       </a>
       <a href="https://etude.otofuda.com/" target="_blank">

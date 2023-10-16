@@ -57,7 +57,7 @@ const showSpNav = ref<boolean>(false)
       音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。
 
       <div class="banners">
-        <a href="https://j.mp/otofuda" target="_blank" rel="noopener noreferrer">
+        <a href="https://arcade.otofuda.com" target="_blank" rel="noopener noreferrer">
           <img src="~/assets/banners/banner_hp.png" alt="音札公式ホームページ">
         </a>
         <a href="https://www.youtube.com/@user-iw6ic4jl4b" target="_blank" rel="noopener noreferrer">

@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 const jacketSrc = computed<string>(() => {
-  const size = Math.min(320, props.song.jacket.width)
+  const size = Math.min(640, props.song.jacket.width)
   return `${props.song.jacket.url}?w=${size}`
 })
 
@@ -63,10 +63,46 @@ const levels = computed<LevelInfo[]>(() => {
       </div>
     </div>
 
+    <div class="detail">
+      <label>ILLUSTRATOR</label>
+      {{ props.song.illustrator }}
+    </div>
+
+    <div class="detail">
+      <label>BPM</label>
+      {{ props.song.dispbpm }}
+    </div>
+
+    <div class="detail">
+      <label>収録タイトル</label>
+
+      <div class="detail-badges">
+        <!-- 音札(AC) -->
+        <UBadge v-if="props.song.for_ac" variant="subtle" class="badge">
+          <UIcon name="i-heroicons-musical-note" />
+          音札
+        </UBadge>
+        <UBadge v-else color="gray" variant="soft" class="badge --d">
+          <UIcon name="i-heroicons-minus" />
+          音札
+        </UBadge>
+
+        <!-- 音札Étude -->
+        <UBadge v-if="props.song.for_mb" color="teal" variant="subtle" class="badge">
+          <UIcon name="i-heroicons-musical-note" />
+          音札Étude
+        </UBadge>
+        <UBadge v-else color="gray" variant="soft" class="badge --d">
+          <UIcon name="i-heroicons-minus" />
+          音札Étude
+        </UBadge>
+      </div>
+    </div>
+
     <div class="links">
       <UButton
-        v-if="$props.song.youtube_music"
-        :to="$props.song.youtube_music"
+        v-if="props.song.youtube_music"
+        :to="props.song.youtube_music"
         target="_blank"
         color="primary"
         variant="outline"
@@ -76,8 +112,8 @@ const levels = computed<LevelInfo[]>(() => {
         <UIcon name="i-heroicons-arrow-top-right-on-square" />
       </UButton>
       <UButton
-        v-if="$props.song.youtube_chart"
-        :to="$props.song.youtube_chart"
+        v-if="props.song.youtube_chart"
+        :to="props.song.youtube_chart"
         target="_blank"
         color="rose"
         variant="outline"
@@ -123,6 +159,8 @@ const levels = computed<LevelInfo[]>(() => {
       </div>
     </div>
 
+    <ShareButtons :text="props.song.name" />
+
     <div class="menu">
       <UButton
         icon="i-heroicons-arrow-left"
@@ -147,6 +185,7 @@ const levels = computed<LevelInfo[]>(() => {
   .jacket {
     width: 320px;
     max-width: 100%;
+    aspect-ratio: 1;
     border-radius: 1.5rem;
     justify-self: center;
     margin-bottom: 1.5rem;
@@ -179,6 +218,46 @@ const levels = computed<LevelInfo[]>(() => {
     }
   }
 
+  .detail {
+    justify-self: center;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    label {
+      width: 6rem;
+      font-size: 0.7rem;
+      text-align: center;
+      padding: 0.125rem;
+      background: $border;
+      clip-path: polygon(
+        0% 50%,
+        10% 0,
+        90% 0,
+        100% 50%,
+        100% 50%,
+        90% 100%,
+        10% 100%,
+        0% 50%
+      );
+    }
+
+    .detail-badges {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+
+      .badge {
+        gap: 0.25rem;
+
+        &.--d {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
   .links {
     justify-self: center;
     margin-bottom: 2rem;
@@ -208,7 +287,7 @@ const levels = computed<LevelInfo[]>(() => {
         padding: 0.5rem;
         border: 0.2rem solid rgba($bg, 0.75);
         border-radius: 0.5rem;
-        box-shadow: 0 0.25rem 0.75rem 0 rgba($text, 0.25);
+        box-shadow: 0 0.75rem 0.75rem -0.5rem rgba($text, 0.25);
       }
 
       &:nth-child(1) .level-number {
@@ -271,6 +350,10 @@ const levels = computed<LevelInfo[]>(() => {
         padding: 0.25rem 0.5rem;
       }
     }
+  }
+
+  .share {
+    margin-bottom: 2rem;
   }
 
   .menu {
