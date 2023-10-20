@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { TopicInfo, TopicPayload } from '~/types/topics'
-import { NewsArticle, NewsPayload } from '~/types/news'
+import type { TopicInfo, TopicPayload } from '~/types/topics'
+import type { NewsArticle, NewsPayload } from '~/types/news'
 
 const title = ref('TOP')
 

@@ -1,10 +1,3 @@
-export interface ComicPayload {
-  contents: ComicInfo[];
-  totalCount: number;
-  offset: number;
-  limit: number;
-}
-
 export interface ComicInfo {
   id: string;
   title: string;
@@ -15,4 +8,11 @@ export interface ComicInfo {
     height: number;
     width: number;
   }
+}
+
+export interface ComicPayload {
+  contents: ComicInfo[];
+  totalCount: number;
+  offset: number;
+  limit: number;
 }

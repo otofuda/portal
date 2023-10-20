@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SongInfo } from '~/types/songs'
+import type { SongInfo } from '~/types/songs'
 
 const props = defineProps<{
   song: SongInfo;

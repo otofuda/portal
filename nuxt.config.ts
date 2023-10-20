@@ -20,6 +20,15 @@ export default defineNuxtConfig({
     }
   },
 
+  vue: {
+    compilerOptions: {
+      // 'swiper-' から始まるElementをVueのコンポーネントとして解決しようとしない
+      isCustomElement: (tag) => {
+        return tag.startsWith('swiper-')
+      }
+    }
+  },
+
   // 使用するモジュール
   modules: [
     ['@nuxtjs/eslint-module', { lintOnStart: false }],

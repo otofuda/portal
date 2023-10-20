@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ComicInfo } from '~/types/comics'
+import type { ComicInfo } from '~/types/comics'
 
 const props = defineProps<{
   comic: ComicInfo;

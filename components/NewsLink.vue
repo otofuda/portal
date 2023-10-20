@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NewsArticle, NewsTag, newsTags } from '~/types/news'
+import { type NewsArticle, type NewsTag, newsTags } from '~/types/news'
 
 const props = defineProps<{
   article: NewsArticle;
