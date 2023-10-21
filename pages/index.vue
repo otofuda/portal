@@ -51,10 +51,11 @@ const latestNews = computed<NewsArticle[]>(() => {
           :to="topic.link"
           class="topic"
         >
-          <img
-            :src="`${topic.image}?format=jpg&name=large`"
+          <LazyNuxtPicture
+            :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg&name=large`"
+            :width="1280"
             :alt="topic.alt"
-          >
+          />
         </NuxtLink>
       </swiper-slide>
       <NuxtLink

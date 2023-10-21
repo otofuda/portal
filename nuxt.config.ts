@@ -41,6 +41,12 @@ export default defineNuxtConfig({
         Inter: { wght: [400, 700] },
         'Zen+Kaku+Gothic+Antique': { wght: [400, 700] }
       }
+    }],
+    ['@nuxt/image', {
+      domains: ['pbs.twimg.com'],
+      alias: {
+        twimg: 'https://pbs.twimg.com'
+      }
     }]
   ],
 

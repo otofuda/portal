@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SongInfo, SongsPayload } from '@/types/songs'
+import type { SongInfo, SongsPayload } from '@/types/songs'
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()

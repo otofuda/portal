@@ -5,11 +5,11 @@ const instances: SimpleParallax[] = []
 
 onMounted(() => {
   const parallaxConfig = [
-    { scale: 1.25, el: document.querySelector<HTMLImageElement>('img.character.--kanon')! },
-    { scale: 1.5, el: document.querySelector<HTMLImageElement>('img.character.--kadone')! },
-    { scale: 1.75, el: document.querySelector<HTMLImageElement>('img.character.--kunon')! },
-    { scale: 1.5, el: document.querySelector<HTMLImageElement>('img.character.--hirono')! },
-    { scale: 1.25, el: document.querySelector<HTMLImageElement>('img.character.--shuon')! }
+    { scale: 1.25, el: document.querySelector<HTMLImageElement>('.character.--kanon > img')! },
+    { scale: 1.5, el: document.querySelector<HTMLImageElement>('.character.--kadone > img')! },
+    { scale: 1.75, el: document.querySelector<HTMLImageElement>('.character.--kunon > img')! },
+    { scale: 1.5, el: document.querySelector<HTMLImageElement>('.character.--hirono > img')! },
+    { scale: 1.25, el: document.querySelector<HTMLImageElement>('.character.--shuon > img')! }
   ]
 
   parallaxConfig.forEach((config) => {
@@ -30,11 +30,11 @@ onUnmounted(() => {
 
 <template>
   <div class="hero">
-    <img class="character --kanon" src="~/assets/characters/kanon.png">
-    <img class="character --kadone" src="~/assets/characters/kadone.png">
-    <img class="character --kunon" src="~/assets/characters/kunon.png">
-    <img class="character --hirono" src="~/assets/characters/hirono.png">
-    <img class="character --shuon" src="~/assets/characters/shuon.png">
+    <NuxtPicture class="character --kanon" src="/characters/kanon.png" />
+    <NuxtPicture class="character --kadone" src="/characters/kadone.png" />
+    <NuxtPicture class="character --kunon" src="/characters/kunon.png" />
+    <NuxtPicture class="character --hirono" src="/characters/hirono.png" />
+    <NuxtPicture class="character --shuon" src="/characters/shuon.png" />
 
     <div class="copy">
       <span>これまでにない、新感覚<wbr>「対戦型音楽カードゲーム」</span>
@@ -67,6 +67,7 @@ onUnmounted(() => {
     position: relative;
     justify-self: center;
     min-width: 125%;
+    aspect-ratio: 1 / 2;
 
     &.--kanon,
     &.--shuon {
@@ -80,6 +81,10 @@ onUnmounted(() => {
 
     &.--kunon {
       top: -15%;
+    }
+
+    img {
+      aspect-ratio: 1 / 2;
     }
   }
 
