@@ -9,8 +9,8 @@ const showSpNav = ref<boolean>(false)
   >
     <header>
       <NuxtLink to="/" class="logo">
-        <img class="icon" src="~/assets/icon.png" alt="音札ポータル">
-        <img class="type" src="~/assets/otofuda_portal.png" alt="音札ポータル">
+        <NuxtImg class="icon" src="/assets/icon.png" alt="音札ポータル" />
+        <NuxtImg class="type" src="/assets/otofuda_portal.png" alt="音札ポータル" />
       </NuxtLink>
 
       <div class="divider" />
@@ -58,10 +58,13 @@ const showSpNav = ref<boolean>(false)
 
       <div class="banners">
         <a href="https://arcade.otofuda.com" target="_blank" rel="noopener noreferrer">
-          <img src="~/assets/banners/banner_hp.png" alt="音札公式ホームページ">
+          <NuxtImg src="/banners/banner_hp.png" alt="音札公式ホームページ" />
         </a>
         <a href="https://www.youtube.com/@user-iw6ic4jl4b" target="_blank" rel="noopener noreferrer">
-          <img src="~/assets/banners/banner_youtube.png" alt="YouTube公式チャンネル">
+          <NuxtImg src="/banners/banner_youtube.png" alt="YouTube公式チャンネル" />
+        </a>
+        <a href="https://twitter.com/otofuda" target="_blank" rel="noopener noreferrer">
+          <NuxtImg src="/banners/banner_twitter.png" alt="公式Twitterアカウント" />
         </a>
       </div>
 

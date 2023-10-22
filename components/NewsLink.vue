@@ -31,7 +31,7 @@ const tags = computed<NewsTag[]>(() => {
     :to="`news/${props.article.id}`"
     class="news-link"
   >
-    <NuxtPicture
+    <NuxtImg
       class="image"
       :src="newsImage.replace('https://images.microcms-assets.io', 'microcms')"
       :alt="props.article.title"
@@ -60,14 +60,12 @@ const tags = computed<NewsTag[]>(() => {
   margin: 0 1rem 1rem 1rem;
   overflow: hidden;
 
-  :deep(.image) {
+  .image {
     grid-row: 1 / 3;
     max-height: 25vh;
     object-fit: contain;
     align-self: stretch;
     justify-self: center;
-
-    img { width: 100%; }
   }
 
   .title {

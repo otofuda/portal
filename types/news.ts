@@ -1,4 +1,4 @@
-type NewsTagString = 'お知らせ' | 'ゲーム情報' | 'イベント情報' | 'おとふだNET'
+type NewsTagString = 'お知らせ' | 'ゲーム情報' | 'イベント情報' | 'おとふだNET' | '音札ポータル'
 
 export interface NewsTag {
   label: NewsTagString;
@@ -45,5 +45,9 @@ export const newsTags: Record<NewsTagString, NewsTag> = {
   おとふだNET: {
     label: 'おとふだNET',
     color: 'orange'
+  },
+  音札ポータル: {
+    label: '音札ポータル',
+    color: 'black'
   }
 }
