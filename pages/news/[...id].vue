@@ -43,6 +43,15 @@ const tags = computed<NewsTag[]>(() => {
     ? article.tags.map(tag => newsTags[tag])
     : [newsTags['お知らせ']]
 })
+
+useSeoMeta({
+  title: title.value,
+  ogTitle: title.value,
+  description: content.value?.content,
+  ogDescription: content.value?.content,
+  ogImage: newsImage.value,
+  twitterCard: 'summary_large_image'
+})
 </script>
 
 <!-- eslint-disable vue/no-v-html -->
@@ -50,7 +59,7 @@ const tags = computed<NewsTag[]>(() => {
   <div class="news">
     <Head>
       <Title>{{ title }}</Title>
-      <Meta name="thumbnail" content="newsImage" />
+      <Meta name="thumbnail" :content="newsImage" />
     </Head>
 
     <NuxtImg
