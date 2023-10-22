@@ -48,6 +48,6 @@ export const newsTags: Record<NewsTagString, NewsTag> = {
   },
   音札ポータル: {
     label: '音札ポータル',
-    color: 'black'
+    color: 'teal'
   }
 }

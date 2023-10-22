@@ -2,7 +2,7 @@
 import type { TopicInfo, TopicPayload } from '~/types/topics'
 import type { NewsArticle, NewsPayload } from '~/types/news'
 
-const title = ref('TOP')
+const title = ref('トップ')
 
 const runtimeConfig = useRuntimeConfig()
 
@@ -26,6 +26,15 @@ const newsData = await useAsyncData<NewsPayload>('news', () => {
 
 const latestNews = computed<NewsArticle[]>(() => {
   return newsData.data.value ? newsData.data.value.contents.slice(0, 5) : []
+})
+
+useSeoMeta({
+  title: '音札ポータル',
+  ogTitle: '音札ポータル',
+  description: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。',
+  ogDescription: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。',
+  ogImage: '/thumb.png',
+  twitterCard: 'summary_large_image'
 })
 </script>
 
@@ -85,6 +94,8 @@ const latestNews = computed<NewsArticle[]>(() => {
         to="/news"
       />
     </div>
+
+    <ShareButtons :text="title" />
   </div>
 </template>
 
@@ -113,6 +124,10 @@ const latestNews = computed<NewsArticle[]>(() => {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.share {
   margin-bottom: 2rem;
 }
 </style>
