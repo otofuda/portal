@@ -1,24 +1,33 @@
 {
-  "name": "otofuda-portal",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "vue": "^3.2.37"
+    "dev": "nuxt dev --host",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview --port 8080",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --fix"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.1.0",
-    "vue-tsc": "^0.40.4"
+    "@nuxt/image": "^1.0.0",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "@nuxtjs/eslint-module": "^4.0.2",
+    "@nuxtjs/google-fonts": "^3.0.0",
+    "eslint": "^8.39.0",
+    "nuxt": "^3.8.0",
+    "sass": "^1.56.1"
+  },
+  "dependencies": {
+    "@iconify-json/fa6-brands": "^1.1.13",
+    "@nuxt/ui": "^2.9.0",
+    "@pinia/nuxt": "^0.4.11",
+    "@primer/css": "^21.0.1",
+    "normalize.css": "^8.0.1",
+    "pinia": "^2.1.6",
+    "simple-parallax-js": "^5.6.2",
+    "swiper": "^10.3.0"
   },
   "volta": {
-    "node": "18.17.1",
+    "node": "20.5.0",
     "npm": "10.0.0"
   }
 }

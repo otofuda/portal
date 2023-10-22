@@ -1,0 +1,46 @@
+<script lang="ts" setup>
+import type { SongInfo, SongsPayload } from '@/types/songs'
+
+const route = useRoute()
+const runtimeConfig = useRuntimeConfig()
+
+const { data, pending } = await useAsyncData<SongsPayload>('songs', () => {
+  return $fetch(`${runtimeConfig.public.apiBase}api/v1/songs`, {
+    params: { limit: 1000 },
+    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
+  })
+})
+
+const content = computed<SongInfo | null>(() => {
+  if (!data.value) { return null }
+  return data.value.contents.find((song) => {
+    return route.params.id.includes(song.song_id)
+  }) || null
+})
+
+const title = ref(`${content.value?.name} - 楽曲情報`)
+</script>
+
+<template>
+  <div>
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
+
+    <div v-if="pending">
+      Loading...
+    </div>
+
+    <SongDetail v-else-if="content" :song="content" />
+
+    <div v-else>
+      Not Found
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.song-data {
+  margin: 1rem 1rem 0 1rem;
+}
+</style>
