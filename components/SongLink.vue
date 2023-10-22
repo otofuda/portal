@@ -14,11 +14,12 @@ const jacketSrc = computed<string>(() => {
 <template>
   <NuxtLink :to="`songs/${props.song.song_id}`" class="song-link">
     <!-- ジャケット -->
-    <img
+    <NuxtPicture
       class="jacket"
       :src="jacketSrc"
+      :alt="props.song.name"
       :style="{ boxShadow: `0 0.5rem 0.75rem 0 rgba(${props.song.color}, 0.5)` }"
-    >
+    />
 
     <strong class="title">{{ props.song.name }}</strong>
     <div class="artist">
@@ -82,6 +83,7 @@ const jacketSrc = computed<string>(() => {
     aspect-ratio: 1;
     grid-row: 1 / 5;
     border-radius: 0.5rem;
+    overflow: hidden;
   }
 
   .title {

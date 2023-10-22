@@ -58,17 +58,6 @@ const latestNews = computed<NewsArticle[]>(() => {
           />
         </NuxtLink>
       </swiper-slide>
-      <NuxtLink
-        v-for="topic in topics"
-        :key="`topic-${topic.id}`"
-        :to="topic.link"
-        class="topic"
-      >
-        <img
-          :src="`${topic.image}?format=jpg&name=large`"
-          :alt="topic.alt"
-        >
-      </NuxtLink>
     </swiper-container>
 
     <HeadingTitle>最新のお知らせ</HeadingTitle>

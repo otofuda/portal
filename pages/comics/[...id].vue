@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ComicInfo, ComicPayload } from '~/types/comics'
+import type { ComicInfo, ComicPayload } from '~/types/comics'
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
@@ -34,10 +34,10 @@ const title = ref(content.value?.title)
     </div>
 
     <div v-else-if="content" class="comic-img">
-      <img
+      <NuxtPicture
         :src="content.image.url"
         :alt="title"
-      >
+      />
     </div>
 
     <div v-else class="error">

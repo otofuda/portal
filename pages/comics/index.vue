@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ComicInfo, ComicPayload } from '~/types/comics'
+import type { ComicInfo, ComicPayload } from '~/types/comics'
 
 const title = ref('マンガ一覧')
 

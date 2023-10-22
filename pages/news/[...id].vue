@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NewsArticle, NewsPayload, NewsTag, newsTags } from '@/types/news'
+import { type NewsArticle, type NewsPayload, type NewsTag, newsTags } from '@/types/news'
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
@@ -50,9 +50,15 @@ const tags = computed<NewsTag[]>(() => {
   <div class="news">
     <Head>
       <Title>{{ title }}</Title>
+      <Meta name="thumbnail" content="newsImage" />
     </Head>
 
-    <img v-if="content" class="image" :src="newsImage" :alt="title">
+    <NuxtImg
+      v-if="content"
+      class="image"
+      :src="newsImage"
+      :alt="title"
+    />
 
     <HeadingTitle>{{ title }}</HeadingTitle>
 
@@ -115,6 +121,7 @@ const tags = computed<NewsTag[]>(() => {
   }
 
   > .heading {
+    justify-content: start;
     margin-bottom: 1rem;
   }
 

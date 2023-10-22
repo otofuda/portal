@@ -43,11 +43,12 @@ const levels = computed<LevelInfo[]>(() => {
 
 <template>
   <div class="song-data">
-    <img
+    <NuxtPicture
       class="jacket"
       :src="jacketSrc"
+      :alt="props.song.name"
       :style="{ boxShadow: `0 0.75rem 1rem 0 rgba(${props.song.color}, 0.5)` }"
-    >
+    />
 
     <strong class="title">{{ props.song.name }}</strong>
 
@@ -189,6 +190,7 @@ const levels = computed<LevelInfo[]>(() => {
     border-radius: 1.5rem;
     justify-self: center;
     margin-bottom: 1.5rem;
+    overflow: hidden;
   }
 
   .title {

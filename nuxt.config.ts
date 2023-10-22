@@ -9,8 +9,10 @@ export default defineNuxtConfig({
     head: {
       titleTemplate: '%s | 音札ポータル',
       meta: [
-        { name: 'description', content: '「音札」ポータルサイトです' },
-        { name: 'robots', content: 'noindex' }
+        { name: 'description', content: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。' },
+        { name: 'thumbnail', content: '/thumb.png' },
+        { property: 'twitter:card', content: 'summary_large_image' },
+        { property: 'twitter:site', content: '@otofuda' }
       ],
       link: [
         { rel: 'icon', href: '/maskable_icon_x512.png', type: 'image/png' },

@@ -1,11 +1,31 @@
 <script lang="ts" setup>
+const route = useRoute()
+
 const props = defineProps<{
   // シェアするテキスト
   text: string;
 }>()
 
-const onTweet = () => {
-  console.log(props.text)
+const text = computed(() => props.text + ' | 音札ポータル')
+const url = 'https://otofuda.com' + route.fullPath
+
+const twitterLink = computed(() => {
+  return `https://twitter.com/intent/tweet?text=${encodeURI(text.value)}&url=${url}&hashtags=音札&via=otofuda`
+})
+
+const facebookLink = computed(() => {
+  return `https://www.facebook.com/sharer.php?quote=${encodeURI(text.value)}&u=${url}`
+})
+
+const lineLink = computed(() => {
+  return `https://line.me/R/share?text=${encodeURI(text.value)}%20${url}`
+})
+
+const onShare = () => {
+  navigator.share({
+    text: text.value,
+    url
+  })
 }
 </script>
 
@@ -21,7 +41,8 @@ const onTweet = () => {
       color="primary"
       :ui="{ rounded: 'rounded-full' }"
       variant="outline"
-      @click="onTweet"
+      :to="twitterLink"
+      target="_blank"
     />
     <!-- Facebook -->
     <UButton
@@ -30,7 +51,8 @@ const onTweet = () => {
       color="primary"
       :ui="{ rounded: 'rounded-full' }"
       variant="outline"
-      @click="onTweet"
+      :to="facebookLink"
+      target="_blank"
     />
     <!-- LINE -->
     <UButton
@@ -39,7 +61,8 @@ const onTweet = () => {
       color="primary"
       :ui="{ rounded: 'rounded-full' }"
       variant="outline"
-      @click="onTweet"
+      :to="lineLink"
+      target="_blank"
     />
     <!-- 共有 -->
     <UButton
@@ -48,7 +71,7 @@ const onTweet = () => {
       color="primary"
       :ui="{ rounded: 'rounded-full' }"
       variant="outline"
-      @click="onTweet"
+      @click="onShare"
     />
   </div>
 </template>

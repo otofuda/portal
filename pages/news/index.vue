@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NewsArticle, NewsPayload } from '~/types/news'
+import type { NewsArticle, NewsPayload } from '~/types/news'
 
 const title = ref('お知らせ一覧')
 const searchWord = ref('')

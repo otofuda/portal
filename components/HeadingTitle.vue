@@ -9,6 +9,7 @@
 <style lang="scss" scoped>
 .heading {
   display: flex;
+  justify-content: center;
   font-weight: bold;
   font-size: 1.5rem;
   padding: 0 1rem;

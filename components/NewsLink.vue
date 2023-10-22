@@ -31,7 +31,7 @@ const tags = computed<NewsTag[]>(() => {
     :to="`news/${props.article.id}`"
     class="news-link"
   >
-    <img class="image" :src="newsImage" :alt="props.article.title">
+    <NuxtPicture class="image" :src="newsImage" :alt="props.article.title" />
     <strong class="title">{{ props.article.title }}</strong>
     <div class="date">
       <UBadge
