@@ -35,7 +35,7 @@ const title = ref(content.value?.title)
 
     <div v-else-if="content" class="comic-img">
       <NuxtPicture
-        :src="content.image.url"
+        :src="content.image.url.replace('https://images.microcms-assets.io', 'microcms')"
         :alt="title"
       />
     </div>

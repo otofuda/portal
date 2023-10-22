@@ -16,7 +16,7 @@ const jacketSrc = computed<string>(() => {
     <!-- ジャケット -->
     <NuxtPicture
       class="jacket"
-      :src="jacketSrc"
+      :src="jacketSrc.replace('https://images.microcms-assets.io', 'microcms')"
       :alt="props.song.name"
       :style="{ boxShadow: `0 0.5rem 0.75rem 0 rgba(${props.song.color}, 0.5)` }"
     />

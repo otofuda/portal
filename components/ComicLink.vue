@@ -10,7 +10,7 @@ const props = defineProps<{
   <NuxtLink :to="`comics/${props.comic.id}`" class="comic-link">
     <NuxtImg
       class="thumbnail"
-      :src="props.comic.image.url"
+      :src="props.comic.image.url.replace('https://images.microcms-assets.io', 'microcms')"
       :width="320"
       :alt="props.comic.title"
     />

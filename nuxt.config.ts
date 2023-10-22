@@ -45,8 +45,9 @@ export default defineNuxtConfig({
       }
     }],
     ['@nuxt/image', {
-      domains: ['pbs.twimg.com'],
+      domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
       alias: {
+        microcms: 'https://images.microcms-assets.io',
         twimg: 'https://pbs.twimg.com'
       }
     }]

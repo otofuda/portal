@@ -45,7 +45,7 @@ const levels = computed<LevelInfo[]>(() => {
   <div class="song-data">
     <NuxtPicture
       class="jacket"
-      :src="jacketSrc"
+      :src="jacketSrc.replace('https://images.microcms-assets.io', 'microcms')"
       :alt="props.song.name"
       :style="{ boxShadow: `0 0.75rem 1rem 0 rgba(${props.song.color}, 0.5)` }"
     />
@@ -160,7 +160,7 @@ const levels = computed<LevelInfo[]>(() => {
       </div>
     </div>
 
-    <ShareButtons :text="props.song.name" />
+    <ShareButtons :text="`${props.song.name} - 楽曲情報`" />
 
     <div class="menu">
       <UButton
@@ -183,7 +183,7 @@ const levels = computed<LevelInfo[]>(() => {
   grid-template-columns: 1fr;
   padding-bottom: 2rem;
 
-  .jacket {
+  :deep(.jacket) {
     width: 320px;
     max-width: 100%;
     aspect-ratio: 1;
@@ -191,6 +191,8 @@ const levels = computed<LevelInfo[]>(() => {
     justify-self: center;
     margin-bottom: 1.5rem;
     overflow: hidden;
+
+    img { width: 100%; }
   }
 
   .title {
