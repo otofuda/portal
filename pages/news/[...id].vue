@@ -165,6 +165,23 @@ useSeoMeta({
   :deep(img) {
     border-radius: 0.5rem;
   }
+
+  :deep(h2) {
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  :deep(h3) {
+    font-size: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  :deep(ul) {
+    list-style: disc inside;
+    line-height: 2;
+    margin-left: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .article-menu {
