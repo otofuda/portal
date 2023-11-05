@@ -204,8 +204,9 @@ onUnmounted(() => {
     }
 
     .buttons {
+      grid-template-rows: auto auto;
+      grid-template-columns: 1fr;
       bottom: 1rem;
-      flex-direction: column;
       gap: 1rem;
       z-index: 10;
     }
