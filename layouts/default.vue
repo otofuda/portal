@@ -45,9 +45,11 @@ const showSpNav = ref<boolean>(false)
     </ClientOnly>
 
     <!-- ナビゲーション(PC用) -->
-    <nav class="nav --pc">
-      <NavLinkList />
-    </nav>
+    <div class="nav-wrapper">
+      <nav class="nav --pc">
+        <NavLinkList />
+      </nav>
+    </div>
 
     <main>
       <slot />
@@ -57,15 +59,21 @@ const showSpNav = ref<boolean>(false)
       音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。
 
       <div class="banners">
-        <a href="https://arcade.otofuda.com" target="_blank" rel="noopener noreferrer">
+        <NuxtLink to="https://arcade.otofuda.com" target="_blank" rel="noopener noreferrer">
           <NuxtImg src="/banners/banner_hp.png" alt="音札公式ホームページ" />
-        </a>
-        <a href="https://www.youtube.com/@user-iw6ic4jl4b" target="_blank" rel="noopener noreferrer">
+        </NuxtLink>
+        <NuxtLink to="https://net.otofuda.com" target="_blank" rel="noopener noreferrer">
+          <NuxtImg src="/banners/banner_net.png" alt="おとふだNET" />
+        </NuxtLink>
+        <NuxtLink to="https://www.youtube.com/@user-iw6ic4jl4b" target="_blank" rel="noopener noreferrer">
           <NuxtImg src="/banners/banner_youtube.png" alt="YouTube公式チャンネル" />
-        </a>
-        <a href="https://twitter.com/otofuda" target="_blank" rel="noopener noreferrer">
+        </NuxtLink>
+        <NuxtLink to="https://twitter.com/otofuda" target="_blank" rel="noopener noreferrer">
           <NuxtImg src="/banners/banner_twitter.png" alt="公式Twitterアカウント" />
-        </a>
+        </NuxtLink>
+        <NuxtLink to="https://otofuda.booth.pm" target="_blank" rel="noopener noreferrer">
+          <NuxtImg src="/banners/banner_booth.png" alt="BOOTH" />
+        </NuxtLink>
       </div>
 
       <div class="icons">
@@ -119,6 +127,11 @@ const showSpNav = ref<boolean>(false)
   justify-content: center;
 
   header {
+    position: sticky;
+    top: 0;
+    z-index: 12;
+    background: rgba($bg, 0.85);
+    backdrop-filter: blur(1rem);
     grid-column: 1 / 3;
     padding: 1rem;
     display: flex;
@@ -157,8 +170,11 @@ const showSpNav = ref<boolean>(false)
     grid-column: 1 / 3;
   }
 
-  .nav.--pc {
+  .nav-wrapper {
     grid-column: 1 / 2;
+  }
+
+  .nav.--pc {
     background: $bg;
     margin: 1rem;
     padding: 1rem 0;
@@ -167,7 +183,7 @@ const showSpNav = ref<boolean>(false)
     box-shadow: 0 0.25rem 0.5rem 0 $border;
     height: max-content;
     position: sticky;
-    top: 2rem;
+    top: 6rem;
   }
 
   main {
@@ -179,7 +195,7 @@ const showSpNav = ref<boolean>(false)
 
   footer {
     grid-column: 1 / 3;
-    padding: 1rem 0;
+    padding: 1rem;
     font-size: 0.75rem;
     color: $sub;
     text-align: center;
@@ -198,7 +214,7 @@ const showSpNav = ref<boolean>(false)
         max-width: 75%;
 
         img {
-          border-radius: 00.5rem;
+          border-radius: 0.5rem;
           width: 100%;
         }
       }

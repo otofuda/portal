@@ -45,6 +45,8 @@ export default defineNuxtConfig({
       }
     }],
     ['@nuxt/image', {
+      provider: 'vercel',
+      format: ['webp', 'png'],
       domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
       alias: {
         microcms: 'https://images.microcms-assets.io',

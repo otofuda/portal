@@ -25,6 +25,10 @@ const comics = computed<ComicInfo[]>(() => {
 
     <HeadingTitle>{{ title }}</HeadingTitle>
 
+    <p class="description">
+      「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！
+    </p>
+
     <div v-if="pending">
       Loading...
     </div>
@@ -40,6 +44,11 @@ const comics = computed<ComicInfo[]>(() => {
 </template>
 
 <style lang="scss" scoped>
+.description {
+  margin: 1rem;
+  text-align: center;
+}
+
 .comics-list {
   padding: 1rem;
   display: grid;

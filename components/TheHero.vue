@@ -122,8 +122,11 @@ onUnmounted(() => {
 
   .buttons {
     position: absolute;
+    width: 100%;
     bottom: 2rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-items: center;
     padding: 0 5%;
     gap: 5%;
 
@@ -201,8 +204,9 @@ onUnmounted(() => {
     }
 
     .buttons {
+      grid-template-rows: auto auto;
+      grid-template-columns: 1fr;
       bottom: 1rem;
-      flex-direction: column;
       gap: 1rem;
       z-index: 10;
     }
