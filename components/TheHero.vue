@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import SimpleParallax from 'simple-parallax-js'
+import type SimpleParallax from 'simple-parallax-js'
 
 const instances: SimpleParallax[] = []
 
-onMounted(() => {
+onMounted(async () => {
+  const SimpleParallax = await import('simple-parallax-js')
+
   const parallaxConfig = [
     { scale: 1.25, el: document.querySelector<HTMLImageElement>('.character.--kanon > img')! },
     { scale: 1.5, el: document.querySelector<HTMLImageElement>('.character.--kadone > img')! },
@@ -13,7 +15,8 @@ onMounted(() => {
   ]
 
   parallaxConfig.forEach((config) => {
-    instances.push(new SimpleParallax(config.el, {
+    // eslint-disable-next-line new-cap
+    instances.push(new SimpleParallax.default(config.el, {
       delay: 1,
       orientation: 'down',
       scale: config.scale,
@@ -30,11 +33,11 @@ onUnmounted(() => {
 
 <template>
   <div class="hero">
-    <NuxtPicture class="character --kanon" src="/characters/kanon.png" />
-    <NuxtPicture class="character --kadone" src="/characters/kadone.png" />
-    <NuxtPicture class="character --kunon" src="/characters/kunon.png" />
-    <NuxtPicture class="character --hirono" src="/characters/hirono.png" />
-    <NuxtPicture class="character --shuon" src="/characters/shuon.png" />
+    <NuxtPicture class="character --kanon" :width="640" src="/characters/kanon.png" />
+    <NuxtPicture class="character --kadone" :width="640" src="/characters/kadone.png" />
+    <NuxtPicture class="character --kunon" :width="640" src="/characters/kunon.png" />
+    <NuxtPicture class="character --hirono" :width="640" src="/characters/hirono.png" />
+    <NuxtPicture class="character --shuon" :width="640" src="/characters/shuon.png" />
 
     <div class="copy">
       <span>これまでにない、新感覚<wbr>「対戦型音楽カードゲーム」</span>
@@ -85,6 +88,7 @@ onUnmounted(() => {
 
     img {
       aspect-ratio: 1 / 2;
+      object-fit: contain;
     }
   }
 

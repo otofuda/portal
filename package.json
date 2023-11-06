@@ -13,12 +13,12 @@
     "@nuxtjs/eslint-module": "^4.0.2",
     "@nuxtjs/google-fonts": "^3.0.0",
     "eslint": "^8.39.0",
-    "nuxt": "^3.8.0",
+    "nuxt": "^3.8.1",
     "sass": "^1.56.1"
   },
   "dependencies": {
     "@iconify-json/fa6-brands": "^1.1.13",
-    "@nuxt/ui": "^2.9.0",
+    "@nuxt/ui": "^2.10.0",
     "@pinia/nuxt": "^0.4.11",
     "@primer/css": "^21.0.1",
     "normalize.css": "^8.0.1",

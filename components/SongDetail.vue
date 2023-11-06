@@ -192,7 +192,11 @@ const levels = computed<LevelInfo[]>(() => {
     margin-bottom: 1.5rem;
     overflow: hidden;
 
-    img { width: 100%; }
+    img {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      width: 100%;
+    }
   }
 
   .title {

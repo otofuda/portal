@@ -9,8 +9,8 @@ const showSpNav = ref<boolean>(false)
   >
     <header>
       <NuxtLink to="/" class="logo">
-        <NuxtImg class="icon" src="/assets/icon.png" alt="音札ポータル" />
-        <NuxtImg class="type" src="/assets/otofuda_portal.png" alt="音札ポータル" />
+        <NuxtImg class="icon" :width="50" :height="50" src="/assets/icon.png" alt="音札ポータル" />
+        <NuxtImg class="type" :width="245" :height="50" src="/assets/otofuda_portal.png" alt="音札ポータル" />
       </NuxtLink>
 
       <div class="divider" />
@@ -38,11 +38,9 @@ const showSpNav = ref<boolean>(false)
       <NavLinkList @close-nav="showSpNav = false" />
     </USlideover>
 
-    <ClientOnly>
-      <Transition name="hero">
-        <TheHero v-if="route.name === 'index'" />
-      </Transition>
-    </ClientOnly>
+    <Transition name="hero" :appear="true">
+      <TheHero v-show="route.name === 'index'" />
+    </Transition>
 
     <!-- ナビゲーション(PC用) -->
     <div class="nav-wrapper">
@@ -168,6 +166,17 @@ const showSpNav = ref<boolean>(false)
 
   .hero {
     grid-column: 1 / 3;
+    position: relative;
+
+    &.hero-enter-active {
+      position: relative;
+      transition: all 2s;
+    }
+
+    &.hero-enter-from {
+      opacity: 0;
+      top: -1rem;
+    }
   }
 
   .nav-wrapper {
@@ -214,6 +223,8 @@ const showSpNav = ref<boolean>(false)
         max-width: 75%;
 
         img {
+          aspect-ratio: 1182 / 295;
+          object-fit: cover;
           border-radius: 0.5rem;
           width: 100%;
         }

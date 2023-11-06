@@ -61,7 +61,7 @@ useSeoMeta({
           :to="topic.link"
           class="topic"
         >
-          <LazyNuxtPicture
+          <NuxtPicture
             :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg&name=large`"
             :width="1280"
             :alt="topic.alt"

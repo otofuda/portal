@@ -84,6 +84,11 @@ const jacketSrc = computed<string>(() => {
     grid-row: 1 / 5;
     border-radius: 0.5rem;
     overflow: hidden;
+
+    img {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
   }
 
   .title {
