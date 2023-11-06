@@ -12,7 +12,8 @@ const { data, pending, error } = await useAsyncData<SongsPayload>('songs', () =>
 })
 
 const songs = computed<SongInfo[]>(() => {
-  return data.value ? data.value.contents.reverse() : []
+  const allSongs = data.value ? [...data.value.contents] : []
+  return allSongs.reverse()
 })
 </script>
 
