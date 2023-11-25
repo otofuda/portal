@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { SongInfo, SongsPayload } from '~/types/songs'
 
-const title = ref('楽曲一覧')
+const title = ref('収録楽曲一覧')
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending, error } = await useAsyncData<SongsPayload>('songs', () => {

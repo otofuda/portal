@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { BreadcrumbLink } from '@nuxt/ui/dist/runtime/types'
 import type { ComicInfo, ComicPayload } from '~/types/comics'
 
 const route = useRoute()
@@ -19,6 +20,14 @@ const content = computed<ComicInfo | null>(() => {
 })
 
 const title = ref(content.value?.title)
+
+const links = computed<BreadcrumbLink[]>(() => {
+  return [
+    { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
+    { label: 'マンガ一覧', to: '/comics' },
+    { label: content.value?.title || '' }
+  ]
+})
 </script>
 
 <template>
@@ -26,6 +35,10 @@ const title = ref(content.value?.title)
     <Head>
       <Title>{{ title }}</Title>
     </Head>
+
+    <div class="breadcrumb">
+      <UBreadcrumb :links="links" />
+    </div>
 
     <HeadingTitle>{{ title }}</HeadingTitle>
 
@@ -61,6 +74,10 @@ const title = ref(content.value?.title)
 
 <style lang="scss" scoped>
 .comic {
+  .breadcrumb {
+    margin: 0 1rem 1rem 1rem;
+  }
+
   .comic-img {
     display: flex;
     justify-content: center;
