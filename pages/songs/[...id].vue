@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { BreadcrumbLink } from '@nuxt/ui/dist/runtime/types'
 import type { SongInfo, SongsPayload } from '@/types/songs'
 
 const route = useRoute()
@@ -19,6 +20,14 @@ const content = computed<SongInfo | null>(() => {
 })
 
 const title = ref(`${content.value?.name} - 楽曲情報`)
+
+const links = computed<BreadcrumbLink[]>(() => {
+  return [
+    { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
+    { label: '楽曲一覧', to: '/songs' },
+    { label: content.value?.name || '' }
+  ]
+})
 </script>
 
 <template>
@@ -26,6 +35,10 @@ const title = ref(`${content.value?.name} - 楽曲情報`)
     <Head>
       <Title>{{ title }}</Title>
     </Head>
+
+    <div class="breadcrumb">
+      <UBreadcrumb :links="links" />
+    </div>
 
     <div v-if="pending">
       Loading...
@@ -40,6 +53,10 @@ const title = ref(`${content.value?.name} - 楽曲情報`)
 </template>
 
 <style lang="scss" scoped>
+.breadcrumb {
+  margin: 0 1rem;
+}
+
 .song-data {
   margin: 1rem 1rem 0 1rem;
 }
