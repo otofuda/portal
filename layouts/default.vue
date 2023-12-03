@@ -56,19 +56,39 @@ const showSpNav = ref<boolean>(false)
 
       <div class="banners">
         <NuxtLink to="https://arcade.otofuda.com" target="_blank" rel="noopener noreferrer">
-          <NuxtImg src="/banners/banner_hp.png" alt="音札公式ホームページ" />
+          <NuxtImg
+            sizes="500px"
+            src="/banners/banner_hp.png"
+            alt="音札公式ホームページ"
+          />
         </NuxtLink>
         <NuxtLink to="https://net.otofuda.com" target="_blank" rel="noopener noreferrer">
-          <NuxtImg src="/banners/banner_net.png" alt="おとふだNET" />
+          <NuxtImg
+            sizes="500px"
+            src="/banners/banner_net.png"
+            alt="おとふだNET"
+          />
         </NuxtLink>
         <NuxtLink to="https://www.youtube.com/@user-iw6ic4jl4b" target="_blank" rel="noopener noreferrer">
-          <NuxtImg src="/banners/banner_youtube.png" alt="YouTube公式チャンネル" />
+          <NuxtImg
+            sizes="500px"
+            src="/banners/banner_youtube.png"
+            alt="YouTube公式チャンネル"
+          />
         </NuxtLink>
         <NuxtLink to="https://twitter.com/otofuda" target="_blank" rel="noopener noreferrer">
-          <NuxtImg src="/banners/banner_twitter.png" alt="公式Twitterアカウント" />
+          <NuxtImg
+            sizes="500px"
+            src="/banners/banner_twitter.png"
+            alt="公式Twitterアカウント"
+          />
         </NuxtLink>
         <NuxtLink to="https://otofuda.booth.pm" target="_blank" rel="noopener noreferrer">
-          <NuxtImg src="/banners/banner_booth.png" alt="BOOTH" />
+          <NuxtImg
+            sizes="sm:1280px 500px"
+            src="/banners/banner_booth.png"
+            alt="BOOTH"
+          />
         </NuxtLink>
       </div>
 

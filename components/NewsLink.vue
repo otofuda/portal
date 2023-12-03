@@ -35,6 +35,7 @@ const tags = computed<NewsTag[]>(() => {
       class="image"
       :src="newsImage.replace('https://images.microcms-assets.io', 'microcms')"
       :alt="props.article.title"
+      sizes="sm:1280px 500px"
     />
     <strong class="title">{{ props.article.title }}</strong>
     <div class="date">
