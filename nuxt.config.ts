@@ -34,11 +34,7 @@ export default defineNuxtConfig({
     ['@nuxt/ui', {
       icons: ['fa6-brands']
     }],
-    ['nuxt-swiper', {
-      modules: ['navigation', 'pagination']
-    }],
     ['@nuxt/image', {
-      provider: 'vercel',
       format: ['webp', 'png'],
       domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
       alias: {

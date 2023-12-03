@@ -44,51 +44,54 @@ useSeoMeta({
       <Title>{{ title }}</Title>
     </Head>
 
-    <Teleport to="#hero">
-      <TheHero />
-    </Teleport>
+    <ClientOnly>
+      <Teleport to="#hero">
+        <TheHero />
+      </Teleport>
+    </ClientOnly>
 
     <!-- トピックス -->
     <HeadingTitle>トピックス</HeadingTitle>
 
-    <Swiper
-      class="topics"
+    <div
+      class="slider topics"
       :space-between="20"
       :centered-slides="true"
       :navigation="true"
     >
-      <SwiperSlide
+      <div
         v-for="topic in topics"
         :key="`topic-${topic.id}`"
+        class="topic"
       >
         <NuxtLink
           :to="topic.link"
-          class="topic"
         >
           <NuxtPicture
             :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg&name=large`"
             :width="1280"
+            sizes="sm:1000px 500px"
             :alt="topic.alt"
           />
         </NuxtLink>
-      </SwiperSlide>
-    </Swiper>
+      </div>
+    </div>
 
     <!-- お知らせ -->
     <HeadingTitle>最新のお知らせ</HeadingTitle>
 
-    <Swiper
-      class="latest-news"
+    <div
+      class="slider latest-news"
       :space-between="20"
       :pagination="true"
     >
-      <SwiperSlide
+      <div
         v-for="news in latestNews"
         :key="`latest-news-${news.id}`"
       >
         <NewsLink :article="news" />
-      </SwiperSlide>
-    </Swiper>
+      </div>
+    </div>
 
     <div class="menu">
       <UButton
@@ -126,7 +129,11 @@ useSeoMeta({
     <HeadingTitle>コンテンツ</HeadingTitle>
     <div class="banners">
       <NuxtLink to="comics">
-        <NuxtImg src="/banners/banner_comic.png" alt="おとふだびより" />
+        <NuxtImg
+          src="/banners/banner_comic.png"
+          alt="おとふだびより"
+          sizes="sm:1280px 500px"
+        />
       </NuxtLink>
     </div>
 
@@ -141,19 +148,43 @@ useSeoMeta({
   justify-content: center;
 }
 
+.slider {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  align-items: center;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--color-primary-500)) transparent;
+
+  &::-webkit-scrollbar {
+    height: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(var(--color-primary-500));
+  }
+}
+
 .topics {
-  --swiper-theme-color: #ffffff;
+  margin-bottom: 1rem;
 
   .topic {
-    height: 100%;
-    display: flex;
-    justify-content: center;
+    width: 100%;
+    flex: none;
+    scroll-snap-align: center;
   }
 }
 
 .latest-news {
-  --swiper-pagination-color: #202020;
   margin-bottom: 1rem;
+
+  > div {
+    width: 100%;
+    flex: none;
+    scroll-snap-align: center;
+  }
 }
 
 .menu {
