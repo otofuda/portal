@@ -17,18 +17,14 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', href: '/maskable_icon_x512.png', type: 'image/png' },
         { rel: 'apple-touch-icon', href: '/maskable_icon_x512.png' },
-        { rel: 'manifest', href: '/manifest.webmanifest' }
+        { rel: 'manifest', href: '/manifest.webmanifest' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap' }
       ]
     }
   },
 
   vue: {
-    compilerOptions: {
-      // 'swiper-' から始まるElementをVueのコンポーネントとして解決しようとしない
-      isCustomElement: (tag) => {
-        return tag.startsWith('swiper-')
-      }
-    }
+    compilerOptions: {}
   },
 
   // 使用するモジュール
@@ -38,11 +34,8 @@ export default defineNuxtConfig({
     ['@nuxt/ui', {
       icons: ['fa6-brands']
     }],
-    ['@nuxtjs/google-fonts', {
-      families: {
-        Inter: { wght: [400, 700] },
-        'Zen+Kaku+Gothic+Antique': { wght: [400, 700] }
-      }
+    ['nuxt-swiper', {
+      modules: ['navigation', 'pagination']
     }],
     ['@nuxt/image', {
       provider: 'vercel',
