@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-const route = useRoute()
 const showSpNav = ref<boolean>(false)
 </script>
 
@@ -38,9 +37,8 @@ const showSpNav = ref<boolean>(false)
       <NavLinkList @close-nav="showSpNav = false" />
     </USlideover>
 
-    <Transition name="hero" :appear="true">
-      <TheHero v-show="route.name === 'index'" />
-    </Transition>
+    <!-- TheHeroのTeleport用 -->
+    <div id="hero" class="hero" />
 
     <!-- ナビゲーション(PC用) -->
     <div class="nav-wrapper">
@@ -167,16 +165,6 @@ const showSpNav = ref<boolean>(false)
   .hero {
     grid-column: 1 / 3;
     position: relative;
-
-    &.hero-enter-active {
-      position: relative;
-      transition: all 2s;
-    }
-
-    &.hero-enter-from {
-      opacity: 0;
-      top: -1rem;
-    }
   }
 
   .nav-wrapper {

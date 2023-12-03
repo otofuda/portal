@@ -44,16 +44,20 @@ useSeoMeta({
       <Title>{{ title }}</Title>
     </Head>
 
+    <Teleport to="#hero">
+      <TheHero />
+    </Teleport>
+
     <!-- トピックス -->
     <HeadingTitle>トピックス</HeadingTitle>
 
-    <swiper-container
+    <Swiper
       class="topics"
       :space-between="20"
       :centered-slides="true"
-      navigation="true"
+      :navigation="true"
     >
-      <swiper-slide
+      <SwiperSlide
         v-for="topic in topics"
         :key="`topic-${topic.id}`"
       >
@@ -67,24 +71,24 @@ useSeoMeta({
             :alt="topic.alt"
           />
         </NuxtLink>
-      </swiper-slide>
-    </swiper-container>
+      </SwiperSlide>
+    </Swiper>
 
     <!-- お知らせ -->
     <HeadingTitle>最新のお知らせ</HeadingTitle>
 
-    <swiper-container
+    <Swiper
       class="latest-news"
       :space-between="20"
-      pagination="true"
+      :pagination="true"
     >
-      <swiper-slide
+      <SwiperSlide
         v-for="news in latestNews"
         :key="`latest-news-${news.id}`"
       >
         <NewsLink :article="news" />
-      </swiper-slide>
-    </swiper-container>
+      </SwiperSlide>
+    </Swiper>
 
     <div class="menu">
       <UButton
