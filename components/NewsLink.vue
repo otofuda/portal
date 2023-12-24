@@ -33,6 +33,7 @@ const tags = computed<NewsTag[]>(() => {
   >
     <NuxtImg
       class="image"
+      format="webp"
       :src="newsImage.replace('https://images.microcms-assets.io', 'microcms')"
       :alt="props.article.title"
       sizes="sm:1280px 500px"
@@ -60,6 +61,7 @@ const tags = computed<NewsTag[]>(() => {
   grid-template-rows: auto 1fr;
   margin: 0 1rem 1rem 1rem;
   overflow: hidden;
+  text-align: left;
 
   .image {
     grid-row: 1 / 3;

@@ -30,7 +30,6 @@ export default defineNuxtConfig({
   // 使用するモジュール
   modules: [
     ['@nuxtjs/eslint-module', { lintOnStart: false }],
-    ['@pinia/nuxt', {}],
     ['@nuxt/ui', {
       icons: ['fa6-brands']
     }],
@@ -53,8 +52,6 @@ export default defineNuxtConfig({
       apiToken: ''
     }
   },
-
-  css: ['normalize.css'],
 
   colorMode: {
     preference: 'light'

@@ -48,7 +48,7 @@ const levels = computed<LevelInfo[]>(() => {
       :src="jacketSrc.replace('https://images.microcms-assets.io', 'microcms')"
       :alt="props.song.name"
       :style="{ boxShadow: `0 0.75rem 1rem 0 rgba(${props.song.color}, 0.5)` }"
-      sizes="640px"
+      sizes="320px"
     />
 
     <strong class="title">{{ props.song.name }}</strong>

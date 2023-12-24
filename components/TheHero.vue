@@ -33,11 +33,11 @@ onUnmounted(() => {
 
 <template>
   <div class="hero">
-    <NuxtPicture class="character --kanon" :width="640" src="/characters/kanon.png" />
-    <NuxtPicture class="character --kadone" :width="640" src="/characters/kadone.png" />
-    <NuxtPicture class="character --kunon" :width="640" src="/characters/kunon.png" />
-    <NuxtPicture class="character --hirono" :width="640" src="/characters/hirono.png" />
-    <NuxtPicture class="character --shuon" :width="640" src="/characters/shuon.png" />
+    <NuxtPicture format="webp" class="character --kanon" sizes="640" src="/characters/kanon.png" />
+    <NuxtPicture format="webp" class="character --kadone" sizes="640" src="/characters/kadone.png" />
+    <NuxtPicture format="webp" class="character --kunon" sizes="640" src="/characters/kunon.png" />
+    <NuxtPicture format="webp" class="character --hirono" sizes="640" src="/characters/hirono.png" />
+    <NuxtPicture format="webp" class="character --shuon" sizes="640" src="/characters/shuon.png" />
 
     <div class="copy">
       <span>これまでにない、新感覚<wbr>「対戦型音楽カードゲーム」</span>
@@ -49,10 +49,10 @@ onUnmounted(() => {
 
     <div class="buttons">
       <a href="https://arcade.otofuda.com" target="_blank">
-        <NuxtImg class="--arcade" src="/assets/button_arcade.png" />
+        <NuxtImg format="webp" width="500" class="--arcade" src="/assets/button_arcade.png" />
       </a>
       <a href="https://etude.otofuda.com/" target="_blank">
-        <NuxtImg class="--etude" src="/assets/button_etude.png" />
+        <NuxtImg format="webp" width="500" class="--etude" src="/assets/button_etude.png" />
       </a>
     </div>
   </div>

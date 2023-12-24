@@ -50,6 +50,8 @@ const links = computed<BreadcrumbLink[]>(() => {
       <NuxtPicture
         :src="content.image.url.replace('https://images.microcms-assets.io', 'microcms')"
         :alt="title"
+        format="webp"
+        sizes="320"
       />
     </div>
 

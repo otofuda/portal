@@ -8,8 +8,22 @@ const showSpNav = ref<boolean>(false)
   >
     <header>
       <NuxtLink to="/" class="logo">
-        <NuxtImg class="icon" :width="50" :height="50" src="/assets/icon.png" alt="音札ポータル" />
-        <NuxtImg class="type" :width="245" :height="50" src="/assets/otofuda_portal.png" alt="音札ポータル" />
+        <NuxtImg
+          class="icon"
+          format="webp"
+          :width="50"
+          :height="50"
+          src="/assets/icon.png"
+          alt="音札ポータル"
+        />
+        <NuxtImg
+          class="type"
+          format="webp"
+          :width="245"
+          :height="50"
+          src="/assets/otofuda_portal.png"
+          alt="音札ポータル"
+        />
       </NuxtLink>
 
       <div class="divider" />
@@ -57,35 +71,40 @@ const showSpNav = ref<boolean>(false)
       <div class="banners">
         <NuxtLink to="https://arcade.otofuda.com" target="_blank" rel="noopener noreferrer">
           <NuxtImg
-            sizes="500px"
+            format="webp"
+            width="360"
             src="/banners/banner_hp.png"
             alt="音札公式ホームページ"
           />
         </NuxtLink>
         <NuxtLink to="https://net.otofuda.com" target="_blank" rel="noopener noreferrer">
           <NuxtImg
-            sizes="500px"
+            format="webp"
+            width="360"
             src="/banners/banner_net.png"
             alt="おとふだNET"
           />
         </NuxtLink>
         <NuxtLink to="https://www.youtube.com/@user-iw6ic4jl4b" target="_blank" rel="noopener noreferrer">
           <NuxtImg
-            sizes="500px"
+            format="webp"
+            width="360"
             src="/banners/banner_youtube.png"
             alt="YouTube公式チャンネル"
           />
         </NuxtLink>
         <NuxtLink to="https://twitter.com/otofuda" target="_blank" rel="noopener noreferrer">
           <NuxtImg
-            sizes="500px"
+            format="webp"
+            width="360"
             src="/banners/banner_twitter.png"
             alt="公式Twitterアカウント"
           />
         </NuxtLink>
         <NuxtLink to="https://otofuda.booth.pm" target="_blank" rel="noopener noreferrer">
           <NuxtImg
-            sizes="sm:1280px 500px"
+            format="webp"
+            width="360"
             src="/banners/banner_booth.png"
             alt="BOOTH"
           />

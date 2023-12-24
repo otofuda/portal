@@ -65,6 +65,8 @@ useSeoMeta({
     <NuxtImg
       v-if="content"
       class="image"
+      format="webp"
+      width="640"
       :src="newsImage.replace('https://images.microcms-assets.io', 'microcms')"
       :alt="title"
     />
