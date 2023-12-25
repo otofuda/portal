@@ -76,5 +76,6 @@ const filteredContents = computed<NewsArticle[]>(() => {
 .news-list {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 </style>

@@ -36,7 +36,7 @@ const tags = computed<NewsTag[]>(() => {
       format="webp"
       :src="newsImage.replace('https://images.microcms-assets.io', 'microcms')"
       :alt="props.article.title"
-      sizes="sm:1280px 500px"
+      :width="500"
     />
     <strong class="title">{{ props.article.title }}</strong>
     <div class="date">
@@ -59,7 +59,7 @@ const tags = computed<NewsTag[]>(() => {
   display: grid;
   grid-template-columns: 250px 1fr;
   grid-template-rows: auto 1fr;
-  margin: 0 1rem 1rem 1rem;
+  margin: 0 1rem;
   overflow: hidden;
   text-align: left;
 

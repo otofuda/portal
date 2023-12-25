@@ -170,6 +170,7 @@ useSeoMeta({
   --vc-pgn-margin: 2px;
   --vc-pgn-active-color: rgb(var(--color-primary-DEFAULT));
   --vc-pgn-background-color: rgb(var(--color-primary-100));
+  --vc-nav-color: rgb(var(--color-primary-DEFAULT));
 
   .carousel__slide {
     padding: 1rem;
