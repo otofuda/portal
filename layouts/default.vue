@@ -85,7 +85,7 @@ const showSpNav = ref<boolean>(false)
             alt="おとふだNET"
           />
         </NuxtLink>
-        <NuxtLink to="https://www.youtube.com/@user-iw6ic4jl4b" target="_blank" rel="noopener noreferrer">
+        <NuxtLink to="https://www.youtube.com/@otofuda" target="_blank" rel="noopener noreferrer">
           <NuxtImg
             format="webp"
             width="360"

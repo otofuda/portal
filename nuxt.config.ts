@@ -34,6 +34,7 @@ export default defineNuxtConfig({
       icons: ['fa6-brands']
     }],
     ['@nuxt/image', {
+      provider: 'ipx',
       format: ['webp', 'png'],
       domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
       alias: {

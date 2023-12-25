@@ -66,6 +66,7 @@ const tags = computed<NewsTag[]>(() => {
   .image {
     grid-row: 1 / 3;
     max-height: 25vh;
+    min-width: 100%;
     object-fit: contain;
     align-self: stretch;
     justify-self: center;

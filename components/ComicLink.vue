@@ -25,6 +25,7 @@ const props = defineProps<{
   text-decoration: none;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   border-radius: 1rem;
   overflow: hidden;
   background-color: $bg-alt;
@@ -33,6 +34,7 @@ const props = defineProps<{
     object-fit: cover;
     object-position: top center;
     aspect-ratio: 0.99;
+    width: 100%;
   }
 
   .title {
