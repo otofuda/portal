@@ -47,6 +47,8 @@ const filteredContents = computed<NewsArticle[]>(() => {
         v-show="searchWord"
         class="mt-3"
         :title="`「${ searchWord }」で検索中`"
+        :close-button="{ icon: 'i-heroicons-x-mark-20-solid', color: 'gray', variant: 'soft', padded: false }"
+        @close="searchWord = ''"
       />
     </div>
 
@@ -74,5 +76,6 @@ const filteredContents = computed<NewsArticle[]>(() => {
 .news-list {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 </style>

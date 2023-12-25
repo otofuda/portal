@@ -30,11 +30,12 @@ export default defineNuxtConfig({
   // 使用するモジュール
   modules: [
     ['@nuxtjs/eslint-module', { lintOnStart: false }],
-    ['@pinia/nuxt', {}],
     ['@nuxt/ui', {
       icons: ['fa6-brands']
     }],
     ['@nuxt/image', {
+      provider: process.env.VERCEL_ENV ? 'vercel' : 'ipx',
+      quality: 100,
       format: ['webp', 'png'],
       domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
       alias: {
@@ -53,8 +54,6 @@ export default defineNuxtConfig({
       apiToken: ''
     }
   },
-
-  css: ['normalize.css'],
 
   colorMode: {
     preference: 'light'

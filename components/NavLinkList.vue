@@ -1,32 +1,39 @@
 <script lang="ts" setup>
-interface NavLink {
-  title: string;
-  class: string;
-  url: string;
-  disabled?: boolean;
-}
-
-const navLinks: NavLink[] = [
-  { title: 'TOP', class: 'top', url: '/' },
-  { title: 'お知らせ', class: 'news', url: '/news' },
-  { title: 'キャラクター', class: 'character', url: '/characters', disabled: true },
-  { title: '収録楽曲', class: 'songs', url: '/songs' },
-  { title: 'マンガ', class: 'comics', url: '/comics' }
-]
-
 const emit = defineEmits<{(e: 'close-nav'): void}>()
+const imgWidth = 400
 </script>
 
 <template>
   <div class="nav-links">
     <ul>
-      <li v-for="(link, i) in navLinks" :key="`navlink-${i}`">
-        <NuxtLink
-          :to="link.disabled ? undefined : link.url"
-          :class="`--${link.class}`"
-          @click="emit('close-nav')"
-        >
-          {{ link.title }}
+      <li>
+        <NuxtLink to="/" @click="emit('close-nav')">
+          <NuxtImg src="/assets/nav/top_1.png" format="webp" :width="imgWidth" alt="トップページ" />
+          <NuxtImg src="/assets/nav/top_2.png" format="webp" :width="imgWidth" alt="トップページ" />
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/news" @click="emit('close-nav')">
+          <NuxtImg src="/assets/nav/news_1.png" format="webp" :width="imgWidth" alt="お知らせ" />
+          <NuxtImg src="/assets/nav/news_2.png" format="webp" :width="imgWidth" alt="お知らせ" />
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink :to="undefined" class="--disabled">
+          <NuxtImg src="/assets/nav/character_1.png" format="webp" :width="imgWidth" alt="キャラクター" />
+          <NuxtImg src="/assets/nav/character_2.png" format="webp" :width="imgWidth" alt="キャラクター" />
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/songs" @click="emit('close-nav')">
+          <NuxtImg src="/assets/nav/songs_1.png" format="webp" :width="imgWidth" alt="収録楽曲" />
+          <NuxtImg src="/assets/nav/songs_2.png" format="webp" :width="imgWidth" alt="収録楽曲" />
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/comics" @click="emit('close-nav')">
+          <NuxtImg src="/assets/nav/comics_1.png" format="webp" :width="imgWidth" alt="マンガ" />
+          <NuxtImg src="/assets/nav/comics_2.png" format="webp" :width="imgWidth" alt="マンガ" />
         </NuxtLink>
       </li>
     </ul>
@@ -50,44 +57,24 @@ ul {
       aspect-ratio: 1438 / 380;
       background-size: contain;
 
-      &.--top {
-        background-image: url("~/assets/nav/top_1.png");
-
-        &.router-link-active {
-          background-image: url("~/assets/nav/top_2.png");
-        }
-      }
-
-      &.--news {
-        background-image: url("~/assets/nav/news_1.png");
-
-        &.router-link-active {
-          background-image: url("~/assets/nav/news_2.png");
-        }
-      }
-
-      &.--character {
+      &.--disabled {
         opacity: 0.5;
-        background-image: url("~/assets/nav/character_1.png");
-
-        &.router-link-active {
-          background-image: url("~/assets/nav/character_2.png");
-        }
       }
 
-      &.--songs {
-        background-image: url("~/assets/nav/songs_1.png");
-
-        &.router-link-active {
-          background-image: url("~/assets/nav/songs_2.png");
-        }
+      img {
+        min-width: 100%;
       }
 
-      &.--comics {
-        background-image: url("~/assets/nav/comics_1.png");
+      img:nth-child(2) {
+        display: none;
+      }
 
-        &.router-link-active {
-          background-image: url("~/assets/nav/comics_2.png");
+      &.router-link-active {
+        img:nth-child(1) {
+          display: none;
+        }
+        img:nth-child(2) {
+          display: unset;
         }
       }
     }

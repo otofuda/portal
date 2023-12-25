@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+
 import type { TopicInfo, TopicPayload } from '~/types/topics'
 import type { NewsArticle, NewsPayload } from '~/types/news'
 
@@ -52,46 +55,49 @@ useSeoMeta({
 
     <!-- トピックス -->
     <HeadingTitle>トピックス</HeadingTitle>
+    <p class="description">
+      音札の最新情報はこちらから！
+    </p>
 
-    <div
-      class="slider topics"
-      :space-between="20"
-      :centered-slides="true"
-      :navigation="true"
-    >
-      <div
+    <Carousel class="slider" :items-to-show="1.5" :wrap-around="true">
+      <Slide
         v-for="topic in topics"
         :key="`topic-${topic.id}`"
         class="topic"
       >
-        <NuxtLink
-          :to="topic.link"
-        >
+        <NuxtLink :to="topic.link" target="_blank">
           <NuxtPicture
+            format="webp"
             :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg&name=large`"
-            :width="1280"
-            sizes="sm:1000px 500px"
+            sizes="500"
             :alt="topic.alt"
           />
         </NuxtLink>
-      </div>
-    </div>
+      </Slide>
+      <template #addons>
+        <Navigation />
+        <Pagination />
+      </template>
+    </Carousel>
 
     <!-- お知らせ -->
     <HeadingTitle>最新のお知らせ</HeadingTitle>
+    <p class="description">
+      音札ポータルに掲載しているお知らせです
+    </p>
 
-    <div
-      class="slider latest-news"
-      :space-between="20"
-      :pagination="true"
-    >
-      <div
+    <Carousel class="slider">
+      <Slide
         v-for="news in latestNews"
         :key="`latest-news-${news.id}`"
       >
         <NewsLink :article="news" />
-      </div>
-    </div>
+      </Slide>
+      <template #addons>
+        <Navigation />
+        <Pagination />
+      </template>
+    </Carousel>
 
     <div class="menu">
       <UButton
@@ -106,6 +112,9 @@ useSeoMeta({
 
     <!-- 動画 -->
     <HeadingTitle>「音札」紹介動画</HeadingTitle>
+    <p class="description">
+      アーケード版「音札」のご紹介
+    </p>
     <iframe
       class="video"
       src="https://www.youtube-nocookie.com/embed/94LRZjHgpM0?si=476AppZZNFs0jQPY&amp;controls=0"
@@ -116,6 +125,9 @@ useSeoMeta({
     />
 
     <HeadingTitle>「音札Étude」紹介動画</HeadingTitle>
+    <p class="description">
+      スマホ・PCで遊べる「音札Étude」のご紹介
+    </p>
     <iframe
       class="video"
       src="https://www.youtube-nocookie.com/embed/nQ7wnzQEDpM?si=_AQUAGihH8h7sCQl&amp;controls=0"
@@ -127,9 +139,14 @@ useSeoMeta({
 
     <!-- バナー -->
     <HeadingTitle>コンテンツ</HeadingTitle>
+    <p class="description">
+      音札ポータルのコンテンツをご紹介
+    </p>
     <div class="banners">
       <NuxtLink to="comics">
         <NuxtImg
+          format="webp"
+          width="500"
           src="/banners/banner_comic.png"
           alt="おとふだびより"
           sizes="sm:1280px 500px"
@@ -149,42 +166,20 @@ useSeoMeta({
 }
 
 .slider {
-  display: flex;
-  flex-flow: row nowrap;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  align-items: center;
-  scrollbar-width: thin;
-  scrollbar-color: rgb(var(--color-primary-500)) transparent;
+  margin-bottom: 2rem;
+  --vc-pgn-margin: 2px;
+  --vc-pgn-active-color: rgb(var(--color-primary-DEFAULT));
+  --vc-pgn-background-color: rgb(var(--color-primary-100));
+  --vc-nav-color: rgb(var(--color-primary-DEFAULT));
 
-  &::-webkit-scrollbar {
-    height: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgb(var(--color-primary-500));
+  .carousel__slide {
+    padding: 1rem;
   }
 }
 
-.topics {
-  margin-bottom: 1rem;
-
-  .topic {
-    width: 100%;
-    flex: none;
-    scroll-snap-align: center;
-  }
-}
-
-.latest-news {
-  margin-bottom: 1rem;
-
-  > div {
-    width: 100%;
-    flex: none;
-    scroll-snap-align: center;
-  }
+.description {
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .menu {
@@ -197,7 +192,7 @@ useSeoMeta({
 .video {
   width: 100%;
   aspect-ratio: 16 / 9;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem 0;
   border-radius: 1rem;
   box-shadow: 0 0.25rem 0.5rem 0 rgba($text, 0.125);
 }
@@ -206,7 +201,7 @@ useSeoMeta({
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem 0;
 
   a {
     border-radius: 0.5rem;

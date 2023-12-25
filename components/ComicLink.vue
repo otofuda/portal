@@ -11,7 +11,8 @@ const props = defineProps<{
     <NuxtImg
       class="thumbnail"
       :src="props.comic.image.url.replace('https://images.microcms-assets.io', 'microcms')"
-      :width="320"
+      format="webp"
+      :width="160"
       :alt="props.comic.title"
     />
     <strong class="title">{{ props.comic.title }}</strong>
@@ -24,6 +25,7 @@ const props = defineProps<{
   text-decoration: none;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   border-radius: 1rem;
   overflow: hidden;
   background-color: $bg-alt;
@@ -32,6 +34,7 @@ const props = defineProps<{
     object-fit: cover;
     object-position: top center;
     aspect-ratio: 0.99;
+    width: 100%;
   }
 
   .title {
