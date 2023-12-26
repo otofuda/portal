@@ -49,10 +49,10 @@ onUnmounted(() => {
 
     <div class="buttons">
       <a href="https://arcade.otofuda.com" target="_blank">
-        <NuxtImg format="webp" width="500" class="--arcade" src="/assets/button_arcade.png" />
+        <NuxtImg format="webp" :width="500" class="--arcade" src="/assets/button_arcade.png" />
       </a>
       <a href="https://etude.otofuda.com/" target="_blank">
-        <NuxtImg format="webp" width="500" class="--etude" src="/assets/button_etude.png" />
+        <NuxtImg format="webp" :width="500" class="--etude" src="/assets/button_etude.png" />
       </a>
     </div>
   </div>
