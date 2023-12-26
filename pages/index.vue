@@ -146,10 +146,9 @@ useSeoMeta({
       <NuxtLink to="comics">
         <NuxtImg
           format="webp"
-          width="500"
+          :width="500"
           src="/banners/banner_comic.png"
           alt="おとふだびより"
-          sizes="sm:1280px 500px"
         />
       </NuxtLink>
     </div>

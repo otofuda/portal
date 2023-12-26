@@ -1,17 +1,19 @@
 # Otofuda Portal
 
-- Nuxt 3.8
+- Nuxt 3.9
 - Node.js v20
 - npm v10
 
-**Dev server**
+![Otofuda Portal](public/thumb.png)
+
+## Dev server
 
 ```sh
 npm install
 npm run dev
 ```
 
-**SSG**
+## SSG
 
 ```sh
 npm run generate
