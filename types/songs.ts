@@ -47,3 +47,10 @@ export interface SongsPayload {
   offset: number;
   limit: number;
 }
+
+/** 楽曲一覧のソート条件 */
+export type SongSort =
+  { type: 'default'; label: string; } |
+  { type: 'level'; label: string; difficulty: 'e' | 'n' | 'h'; color: string; } |
+  { type: 'notes'; label: string; difficulty: 'e' | 'n' | 'h'; color: string; } |
+  { type: 'bpm'; label: string; };
