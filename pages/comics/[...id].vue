@@ -21,12 +21,19 @@ const content = computed<ComicInfo | null>(() => {
 
 const title = ref(content.value?.title)
 
-const links = computed<BreadcrumbLink[]>(() => {
+const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: 'マンガ一覧', to: '/comics' },
     { label: content.value?.title || '' }
   ]
+})
+
+useSeoMeta({
+  title: `「おとふだびより♪」${title.value}｜音札ポータル`,
+  ogTitle: `「おとふだびより♪」${title.value}｜音札ポータル`,
+  description: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！',
+  ogDescription: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！'
 })
 </script>
 
@@ -37,7 +44,7 @@ const links = computed<BreadcrumbLink[]>(() => {
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="links" />
+      <UBreadcrumb :links="breadcrumbLinks" />
     </div>
 
     <HeadingTitle>{{ title }}</HeadingTitle>

@@ -20,9 +20,12 @@ const newsImage = computed<string>(() => {
 
 /** お知らせの種類(色とラベル) */
 const tags = computed<NewsTag[]>(() => {
+  const defaultTag: NewsTag = {
+    label: 'お知らせ', color: 'sky'
+  }
   return props.article.tags.length > 0
-    ? props.article.tags.map(tag => newsTags[tag])
-    : [newsTags['お知らせ']]
+    ? props.article.tags.map(tag => newsTags.get(tag) || { label: tag, color: 'sky' })
+    : [defaultTag]
 })
 </script>
 
@@ -40,14 +43,21 @@ const tags = computed<NewsTag[]>(() => {
     />
     <strong class="title">{{ props.article.title }}</strong>
     <div class="date">
+      {{ dateString }}
+    </div>
+    <div class="tags">
       <UBadge
         v-for="tag in tags"
         :key="`newsLink-${props.article.id}-tag-${tag.label}`"
         :color="tag.color"
         :label="tag.label"
         size="md"
-      />
-      {{ dateString }}
+      >
+        <template #default>
+          <UIcon name="i-heroicons-tag" />
+          {{ tag.label }}
+        </template>
+      </UBadge>
     </div>
   </NuxtLink>
 </template>
@@ -57,14 +67,14 @@ const tags = computed<NewsTag[]>(() => {
   color: $primary;
   text-decoration: none;
   display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: minmax(0, 250px) minmax(200px, 1fr);
+  grid-template-rows: auto auto 1fr;
   margin: 0 1rem;
   overflow: hidden;
   text-align: left;
 
   .image {
-    grid-row: 1 / 3;
+    grid-row: 1 / 4;
     max-height: 25vh;
     min-width: 100%;
     object-fit: contain;
@@ -78,8 +88,16 @@ const tags = computed<NewsTag[]>(() => {
   }
 
   .date {
-    padding: 0.5rem 1rem 1rem 1rem;
+    padding: 0 1rem;
     color: $sub;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem 1rem 1rem;
   }
 
   &:hover {
@@ -91,7 +109,7 @@ const tags = computed<NewsTag[]>(() => {
   .news-link {
 
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
 
     .image {
       grid-row: 1 / 2;
