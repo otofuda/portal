@@ -39,9 +39,10 @@ const newsImage = computed<string>(() => {
 /** お知らせの種類(色とラベル) */
 const tags = computed<NewsTag[]>(() => {
   const article = content.value
+  const defaultTag: NewsTag = { label: 'お知らせ', color: 'sky' }
   return article && article.tags.length > 0
-    ? article.tags.map(tag => newsTags[tag])
-    : [newsTags['お知らせ']]
+    ? article.tags.map(tag => newsTags.get(tag) || defaultTag)
+    : [defaultTag]
 })
 
 useSeoMeta({
@@ -82,14 +83,18 @@ useSeoMeta({
         {{ dateString }}
       </div>
 
-      <div class="detail">
-        <UBadge
+      <div class="tags">
+        <UButton
           v-for="tag in tags"
           :key="`newsLink-${content.id}-tag-${tag.label}`"
           :color="tag.color"
           :label="tag.label"
-          size="md"
-        />
+          icon="i-heroicons-tag"
+          class="py-1"
+          :to="{ path: '/news', query: { tag: tag.label } }"
+        >
+          {{ tag.label }}
+        </UButton>
       </div>
 
       <ShareButtons :text="content.title" />
@@ -142,6 +147,14 @@ useSeoMeta({
     margin-bottom: 1rem;
     padding: 0 1rem;
     color: $sub;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
   }
 
   .share {
