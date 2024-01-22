@@ -136,7 +136,16 @@ const showSpNav = ref<boolean>(false)
           color="gray"
           :ui="{ rounded: 'rounded-full' }"
           variant="ghost"
-          to="https://www.youtube.com/@user-iw6ic4jl4b"
+          to="https://www.youtube.com/@youtube"
+          target="_blank"
+        />
+        <UButton
+          icon="i-fa6-brands-pixiv"
+          size="lg"
+          color="gray"
+          :ui="{ rounded: 'rounded-full' }"
+          variant="ghost"
+          to="https://www.pixiv.net/users/44346167"
           target="_blank"
         />
         <UButton

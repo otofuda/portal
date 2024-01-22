@@ -59,7 +59,7 @@ useSeoMeta({
       音札の最新情報はこちらから！
     </p>
 
-    <Carousel class="slider" :items-to-show="1.5" :wrap-around="true">
+    <Carousel class="slider" :items-to-show="1.2" :wrap-around="true">
       <Slide
         v-for="topic in topics"
         :key="`topic-${topic.id}`"
@@ -151,6 +151,14 @@ useSeoMeta({
           alt="おとふだびより"
         />
       </NuxtLink>
+      <NuxtLink to="songs">
+        <NuxtImg
+          format="webp"
+          :width="500"
+          src="/banners/banner_songs.png"
+          alt="収録楽曲一覧"
+        />
+      </NuxtLink>
     </div>
 
     <!-- 共有ボタン -->
@@ -166,10 +174,33 @@ useSeoMeta({
 
 .slider {
   margin-bottom: 2rem;
-  --vc-pgn-margin: 2px;
+  --vc-pgn-margin: 0 2px;
+  --vc-pgn-width: 8px;
   --vc-pgn-active-color: rgb(var(--color-primary-DEFAULT));
   --vc-pgn-background-color: rgb(var(--color-primary-100));
   --vc-nav-color: rgb(var(--color-primary-DEFAULT));
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 1rem;
+    height: 100%;
+    background: linear-gradient(to right, #ffffff88, #ffffff00);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 1rem;
+    height: 100%;
+    background: linear-gradient(to left, #ffffff88, #ffffff00);
+  }
 
   .carousel__slide {
     padding: 1rem;
@@ -199,6 +230,7 @@ useSeoMeta({
 .banners {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
   padding: 0 1rem;
   margin: 1rem 0 2rem 0;
 

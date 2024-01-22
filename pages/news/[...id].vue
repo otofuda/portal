@@ -182,11 +182,13 @@ useSeoMeta({
   }
 
   :deep(h2) {
+    font-weight: bold;
     font-size: 1.5rem;
     margin: 1.5rem 0;
   }
 
   :deep(h3) {
+    font-weight: bold;
     font-size: 1.25rem;
     margin: 1.5rem 0;
   }
