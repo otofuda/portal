@@ -72,7 +72,9 @@ useSeoMeta({
       :alt="title"
     />
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <h1 class="title">
+      {{ title }}
+    </h1>
 
     <div v-if="pending" class="loading">
       Loading...
@@ -132,15 +134,15 @@ useSeoMeta({
   flex-direction: column;
 
   :deep(.image) {
-    margin-bottom: 1rem;
     object-fit: contain;
 
     img { width: 100%; }
   }
 
-  > .heading {
-    justify-content: start;
-    margin-bottom: 1rem;
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem;
   }
 
   .detail {

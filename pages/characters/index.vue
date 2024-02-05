@@ -8,7 +8,12 @@ const title = ref('キャラクター')
       <Title>{{ title }}</Title>
     </Head>
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <HeadingTitle>
+      {{ title }}
+      <template #sub>
+        Characters
+      </template>
+    </HeadingTitle>
 
     <p class="caution">
       🏗️ このページは工事中です
