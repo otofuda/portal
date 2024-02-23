@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '@nuxt/ui/dist/runtime/types'
+import type { BreadcrumbLink } from '#ui/types'
 import type { ComicInfo, ComicPayload } from '~/types/comics'
 
 const title = ref('マンガ一覧')
@@ -42,7 +42,12 @@ useSeoMeta({
       <UBreadcrumb :links="breadcrumbLinks" />
     </div>
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <HeadingTitle>
+      {{ title }}
+      <template #sub>
+        Comics
+      </template>
+    </HeadingTitle>
 
     <p class="description">
       「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！

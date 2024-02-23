@@ -23,7 +23,12 @@ const songs = computed<SongInfo[]>(() => {
       <Title>{{ title }}</Title>
     </Head>
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <HeadingTitle>
+      {{ title }}
+      <template #sub>
+        Songs
+      </template>
+    </HeadingTitle>
 
     <div v-if="pending">
       Loading...

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '@nuxt/ui/dist/runtime/types'
+import type { BreadcrumbLink } from '#ui/types'
 import { type NewsArticle, type NewsPayload, type NewsTagString, newsTags } from '@/types/news'
 
 const route = useRoute()
@@ -66,7 +66,12 @@ const onClickTag = (tag: NewsTagString) => {
       <UBreadcrumb :links="breadcrumbLinks" />
     </div>
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <HeadingTitle>
+      {{ title }}
+      <template #sub>
+        News
+      </template>
+    </HeadingTitle>
 
     <div class="news-search">
       <UInput

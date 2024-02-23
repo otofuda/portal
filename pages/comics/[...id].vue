@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '@nuxt/ui/dist/runtime/types'
+import type { BreadcrumbLink } from '#ui/types'
 import type { ComicInfo, ComicPayload } from '~/types/comics'
 
 const route = useRoute()
@@ -47,7 +47,12 @@ useSeoMeta({
       <UBreadcrumb :links="breadcrumbLinks" />
     </div>
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <HeadingTitle>
+      {{ title }}
+      <template #sub>
+        Comics
+      </template>
+    </HeadingTitle>
 
     <div v-if="pending" class="loading">
       Loading...
