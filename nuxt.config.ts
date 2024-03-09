@@ -23,6 +23,11 @@ export default defineNuxtConfig({
     }
   },
 
+  experimental: {
+    typedPages: true,
+    sharedPrerenderData: true
+  },
+
   vue: {
     compilerOptions: {}
   },
@@ -34,7 +39,7 @@ export default defineNuxtConfig({
       icons: ['fa6-brands']
     }],
     ['@nuxt/image', {
-      provider: process.env.VERCEL_ENV ? 'vercel' : 'ipx',
+      provider: process.env.VERCEL_ENV ? 'vercel' : undefined,
       quality: 100,
       format: ['webp', 'png'],
       domains: ['images.microcms-assets.io', 'pbs.twimg.com'],

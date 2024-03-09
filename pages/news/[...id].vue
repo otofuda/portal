@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { type NewsArticle, type NewsPayload, type NewsTag, newsTags } from '@/types/news'
 
-const route = useRoute()
+const route = useRoute('news-id')
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
@@ -14,6 +14,7 @@ const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
 const content = computed<NewsArticle | null>(() => {
   if (!data.value) { return null }
   return data.value.contents.find((news) => {
+    if (!route.params.id) { return null }
     return route.params.id.includes(news.id)
   }) || null
 })

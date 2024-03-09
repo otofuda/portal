@@ -265,7 +265,8 @@ useSeoMeta({
   justify-content: center;
   align-items: center;
   gap: 1rem 0.5rem;
-  margin-top: 1rem;
+  margin: 1rem;
+  font-size: 0.9rem;
 
   dt {
     padding: 0.25rem 1rem;
