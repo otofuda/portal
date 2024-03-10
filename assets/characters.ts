@@ -1,7 +1,9 @@
 interface OtofudaCharacter {
   id: string;
   name: string;
+  ruby: string;
   image: string;
+  battleImage: string;
   blood: 'A' | 'B' | 'O' | 'AB';
   height: number;
   weight: 'ヒミツ';
@@ -14,7 +16,9 @@ export const characters: OtofudaCharacter[] = [
   {
     id: 'kanon',
     name: '華音',
+    ruby: 'かのん',
     image: '/characters/kanon.png',
+    battleImage: '/characters/battle/kanon.png',
     blood: 'A',
     height: 159,
     weight: 'ヒミツ',
@@ -25,7 +29,9 @@ export const characters: OtofudaCharacter[] = [
   {
     id: 'kadone',
     name: '門音',
+    ruby: 'かどね',
     image: '/characters/kadone.png',
+    battleImage: '/characters/battle/kadone.png',
     blood: 'B',
     height: 163,
     weight: 'ヒミツ',
@@ -36,7 +42,9 @@ export const characters: OtofudaCharacter[] = [
   {
     id: 'kunon',
     name: '空音',
+    ruby: 'くのん',
     image: '/characters/kunon.png',
+    battleImage: '/characters/battle/kunon.png',
     blood: 'A',
     height: 168,
     weight: 'ヒミツ',
@@ -47,7 +55,9 @@ export const characters: OtofudaCharacter[] = [
   {
     id: 'hirono',
     name: '大音',
+    ruby: 'ひろの',
     image: '/characters/hirono.png',
+    battleImage: '/characters/battle/hirono.png',
     blood: 'B',
     height: 149,
     weight: 'ヒミツ',
@@ -58,7 +68,9 @@ export const characters: OtofudaCharacter[] = [
   {
     id: 'shuon',
     name: '珠音',
+    ruby: 'しゅおん',
     image: '/characters/shuon.png',
+    battleImage: '/characters/battle/shuon.png',
     blood: 'O',
     height: 170,
     weight: 'ヒミツ',

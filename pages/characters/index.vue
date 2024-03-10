@@ -52,8 +52,8 @@ const title = ref('キャラクター')
     line-height: 2;
 
     p {
-      padding: 0 1rem;
-      margin-bottom: 1rem;
+      padding: 0 2rem;
+      margin-bottom: 2rem;
     }
   }
 

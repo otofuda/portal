@@ -28,7 +28,7 @@ onMounted(async () => {
   instance = new SimpleParallax.default(el, {
     delay: 1,
     orientation: 'down',
-    scale: 1.25,
+    scale: 1.5,
     transition: 'cubic-bezier(0, 0, 0, 1)',
     overflow: true
   })
@@ -57,10 +57,21 @@ onUnmounted(() => {
           sizes="640"
           :src="character.image"
         />
+        <NuxtPicture
+          format="webp"
+          class="intro-image-battle"
+          sizes="160"
+          :src="character.battleImage"
+        />
       </div>
 
       <div class="intro-info">
-        <h1>{{ character.name }}</h1>
+        <h1>
+          <ruby>
+            {{ character.name }}
+            <rp>(</rp><rt>{{ character.ruby }}</rt><rp>)</rp>
+          </ruby>
+        </h1>
 
         <dl class="desclist">
           <dt>血液型</dt>
@@ -113,6 +124,29 @@ onUnmounted(() => {
     grid-template-columns: 2fr 3fr;
     grid-template-rows: 1fr;
 
+    .intro-image {
+      position: relative;
+
+      .intro-image-battle {
+        width: 7rem;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        &::before {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          z-index: -1;
+          content: '';
+          width: 7rem;
+          height: 2.5rem;
+          background: rgba(0, 0, 0, 0.25);
+          border-radius: 50%;
+        }
+      }
+    }
+
     .intro-info {
       padding: 0 1rem 0 0;
 
@@ -120,6 +154,12 @@ onUnmounted(() => {
         margin: 0;
         font-size: 2.5rem;
         font-weight: bold;
+
+        ruby {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
       }
 
       .desclist {
@@ -171,11 +211,15 @@ onUnmounted(() => {
   .character {
     .intro {
       grid-template-columns: 1fr;
-      grid-template-rows: 24rem auto;
+      grid-template-rows: 30rem auto;
 
       .intro-image {
         max-width: 20rem;
         justify-self: center;
+
+        .intro-image-battle {
+          bottom: -4rem;
+        }
       }
 
       .intro-info {
