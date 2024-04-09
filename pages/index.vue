@@ -73,7 +73,7 @@ useSeoMeta({
         <NuxtLink :to="topic.link" target="_blank">
           <NuxtPicture
             format="webp"
-            :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg&name=large`"
+            :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg`"
             sizes="500"
             :alt="topic.alt"
           />
