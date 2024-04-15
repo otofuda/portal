@@ -163,6 +163,10 @@ const showSpNav = ref<boolean>(false)
 
       <p>© 音札プロジェクト</p>
     </footer>
+
+    <ClientOnly>
+      <ToTop />
+    </ClientOnly>
   </div>
 </template>
 
@@ -295,6 +299,11 @@ const showSpNav = ref<boolean>(false)
 
     header .menu {
       display: inline-flex;
+    }
+
+    footer {
+      line-height: 4;
+      padding-bottom: 2rem;
     }
   }
 }
