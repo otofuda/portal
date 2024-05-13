@@ -301,7 +301,7 @@ const showSpNav = ref<boolean>(false)
       display: inline-flex;
     }
 
-    footer {
+    footer p:last-child {
       line-height: 4;
       padding-bottom: 2rem;
     }

@@ -42,8 +42,8 @@ onMounted(() => {
 <style lang="scss" scoped>
 .intersection {
   opacity: 0;
-  transition: all 2s ease;
-  transform: translateY(1rem);
+  transition: all 4s ease;
+  transform: translateY(2rem);
 
   &.--visible {
     opacity: 1;

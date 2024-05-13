@@ -199,8 +199,7 @@ useSeoMeta({
   :deep(ul) {
     list-style: disc inside;
     line-height: 2;
-    margin-left: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-left: 1rem;
   }
 }
 

@@ -107,6 +107,8 @@ onUnmounted(() => {
   .pictures {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
+    margin-top: -5%;
+    margin-bottom: -10%;
 
     > .character {
       position: relative;
