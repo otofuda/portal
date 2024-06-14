@@ -31,6 +31,15 @@ onMounted(async () => {
 onUnmounted(() => {
   instances.forEach(instance => instance.destroy())
 })
+
+useSeoMeta({
+  title: `${title.value}｜音札ポータル`,
+  ogTitle: `${title.value}｜音札ポータル`,
+  description: '音札のストーリーとキャラクターを紹介するページです！',
+  ogDescription: '音札のストーリーとキャラクターを紹介するページです！',
+  ogImage: '/thumb.png',
+  twitterCard: 'summary_large_image'
+})
 </script>
 
 <template>
@@ -174,16 +183,16 @@ onUnmounted(() => {
   .characters .pictures {
     grid-template-columns: 50% 50%;
     grid-template-rows: auto auto auto auto auto;
-    padding: 0 10%;
+    padding: 0 15%;
     margin-top: -15%;
-    margin-bottom: -75%;
+    margin-bottom: -120%;
     overflow: hidden;
 
     > .character {
       position: static;
       min-width: 200%;
       top: 0;
-      margin-bottom: -300%;
+      margin-bottom: -315%;
 
       &.--hirono {
         grid-column: 2;

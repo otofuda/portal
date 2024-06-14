@@ -8,7 +8,7 @@
 @keyframes cube {
   from {
     transform: scale(0) rotate(0deg) translate(-50%, -50%);
-    opacity: 0.75;
+    opacity: 0.15;
   }
   to {
     transform: scale(20) rotate(360deg) translate(-50%, -50%);
@@ -34,8 +34,8 @@
     left: 45vw;
     width: 10px;
     height: 10px;
-    border-radius: 1px;
-    border: solid 0.5px $border;
+    border-radius: 2px;
+    border: solid 0.5px $green;
     color: transparent;
     transform-origin: top left;
     transform: scale(0) rotate(0deg) translate(-50%, -50%);
@@ -49,11 +49,18 @@
     border-color: #ffffff;
   }
 
+  li:nth-child(0) {
+    animation-delay: 0s;
+    left: 65vw;
+    top: 4vh;
+    border-color: $blue;
+  }
+
   li:nth-child(1) {
     animation-delay: 2s;
     left: 72vw;
     top: 87vh;
-    border-color: #ffffff;
+    border-color: $blue;
   }
 
   li:nth-child(2) {
@@ -66,7 +73,7 @@
     animation-delay: 6s;
     left: 46vw;
     top: 44vh;
-    border-color: #ffffff;
+    border-color: $blue;
   }
 
   li:nth-child(4) {
@@ -79,7 +86,7 @@
     animation-delay: 10s;
     left: 15vw;
     top: 94vh;
-    border-color: #ffffff;
+    border-color: $blue;
   }
 
   li:nth-child(6) {
@@ -110,28 +117,28 @@
     animation-delay: 20s;
     left: 58vw;
     top: 36vh;
-    border-color: #ffffff;
+    border-color: $blue;
   }
 
   li:nth-child(11) {
     animation-delay: 22s;
     left: 29vw;
     top: 14vh;
-    border-color: #ffffff;
+    border-color: $blue;
   }
 
   li:nth-child(12) {
     animation-delay: 24s;
     left: 53vw;
     top: 98vh;
-    border-color: #ffffff;
+    border-color: $blue;
   }
 
   li:nth-child(13) {
     animation-delay: 26s;
     left: 87vw;
     top: 51vh;
-    border-color: #ffffff;
+    border-color: $blue;
   }
 
   li:nth-child(14) {
@@ -150,7 +157,7 @@
     animation-delay: 32s;
     left: 95vw;
     top: 71vh;
-    border-color: #ffffff;
+    border-color: $blue;
   }
 
   li:nth-child(17) {
@@ -169,7 +176,7 @@
     animation-delay: 38s;
     left: 12vw;
     top: 66vh;
-    border-color: #ffffff;
+    border-color: $blue;
   }
 }
 </style>

@@ -9,7 +9,7 @@ const character = characters.find((character) => {
   return route.params.id && route.params.id.includes(character.id)
 })
 
-const title = character?.name || '？'
+const title = `${character?.name} キャラクター紹介`
 
 const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
   return [
@@ -36,6 +36,15 @@ onMounted(async () => {
 
 onUnmounted(() => {
   instance?.destroy()
+})
+
+useSeoMeta({
+  title: `${title}｜音札ポータル`,
+  ogTitle: `${title}｜音札ポータル`,
+  description: `音札のキャラクター「${character?.name}」の紹介ページです！`,
+  ogDescription: `音札のキャラクター「${character?.name}」の紹介ページです！`,
+  ogImage: '/thumb.png',
+  twitterCard: 'summary_large_image'
 })
 </script>
 
