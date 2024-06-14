@@ -154,8 +154,9 @@ const levels = computed<LevelInfo[]>(() => {
             color="rose"
             variant="solid"
             icon="i-fa6-brands-youtube"
+            block
           >
-            譜面紹介動画を見る
+            譜面紹介
           </UButton>
         </div>
       </div>
@@ -185,7 +186,7 @@ const levels = computed<LevelInfo[]>(() => {
   padding-bottom: 2rem;
 
   :deep(.jacket) {
-    width: 320px;
+    width: 240px;
     max-width: 100%;
     aspect-ratio: 1;
     border-radius: 1.5rem;
@@ -278,15 +279,16 @@ const levels = computed<LevelInfo[]>(() => {
 
   .levels {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 2rem;
     margin-bottom: 2rem;
 
     .level {
+      flex: 1;
       display: grid;
       align-items: flex-start;
-      grid-template-columns: 5rem 1fr;
-      column-gap: 1rem;
+      grid-template-rows: 5rem 1fr;
+      gap: 1rem;
 
       .level-number {
         color: $bg;
@@ -315,7 +317,7 @@ const levels = computed<LevelInfo[]>(() => {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.5rem;
+        gap: 1rem;
       }
 
       .level-label {

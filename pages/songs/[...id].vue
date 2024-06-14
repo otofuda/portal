@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '@nuxt/ui/dist/runtime/types'
+import type { BreadcrumbLink } from '#ui/types'
 import type { SongInfo, SongsPayload } from '@/types/songs'
 
 const route = useRoute()

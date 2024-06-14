@@ -1,4 +1,4 @@
-type NewsTagString = 'お知らせ' | 'ゲーム情報' | 'イベント情報' | 'おとふだNET' | '音札ポータル'
+export type NewsTagString = 'お知らせ' | 'ゲーム情報' | '音札Étude' | 'アーケード版' | 'イベント情報' | 'おとふだNET' | '音札ポータル' | 'おとふだびより♪'
 
 export interface NewsTag {
   label: NewsTagString;
@@ -29,25 +29,33 @@ export interface NewsPayload {
   limit: number;
 }
 
-export const newsTags: Record<NewsTagString, NewsTag> = {
-  お知らせ: {
-    label: 'お知らせ',
-    color: 'sky'
-  },
-  イベント情報: {
-    label: 'イベント情報',
-    color: 'green'
-  },
-  ゲーム情報: {
-    label: 'ゲーム情報',
-    color: 'sky'
-  },
-  おとふだNET: {
-    label: 'おとふだNET',
-    color: 'orange'
-  },
-  音札ポータル: {
-    label: '音札ポータル',
-    color: 'teal'
-  }
-}
+export const newsTags = new Map<NewsTagString, NewsTag>([
+  [
+    'ゲーム情報',
+    { label: 'ゲーム情報', color: 'rose' }
+  ],
+  [
+    '音札Étude',
+    { label: '音札Étude', color: 'emerald' }
+  ],
+  [
+    'アーケード版',
+    { label: 'アーケード版', color: 'blue' }
+  ],
+  [
+    'イベント情報',
+    { label: 'イベント情報', color: 'orange' }
+  ],
+  [
+    'おとふだNET',
+    { label: 'おとふだNET', color: 'white' }
+  ],
+  [
+    '音札ポータル',
+    { label: '音札ポータル', color: 'lime' }
+  ],
+  [
+    'おとふだびより♪',
+    { label: 'おとふだびより♪', color: 'cyan' }
+  ]
+])

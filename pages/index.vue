@@ -54,12 +54,17 @@ useSeoMeta({
     </ClientOnly>
 
     <!-- トピックス -->
-    <HeadingTitle>トピックス</HeadingTitle>
+    <HeadingTitle>
+      トピックス
+      <template #sub>
+        Topics
+      </template>
+    </HeadingTitle>
     <p class="description">
-      音札の最新情報はこちらから！
+      音札の最新情報はこちら！
     </p>
 
-    <Carousel class="slider" :items-to-show="1.5" :wrap-around="true">
+    <Carousel class="slider" :items-to-show="1.2" :wrap-around="true">
       <Slide
         v-for="topic in topics"
         :key="`topic-${topic.id}`"
@@ -68,7 +73,7 @@ useSeoMeta({
         <NuxtLink :to="topic.link" target="_blank">
           <NuxtPicture
             format="webp"
-            :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg&name=large`"
+            :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg`"
             sizes="500"
             :alt="topic.alt"
           />
@@ -81,10 +86,12 @@ useSeoMeta({
     </Carousel>
 
     <!-- お知らせ -->
-    <HeadingTitle>最新のお知らせ</HeadingTitle>
-    <p class="description">
-      音札ポータルに掲載しているお知らせです
-    </p>
+    <HeadingTitle>
+      最新のお知らせ
+      <template #sub>
+        News
+      </template>
+    </HeadingTitle>
 
     <Carousel class="slider">
       <Slide
@@ -110,11 +117,25 @@ useSeoMeta({
       />
     </div>
 
-    <!-- 動画 -->
-    <HeadingTitle>「音札」紹介動画</HeadingTitle>
+    <HeadingTitle>
+      アーケード版「音札」紹介
+      <template #sub>
+        Arcade
+      </template>
+    </HeadingTitle>
     <p class="description">
-      アーケード版「音札」のご紹介
+      「音札」は、リズムに乗って演奏する爽快な音楽ゲームに、花札をモチーフにした「音札」によるカードバトルを組み合わせたゲームです。
     </p>
+    <dl class="desclist">
+      <dt>ジャンル</dt>
+      <dd>対戦型音楽カードゲーム</dd>
+      <dt>プレイ人数</dt>
+      <dd>2人</dd>
+      <dt>プレイ料金</dt>
+      <dd>無料</dd>
+      <dt>プラットフォーム</dt>
+      <dd>アーケード</dd>
+    </dl>
     <iframe
       class="video"
       src="https://www.youtube-nocookie.com/embed/94LRZjHgpM0?si=476AppZZNFs0jQPY&amp;controls=0"
@@ -124,10 +145,32 @@ useSeoMeta({
       allowfullscreen
     />
 
-    <HeadingTitle>「音札Étude」紹介動画</HeadingTitle>
+    <HeadingTitle>
+      「音札Étude」紹介
+      <template #sub>
+        Mobile
+      </template>
+    </HeadingTitle>
     <p class="description">
-      スマホ・PCで遊べる「音札Étude」のご紹介
+      「音札Étude」はスマホやPCで一人で手軽に遊べる対戦音楽ゲームです。<br>
+      敵との勝敗を決めるのは、音ゲーの上手さとカードゲームの上手さ！「音札」を使って敵を妨害し、音ゲーを有利に進めよう！
     </p>
+    <a class="etude-link" href="https://etude.otofuda.com/" target="_blank">
+      <NuxtImg format="webp" :width="500" class="--etude" src="/assets/button_etude.png" />
+    </a>
+    <p class="description">
+      デッキ編成や戦略を研究する、同じ譜面を繰り返し練習する、好きな楽曲をひたすらリピートする、など楽しみ方はあなた次第！
+    </p>
+    <dl class="desclist">
+      <dt>ジャンル</dt>
+      <dd>家庭用音楽カードゲーム</dd>
+      <dt>プレイ人数</dt>
+      <dd>1人</dd>
+      <dt>価格</dt>
+      <dd>無料</dd>
+      <dt>プラットフォーム</dt>
+      <dd>Android, iOS, iPad OS, Windows</dd>
+    </dl>
     <iframe
       class="video"
       src="https://www.youtube-nocookie.com/embed/nQ7wnzQEDpM?si=_AQUAGihH8h7sCQl&amp;controls=0"
@@ -138,10 +181,12 @@ useSeoMeta({
     />
 
     <!-- バナー -->
-    <HeadingTitle>コンテンツ</HeadingTitle>
-    <p class="description">
-      音札ポータルのコンテンツをご紹介
-    </p>
+    <HeadingTitle>
+      コンテンツ
+      <template #sub>
+        Contents
+      </template>
+    </HeadingTitle>
     <div class="banners">
       <NuxtLink to="comics">
         <NuxtImg
@@ -149,6 +194,14 @@ useSeoMeta({
           :width="500"
           src="/banners/banner_comic.png"
           alt="おとふだびより"
+        />
+      </NuxtLink>
+      <NuxtLink to="songs">
+        <NuxtImg
+          format="webp"
+          :width="500"
+          src="/banners/banner_songs.png"
+          alt="収録楽曲一覧"
         />
       </NuxtLink>
     </div>
@@ -166,10 +219,33 @@ useSeoMeta({
 
 .slider {
   margin-bottom: 2rem;
-  --vc-pgn-margin: 2px;
+  --vc-pgn-margin: 0 2px;
+  --vc-pgn-width: 8px;
   --vc-pgn-active-color: rgb(var(--color-primary-DEFAULT));
   --vc-pgn-background-color: rgb(var(--color-primary-100));
   --vc-nav-color: rgb(var(--color-primary-DEFAULT));
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 1rem;
+    height: 100%;
+    background: linear-gradient(to right, #ffffff88, #ffffff00);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 1rem;
+    height: 100%;
+    background: linear-gradient(to left, #ffffff88, #ffffff00);
+  }
 
   .carousel__slide {
     padding: 1rem;
@@ -178,7 +254,51 @@ useSeoMeta({
 
 .description {
   font-size: 0.9rem;
+  line-height: 2;
   text-align: center;
+  margin: 0 2rem;
+}
+
+.desclist {
+  display: grid;
+  grid-template-columns: 8rem auto;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem 0.5rem;
+  margin: 1rem;
+  font-size: 0.9rem;
+
+  dt {
+    padding: 0.25rem 1rem;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: $bg;
+    background: $otofuda-gradient;
+    clip-path: polygon(
+      0% 50%,
+      10% 0,
+      90% 0,
+      100% 50%,
+      100% 50%,
+      90% 100%,
+      10% 100%,
+      0% 50%
+    );
+  }
+}
+
+.etude-link {
+  display: flex;
+  justify-content: center;
+  padding: 0 2rem;
+  margin: 2rem 0;
+
+  img {
+    width: 100%;
+    max-width: 25rem;
+    filter: drop-shadow(0 0.25rem 0.5rem rgba($green, 0.2));
+  }
 }
 
 .menu {
@@ -191,7 +311,7 @@ useSeoMeta({
 .video {
   width: 100%;
   aspect-ratio: 16 / 9;
-  margin: 1rem 0 2rem 0;
+  margin: 2rem 0;
   border-radius: 1rem;
   box-shadow: 0 0.25rem 0.5rem 0 rgba($text, 0.125);
 }
@@ -199,6 +319,7 @@ useSeoMeta({
 .banners {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
   padding: 0 1rem;
   margin: 1rem 0 2rem 0;
 

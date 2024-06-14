@@ -59,7 +59,12 @@ const songs = computed<SongInfo[]>(() => {
       <Title>{{ title }}</Title>
     </Head>
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <HeadingTitle>
+      {{ title }}
+      <template #sub>
+        Songs
+      </template>
+    </HeadingTitle>
 
     <p class="description">
       音札シリーズに収録されている楽曲の情報を見ることができます！

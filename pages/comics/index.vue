@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { BreadcrumbLink } from '#ui/types'
 import type { ComicInfo, ComicPayload } from '~/types/comics'
 
 const title = ref('マンガ一覧')
@@ -15,6 +16,20 @@ const { data, pending } = await useAsyncData<ComicPayload>('comics', () => {
 const comics = computed<ComicInfo[]>(() => {
   return data.value ? data.value.contents : []
 })
+
+const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
+  return [
+    { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
+    { label: 'マンガ一覧', to: '' }
+  ]
+})
+
+useSeoMeta({
+  title: 'マンガ一覧｜音札ポータル',
+  ogTitle: 'マンガ一覧｜音札ポータル',
+  description: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！',
+  ogDescription: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！'
+})
 </script>
 
 <template>
@@ -23,7 +38,16 @@ const comics = computed<ComicInfo[]>(() => {
       <Title>{{ title }}</Title>
     </Head>
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <div class="breadcrumb">
+      <UBreadcrumb :links="breadcrumbLinks" />
+    </div>
+
+    <HeadingTitle>
+      {{ title }}
+      <template #sub>
+        Comics
+      </template>
+    </HeadingTitle>
 
     <p class="description">
       「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！
@@ -44,6 +68,10 @@ const comics = computed<ComicInfo[]>(() => {
 </template>
 
 <style lang="scss" scoped>
+.breadcrumb {
+  margin: 0 1rem 1rem 1rem;
+}
+
 .description {
   margin: 1rem;
   text-align: center;

@@ -66,7 +66,7 @@ const showSpNav = ref<boolean>(false)
     </main>
 
     <footer>
-      音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。
+      <p>音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。</p>
 
       <div class="banners">
         <NuxtLink to="https://arcade.otofuda.com" target="_blank" rel="noopener noreferrer">
@@ -136,7 +136,16 @@ const showSpNav = ref<boolean>(false)
           color="gray"
           :ui="{ rounded: 'rounded-full' }"
           variant="ghost"
-          to="https://www.youtube.com/@user-iw6ic4jl4b"
+          to="https://www.youtube.com/@youtube"
+          target="_blank"
+        />
+        <UButton
+          icon="i-fa6-brands-pixiv"
+          size="lg"
+          color="gray"
+          :ui="{ rounded: 'rounded-full' }"
+          variant="ghost"
+          to="https://www.pixiv.net/users/44346167"
           target="_blank"
         />
         <UButton
@@ -150,8 +159,14 @@ const showSpNav = ref<boolean>(false)
         />
       </div>
 
-      © 音札プロジェクト
+      <p>掲載されている会社名・製品名などは各社の商標や登録商標です。</p>
+
+      <p>© 音札プロジェクト</p>
     </footer>
+
+    <ClientOnly>
+      <ToTop />
+    </ClientOnly>
   </div>
 </template>
 
@@ -232,10 +247,14 @@ const showSpNav = ref<boolean>(false)
   footer {
     grid-column: 1 / 3;
     padding: 1rem;
-    font-size: 0.75rem;
-    color: $sub;
     text-align: center;
     border-top: 1px solid $border;
+
+    p {
+      font-size: 0.75rem;
+      color: $sub;
+      margin-bottom: 1rem;
+    }
 
     .banners {
       display: flex;
@@ -243,7 +262,7 @@ const showSpNav = ref<boolean>(false)
       flex-direction: column;
       flex-wrap: wrap;
       gap: 1rem;
-      margin: 1rem 0;
+      margin-bottom: 1rem;
 
       a {
         width: 360px;
@@ -280,6 +299,11 @@ const showSpNav = ref<boolean>(false)
 
     header .menu {
       display: inline-flex;
+    }
+
+    footer p:last-child {
+      line-height: 4;
+      padding-bottom: 2rem;
     }
   }
 }

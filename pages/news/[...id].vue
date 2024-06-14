@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { type NewsArticle, type NewsPayload, type NewsTag, newsTags } from '@/types/news'
 
-const route = useRoute()
+const route = useRoute('news-id')
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
@@ -14,6 +14,7 @@ const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
 const content = computed<NewsArticle | null>(() => {
   if (!data.value) { return null }
   return data.value.contents.find((news) => {
+    if (!route.params.id) { return null }
     return route.params.id.includes(news.id)
   }) || null
 })
@@ -39,9 +40,10 @@ const newsImage = computed<string>(() => {
 /** お知らせの種類(色とラベル) */
 const tags = computed<NewsTag[]>(() => {
   const article = content.value
+  const defaultTag: NewsTag = { label: 'お知らせ', color: 'sky' }
   return article && article.tags.length > 0
-    ? article.tags.map(tag => newsTags[tag])
-    : [newsTags['お知らせ']]
+    ? article.tags.map(tag => newsTags.get(tag) || defaultTag)
+    : [defaultTag]
 })
 
 useSeoMeta({
@@ -71,7 +73,9 @@ useSeoMeta({
       :alt="title"
     />
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <h1 class="title">
+      {{ title }}
+    </h1>
 
     <div v-if="pending" class="loading">
       Loading...
@@ -82,14 +86,18 @@ useSeoMeta({
         {{ dateString }}
       </div>
 
-      <div class="detail">
-        <UBadge
+      <div class="tags">
+        <UButton
           v-for="tag in tags"
           :key="`newsLink-${content.id}-tag-${tag.label}`"
           :color="tag.color"
           :label="tag.label"
-          size="md"
-        />
+          icon="i-heroicons-tag"
+          class="py-1"
+          :to="{ path: '/news', query: { tag: tag.label } }"
+        >
+          {{ tag.label }}
+        </UButton>
       </div>
 
       <ShareButtons :text="content.title" />
@@ -127,21 +135,29 @@ useSeoMeta({
   flex-direction: column;
 
   :deep(.image) {
-    margin-bottom: 1rem;
     object-fit: contain;
 
     img { width: 100%; }
   }
 
-  > .heading {
-    justify-content: start;
-    margin-bottom: 1rem;
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem;
   }
 
   .detail {
     margin-bottom: 1rem;
     padding: 0 1rem;
     color: $sub;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
   }
 
   .share {
@@ -169,11 +185,13 @@ useSeoMeta({
   }
 
   :deep(h2) {
+    font-weight: bold;
     font-size: 1.5rem;
     margin: 1.5rem 0;
   }
 
   :deep(h3) {
+    font-weight: bold;
     font-size: 1.25rem;
     margin: 1.5rem 0;
   }
@@ -181,8 +199,7 @@ useSeoMeta({
   :deep(ul) {
     list-style: disc inside;
     line-height: 2;
-    margin-left: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-left: 1rem;
   }
 }
 

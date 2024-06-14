@@ -1,8 +1,17 @@
 <script lang="ts" setup>
-import type { NewsArticle, NewsPayload } from '~/types/news'
+import type { BreadcrumbLink } from '#ui/types'
+import { type NewsArticle, type NewsPayload, type NewsTagString, newsTags } from '@/types/news'
+
+const route = useRoute()
 
 const title = ref('お知らせ一覧')
-const searchWord = ref('')
+
+const searchWord = ref<string>('')
+const searchTag = ref<NewsTagString | null>((() => {
+  const tag = route.query.tag ? route.query.tag.toString() : null
+  if (tag) { return newsTags.get(tag as NewsTagString)?.label || null }
+  return null
+})())
 
 const runtimeConfig = useRuntimeConfig()
 
@@ -19,11 +28,32 @@ const contents = computed<NewsArticle[]>(() => {
 
 const filteredContents = computed<NewsArticle[]>(() => {
   if (contents.value === null) { return [] }
-  if (searchWord.value === '') { return contents.value }
   return contents.value.filter((article) => {
-    return article.title.includes(searchWord.value)
+    let flag = true
+    if (searchWord.value !== '') {
+      flag = article.title.toLowerCase().includes(searchWord.value.toLowerCase())
+    }
+    if (flag && searchTag.value !== null) {
+      flag = article.tags.includes(searchTag.value)
+    }
+    return flag
   })
 })
+
+const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
+  return [
+    { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
+    { label: 'お知らせ一覧', to: '' }
+  ]
+})
+
+const onClickTag = (tag: NewsTagString) => {
+  if (searchTag.value === tag) {
+    searchTag.value = null
+  } else {
+    searchTag.value = tag
+  }
+}
 </script>
 
 <template>
@@ -32,7 +62,16 @@ const filteredContents = computed<NewsArticle[]>(() => {
       <Title>{{ title }}</Title>
     </Head>
 
-    <HeadingTitle>{{ title }}</HeadingTitle>
+    <div class="breadcrumb">
+      <UBreadcrumb :links="breadcrumbLinks" />
+    </div>
+
+    <HeadingTitle>
+      {{ title }}
+      <template #sub>
+        News
+      </template>
+    </HeadingTitle>
 
     <div class="news-search">
       <UInput
@@ -45,31 +84,63 @@ const filteredContents = computed<NewsArticle[]>(() => {
 
       <UAlert
         v-show="searchWord"
-        class="mt-3"
+        class="mt-4"
         :title="`「${ searchWord }」で検索中`"
-        :close-button="{ icon: 'i-heroicons-x-mark-20-solid', color: 'gray', variant: 'soft', padded: false }"
+        :close-button="{ icon: 'i-heroicons-x-mark-20-solid', color: 'white', variant: 'ghost', padded: false }"
         @close="searchWord = ''"
       />
     </div>
 
+    <div class="news-tags">
+      <UButton
+        v-for="[tagName, tag] in newsTags"
+        :key="`news-tag-${tagName}`"
+        icon="i-heroicons-tag"
+        size="sm"
+        :color="tag.color"
+        :variant="searchTag === tagName ? 'solid' : 'link'"
+        :label="tagName"
+        @click="onClickTag(tagName)"
+      />
+    </div>
+
     <div class="news-list">
-      <div v-if="pending">
+      <div v-if="pending" class="px-4">
         Loading...
       </div>
 
-      <NewsLink
-        v-for="article in filteredContents"
-        :key="`news-${article.id}`"
-        :article="article"
-        class="article"
-      />
+      <div v-if="filteredContents.length === 0" class="px-4">
+        <UAlert
+          title="条件に一致するお知らせが見つかりませんでした"
+          color="primary"
+          variant="outline"
+        />
+      </div>
+
+      <TransitionGroup name="list">
+        <NewsLink
+          v-for="article in filteredContents"
+          :key="`news-${article.id}`"
+          :article="article"
+          class="article"
+        />
+      </TransitionGroup>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.breadcrumb {
+  margin: 0 1rem 1rem 1rem;
+}
+
 .news-search {
   margin: 1.5rem 0;
+  padding: 0 1rem;
+}
+
+.news-tags {
+  margin-bottom: 1.5rem;
   padding: 0 1rem;
 }
 
@@ -77,5 +148,21 @@ const filteredContents = computed<NewsArticle[]>(() => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 1rem;
+
+  .list-move,
+  .list-enter-active {
+    transition: all 0.5s ease;
+  }
+
+  .list-leave-active {
+    transition: none;
+  }
+
+  .list-enter-from,
+  .list-leave-to {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
 }
 </style>
