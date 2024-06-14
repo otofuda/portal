@@ -13,6 +13,8 @@ const { data, pending, error } = await useAsyncData<SongsPayload>('songs', () =>
 
 const SORT_OPTIONS: SongSort[] = [
   { type: 'default', label: '新着順' },
+  { type: 'name', label: '楽曲名順' },
+  { type: 'artist', label: 'アーティスト名順' },
   { type: 'level', label: '楽曲難易度順', difficulty: 'e', color: '#25ca25' },
   { type: 'level', label: '楽曲難易度順', difficulty: 'n', color: '#ffb223' },
   { type: 'level', label: '楽曲難易度順', difficulty: 'h', color: '#ff0984' },
@@ -20,7 +22,7 @@ const SORT_OPTIONS: SongSort[] = [
   { type: 'notes', label: 'ノーツ数順', difficulty: 'e', color: '#25ca25' },
   { type: 'notes', label: 'ノーツ数順', difficulty: 'n', color: '#ffb223' },
   { type: 'notes', label: 'ノーツ数順', difficulty: 'h', color: '#ff0984' }
-]
+] as const
 const sortOptions = ref<SongSort[]>(SORT_OPTIONS)
 const songSort = ref<SongSort>(SORT_OPTIONS[0])
 const isDesc = ref<boolean>(true)
@@ -29,23 +31,38 @@ const songs = computed<SongInfo[]>(() => {
   const allSongs = data.value ? [...data.value.contents] : []
   if (songSort.value.type !== 'default') {
     let key: (keyof SongInfo) | null = null
-    if (songSort.value.type === 'bpm') { key = 'bpm' }
-    if (songSort.value.type === 'level') {
-      if (songSort.value.difficulty === 'e') { key = 'easy' }
-      if (songSort.value.difficulty === 'n') { key = 'normal' }
-      if (songSort.value.difficulty === 'h') { key = 'hard' }
-    }
-    if (songSort.value.type === 'notes') {
-      if (songSort.value.difficulty === 'e') { key = 'easy_notes' }
-      if (songSort.value.difficulty === 'n') { key = 'normal_notes' }
-      if (songSort.value.difficulty === 'h') { key = 'hard_notes' }
+    switch (songSort.value.type) {
+      case 'bpm':
+      case 'name':
+      case 'artist':
+        key = songSort.value.type
+        break
+      case 'level': {
+        if (songSort.value.difficulty === 'e') { key = 'easy' }
+        if (songSort.value.difficulty === 'n') { key = 'normal' }
+        if (songSort.value.difficulty === 'h') { key = 'hard' }
+        break
+      }
+      case 'notes': {
+        if (songSort.value.difficulty === 'e') { key = 'easy_notes' }
+        if (songSort.value.difficulty === 'n') { key = 'normal_notes' }
+        if (songSort.value.difficulty === 'h') { key = 'hard_notes' }
+        break
+      }
     }
     if (key) {
-      const k = key
       allSongs.sort((a, b) => {
-        const A = a[k]
-        const B = b[k]
-        if (A < B) { return -1 } else if (B < A) { return 1 } else { return 0 }
+        const A = a[key]
+        const B = b[key]
+        if (typeof A === 'string' && typeof B === 'string') {
+          return A.localeCompare(B)
+        } else if (A < B) {
+          return -1
+        } else if (B < A) {
+          return 1
+        } else {
+          return 0
+        }
       })
     }
   }
@@ -90,7 +107,7 @@ const songs = computed<SongInfo[]>(() => {
     <div class="sort-form">
       <span>ならびかえ</span>
       <UButtonGroup size="lg" orientation="horizontal">
-        <USelectMenu v-model="songSort" :options="sortOptions">
+        <USelectMenu v-model="songSort" :options="sortOptions" class="flex-grow">
           <template #label>
             <span
               v-if="songSort.type === 'level' || songSort.type === 'notes'"
@@ -148,10 +165,11 @@ const songs = computed<SongInfo[]>(() => {
 }
 
 .sort-form {
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: center;
+  grid-template-columns: auto 1fr;
   gap: 1rem;
+  padding: 0 1rem;
 
   > span {
     color: $sub;
