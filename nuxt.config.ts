@@ -47,8 +47,14 @@ export default defineNuxtConfig({
         microcms: 'https://images.microcms-assets.io',
         twimg: 'https://pbs.twimg.com'
       }
-    }]
+    }],
+    ['@nuxtjs/seo', {}]
   ],
+
+  // Nuxt SEO 関連
+  site: { url: 'otofuda.com' },
+  ogImage: { enabled: false },
+  linkChecker: { enabled: false },
 
   devServer: { port: 8080 },
 
