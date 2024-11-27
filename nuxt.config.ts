@@ -52,7 +52,11 @@ export default defineNuxtConfig({
   ],
 
   // Nuxt SEO 関連
-  site: { url: 'otofuda.com' },
+  site: {
+    url: 'otofuda.com',
+    name: '音札ポータル',
+    description: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。'
+  },
   ogImage: { enabled: false },
   linkChecker: { enabled: false },
 

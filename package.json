@@ -8,12 +8,12 @@
     "lint": "eslint . --fix"
   },
   "devDependencies": {
-    "@nuxt/image": "^1.7.0",
+    "@nuxt/image": "^1.8.1",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
-    "@nuxtjs/seo": "^2.0.0-rc.23",
+    "@nuxtjs/seo": "^2.0.2",
     "eslint": "^8.57.0",
-    "nuxt": "^3.14.159",
+    "nuxt": "^3.14.1592",
     "sass": "^1.77.8"
   },
   "dependencies": {

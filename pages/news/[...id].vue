@@ -46,11 +46,17 @@ const tags = computed<NewsTag[]>(() => {
     : [defaultTag]
 })
 
+/** SEO用説明文 */
+const description = computed(() => {
+  const t = tags.value.map(tag => tag.label).join(', ')
+  return `${dateString.value}のお知らせ | タグ: ${t}`
+})
+
 useSeoMeta({
   title: title.value,
   ogTitle: title.value,
-  description: content.value?.content,
-  ogDescription: content.value?.content,
+  description,
+  ogDescription: description,
   ogImage: newsImage.value,
   twitterCard: 'summary_large_image'
 })
