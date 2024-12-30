@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import type { SongInfo } from '~/types/songs'
+import type { SongInfo, SongSort } from '~/types/songs'
 
 const props = defineProps<{
   song: SongInfo;
+  sort?: SongSort;
 }>()
 
 const jacketSrc = computed<string>(() => {
@@ -26,15 +27,48 @@ const jacketSrc = computed<string>(() => {
     <div class="artist">
       {{ props.song.artist }}
     </div>
-    <div class="info">
+
+    <!-- 特殊なソート適用時 -->
+    <div v-if="sort?.type === 'level' || sort?.type === 'notes'" class="info">
       <!-- 難易度情報 -->
-      <div class="difficulty">
+      <div v-if="sort.difficulty === 'e'" class="difficulty --e">
         {{ props.song.easy }}
       </div>
-      <div class="difficulty">
+      <div v-else-if="sort.difficulty === 'n'" class="difficulty --n">
         {{ props.song.normal }}
       </div>
-      <div class="difficulty">
+      <div v-else-if="sort.difficulty === 'h'" class="difficulty --h">
+        {{ props.song.hard }}
+      </div>
+      <!-- ノーツ数情報 -->
+      <div v-if="sort.difficulty === 'e'" class="number">
+        {{ props.song.easy_notes }} Notes
+      </div>
+      <div v-else-if="sort.difficulty === 'n'" class="number">
+        {{ props.song.normal_notes }} Notes
+      </div>
+      <div v-else-if="sort.difficulty === 'h'" class="number">
+        {{ props.song.hard_notes }} Notes
+      </div>
+    </div>
+
+    <!-- BPMソート適用時 -->
+    <div v-else-if="sort?.type === 'bpm'" class="info">
+      <div class="number">
+        BPM: {{ props.song.dispbpm }}
+      </div>
+    </div>
+
+    <!-- 通常時 -->
+    <div v-else class="info">
+      <!-- 難易度情報 -->
+      <div class="difficulty --e">
+        {{ props.song.easy }}
+      </div>
+      <div class="difficulty --n">
+        {{ props.song.normal }}
+      </div>
+      <div class="difficulty --h">
         {{ props.song.hard }}
       </div>
     </div>
@@ -113,17 +147,21 @@ const jacketSrc = computed<string>(() => {
       width: 40px;
       border-radius: 0.3rem;
 
-      &:nth-child(1) {
+      &.--e {
         background: $color-easy-gradient;
       }
 
-      &:nth-child(2) {
+      &.--n {
         background: $color-normal-gradient;
       }
 
-      &:nth-child(3) {
+      &.--h {
         background: $color-hard-gradient;
       }
+    }
+
+    .number {
+      color: $sub;
     }
   }
 
