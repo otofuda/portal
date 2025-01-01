@@ -23,12 +23,28 @@ const SORT_OPTIONS: SongSort[] = [
   { type: 'notes', label: 'ノーツ数順', difficulty: 'n', color: '#ffb223' },
   { type: 'notes', label: 'ノーツ数順', difficulty: 'h', color: '#ff0984' }
 ] as const
+
+const filterText = ref<string>('')
 const sortOptions = ref<SongSort[]>(SORT_OPTIONS)
 const songSort = ref<SongSort>(SORT_OPTIONS[0])
 const isDesc = ref<boolean>(true)
 
 const songs = computed<SongInfo[]>(() => {
-  const allSongs = data.value ? [...data.value.contents] : []
+  let songs = data.value ? [...data.value.contents] : []
+  // 検索ワードの処理
+  if (filterText.value) {
+    const word = filterText.value.toLowerCase();
+    songs = songs.filter(song => {
+      if (song.name.toLowerCase().includes(word)) { return true }
+      if (song.artist.toLowerCase().includes(word)) { return true }
+      if (song.illustrator.toLowerCase().includes(word)) { return true }
+      if (song.easy_nd.toLowerCase().includes(word)) { return true }
+      if (song.normal_nd.toLowerCase().includes(word)) { return true }
+      if (song.hard_nd.toLowerCase().includes(word)) { return true }
+      return false
+    })
+  }
+  // ならびかえの処理
   if (songSort.value.type !== 'default') {
     let key: (keyof SongInfo) | null = null
     switch (songSort.value.type) {
@@ -51,7 +67,7 @@ const songs = computed<SongInfo[]>(() => {
       }
     }
     if (key) {
-      allSongs.sort((a, b) => {
+      songs.sort((a, b) => {
         const A = a[key]
         const B = b[key]
         if (typeof A === 'string' && typeof B === 'string') {
@@ -66,7 +82,17 @@ const songs = computed<SongInfo[]>(() => {
       })
     }
   }
-  return isDesc.value ? allSongs.reverse() : allSongs
+  return isDesc.value ? songs.reverse() : songs
+})
+
+const allCopyrights = computed(() => {
+  const result = new Set<string>()
+  if (data.value) {
+    data.value.contents.forEach((song) => {
+      if (song.copyright) { result.add(song.copyright) }
+    })
+  }
+  return Array.from(result)
 })
 </script>
 
@@ -95,15 +121,18 @@ const songs = computed<SongInfo[]>(() => {
       {{ error.name }}: {{ error.message }}
     </div>
 
-    <!-- ならびかえ -->
+    <!-- 検索ワード -->
     <div class="search-form">
       <UInput
+        v-model="filterText"
         icon="i-heroicons-magnifying-glass-20-solid"
         size="lg"
-        color="primary"
+        color="white"
         placeholder="検索ワードを入力"
       />
     </div>
+
+    <!-- ならびかえ -->
     <div class="sort-form">
       <span>ならびかえ</span>
       <UButtonGroup size="lg" orientation="horizontal">
@@ -150,6 +179,12 @@ const songs = computed<SongInfo[]>(() => {
         :sort="songSort"
       />
     </div>
+
+    <ul class="copyrights">
+      <li v-for="(copyright, i) in allCopyrights" :key="`copyright-${i}`">
+        {{ copyright }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -157,6 +192,7 @@ const songs = computed<SongInfo[]>(() => {
 @use "@/assets/_vars.scss" as vars;
 
 .description {
+  font-size: 0.8rem;
   margin: 1rem;
   text-align: center;
 }
@@ -184,5 +220,12 @@ const songs = computed<SongInfo[]>(() => {
   display: flex;
   flex-direction: column;
   margin: 1rem;
+}
+
+.copyrights {
+  text-align: center;
+  color: vars.$sub;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
 }
 </style>

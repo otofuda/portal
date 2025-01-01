@@ -34,7 +34,7 @@ export default defineNuxtConfig({
 
   // 使用するモジュール
   modules: [
-    ['@nuxtjs/eslint-module', { lintOnStart: false }],
+    // ['@nuxtjs/eslint-module', { lintOnStart: false }],
     ['@nuxt/ui', {
       icons: ['fa6-brands']
     }],
@@ -79,7 +79,6 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         // 色変数のscss
         scss: {
-          // api: 'modern-compiler'
           // additionalData: '@use "@/assets/_vars.scss" as vars;'
         }
       }

@@ -161,6 +161,7 @@ useSeoMeta({
   .tags {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
     align-items: flex-start;
     margin-bottom: 1rem;
     padding: 0 1rem;
@@ -193,13 +194,13 @@ useSeoMeta({
   :deep(h2) {
     font-weight: bold;
     font-size: 1.5rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
   }
 
   :deep(h3) {
     font-weight: bold;
     font-size: 1.25rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
   }
 
   :deep(ul) {

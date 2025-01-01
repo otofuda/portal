@@ -14,8 +14,10 @@ const { data, pending } = await useAsyncData<SongsPayload>('songs', () => {
 
 const content = computed<SongInfo | null>(() => {
   if (!data.value) { return null }
+  // @ts-expect-error
+  const id = route.params.id as string
   return data.value.contents.find((song) => {
-    return route.params.id.includes(song.song_id)
+    return id.includes(song.song_id)
   }) || null
 })
 

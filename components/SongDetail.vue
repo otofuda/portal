@@ -318,7 +318,7 @@ const levels = computed<LevelInfo[]>(() => {
       .level-detail {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 1rem;
       }
 
@@ -372,6 +372,25 @@ const levels = computed<LevelInfo[]>(() => {
   .menu {
     display: flex;
     justify-content: center;
+  }
+}
+
+@media (max-width: vars.$spwidth) {
+  .song-data {
+    .levels {
+      flex-direction: column;
+      gap: 2rem;
+
+      .level {
+        grid-template-columns: 6rem 1fr;
+        grid-template-rows: auto;
+
+        .level-detail {
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+      }
+    }
   }
 }
 </style>
