@@ -41,6 +41,8 @@ const imgWidth = 400
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 ul {
   display: flex;
   flex-direction: column;

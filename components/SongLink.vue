@@ -99,8 +99,10 @@ const jacketSrc = computed<string>(() => {
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .song-link {
-  color: $text;
+  color: vars.$text;
   text-decoration: none;
   padding: 0.5rem 0;
   display: grid;
@@ -132,7 +134,7 @@ const jacketSrc = computed<string>(() => {
   }
 
   .artist {
-    color: $sub;
+    color: vars.$sub;
     line-height: 1;
   }
 
@@ -141,27 +143,27 @@ const jacketSrc = computed<string>(() => {
     gap: 0.5rem;
 
     .difficulty {
-      color: $bg;
+      color: vars.$bg;
       font-weight: bold;
       text-align: center;
       width: 40px;
       border-radius: 0.3rem;
 
       &.--e {
-        background: $color-easy-gradient;
+        background: vars.$color-easy-gradient;
       }
 
       &.--n {
-        background: $color-normal-gradient;
+        background: vars.$color-normal-gradient;
       }
 
       &.--h {
-        background: $color-hard-gradient;
+        background: vars.$color-hard-gradient;
       }
     }
 
     .number {
-      color: $sub;
+      color: vars.$sub;
     }
   }
 

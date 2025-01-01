@@ -79,7 +79,8 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         // 色変数のscss
         scss: {
-          additionalData: '@use "@/assets/_vars.scss" as *;'
+          // api: 'modern-compiler'
+          // additionalData: '@use "@/assets/_vars.scss" as vars;'
         }
       }
     }

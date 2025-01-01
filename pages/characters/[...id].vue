@@ -123,6 +123,8 @@ useSeoMeta({
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .character {
   .breadcrumb {
     margin: 0 1rem 1rem 1rem;
@@ -188,8 +190,8 @@ useSeoMeta({
           text-align: center;
           font-size: 0.7rem;
           font-weight: bold;
-          color: $bg;
-          background: $otofuda-gradient;
+          color: vars.$bg;
+          background: vars.$otofuda-gradient;
           clip-path: polygon(
             0% 50%,
             10% 0,
@@ -216,7 +218,7 @@ useSeoMeta({
   }
 }
 
-@media (max-width: $spwidth) {
+@media (max-width: vars.$spwidth) {
   .character {
     .intro {
       grid-template-columns: 1fr;

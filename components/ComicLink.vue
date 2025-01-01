@@ -20,15 +20,17 @@ const props = defineProps<{
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .comic-link {
-  color: $primary;
+  color: vars.$primary;
   text-decoration: none;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   border-radius: 1rem;
   overflow: hidden;
-  background-color: $bg-alt;
+  background-color: vars.$bg-alt;
 
   .thumbnail {
     object-fit: cover;

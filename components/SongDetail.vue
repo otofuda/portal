@@ -178,8 +178,10 @@ const levels = computed<LevelInfo[]>(() => {
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .song-data {
-  color: $text;
+  color: vars.$text;
   text-decoration: none;
   display: grid;
   grid-template-columns: 1fr;
@@ -214,7 +216,7 @@ const levels = computed<LevelInfo[]>(() => {
   .comment {
     justify-self: stretch;
     padding: 1rem;
-    background: $bg-alt;
+    background: vars.$bg-alt;
     text-align: center;
     border-radius: 1rem;
     margin-bottom: 1rem;
@@ -223,7 +225,7 @@ const levels = computed<LevelInfo[]>(() => {
     gap: 0.5rem;
 
     .copyright {
-      color: $sub;
+      color: vars.$sub;
       font-size: 0.75rem;
     }
   }
@@ -240,7 +242,7 @@ const levels = computed<LevelInfo[]>(() => {
       font-size: 0.7rem;
       text-align: center;
       padding: 0.125rem;
-      background: $border;
+      background: vars.$border;
       clip-path: polygon(
         0% 50%,
         10% 0,
@@ -291,26 +293,26 @@ const levels = computed<LevelInfo[]>(() => {
       gap: 1rem;
 
       .level-number {
-        color: $bg;
+        color: vars.$bg;
         font-size: 1.5rem;
         font-weight: bold;
         text-align: center;
         padding: 0.5rem;
-        border: 0.2rem solid rgba($bg, 0.75);
+        border: 0.2rem solid rgba(vars.$bg, 0.75);
         border-radius: 0.5rem;
-        box-shadow: 0 0.75rem 0.75rem -0.5rem rgba($text, 0.25);
+        box-shadow: 0 0.75rem 0.75rem -0.5rem rgba(vars.$text, 0.25);
       }
 
       &:nth-child(1) .level-number {
-        background: $color-easy-gradient;
+        background: vars.$color-easy-gradient;
       }
 
       &:nth-child(2) .level-number {
-        background: $color-normal-gradient;
+        background: vars.$color-normal-gradient;
       }
 
       &:nth-child(3) .level-number {
-        background: $color-hard-gradient;
+        background: vars.$color-hard-gradient;
       }
 
       .level-detail {
@@ -326,8 +328,8 @@ const levels = computed<LevelInfo[]>(() => {
         font-size: 0.75rem;
         text-align: center;
         padding: 0.125rem;
-        color: $bg;
-        background: $text;
+        color: vars.$bg;
+        background: vars.$text;
         clip-path: polygon(
           0% 50%,
           10% 0,
@@ -353,7 +355,7 @@ const levels = computed<LevelInfo[]>(() => {
       }
 
       .level-video {
-        color: $bg;
+        color: vars.$bg;
         background: #dc143c;
         justify-self: start;
         text-decoration: none;

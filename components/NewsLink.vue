@@ -63,8 +63,10 @@ const tags = computed<NewsTag[]>(() => {
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .news-link {
-  color: $primary;
+  color: vars.$primary;
   text-decoration: none;
   display: grid;
   grid-template-columns: minmax(0, 250px) minmax(200px, 1fr);
@@ -89,7 +91,7 @@ const tags = computed<NewsTag[]>(() => {
 
   .date {
     padding: 0 1rem;
-    color: $sub;
+    color: vars.$sub;
   }
 
   .tags {
@@ -101,11 +103,11 @@ const tags = computed<NewsTag[]>(() => {
   }
 
   &:hover {
-    background-color: $bg-alt;
+    background-color: vars.$bg-alt;
   }
 }
 
-@media (max-width: $spwidth) {
+@media (max-width: vars.$spwidth) {
   .news-link {
 
     grid-template-columns: 1fr;

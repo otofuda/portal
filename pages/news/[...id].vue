@@ -134,7 +134,7 @@ useSeoMeta({
 </template>
 
 <style lang="scss" scoped>
-@import "@primer/css/markdown/index.scss";
+@use "@/assets/_vars.scss" as vars;
 
 .news {
   display: flex;
@@ -155,7 +155,7 @@ useSeoMeta({
   .detail {
     margin-bottom: 1rem;
     padding: 0 1rem;
-    color: $sub;
+    color: vars.$sub;
   }
 
   .tags {
@@ -174,16 +174,16 @@ useSeoMeta({
 .article {
   padding: 0 1rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid vars.$border;
   margin-bottom: 2rem;
-  font-family: $fonts;
+  font-family: vars.$fonts;
 
   :deep(p) {
     line-height: 2;
   }
 
   :deep(a) {
-    color: $primary;
+    color: vars.$primary;
   }
 
   :deep(img) {

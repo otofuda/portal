@@ -154,6 +154,8 @@ const songs = computed<SongInfo[]>(() => {
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .description {
   margin: 1rem;
   text-align: center;
@@ -172,7 +174,7 @@ const songs = computed<SongInfo[]>(() => {
   padding: 0 1rem;
 
   > span {
-    color: $sub;
+    color: vars.$sub;
     font-weight: bold;
     font-size: 0.8rem;
   }

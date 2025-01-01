@@ -112,6 +112,8 @@ useSeoMeta({
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .characters {
   .pictures {
     display: grid;
@@ -179,7 +181,7 @@ useSeoMeta({
   }
 }
 
-@media (max-width: $spwidth) {
+@media (max-width: vars.$spwidth) {
   .characters .pictures {
     grid-template-columns: 50% 50%;
     grid-template-rows: auto auto auto auto auto;

@@ -171,16 +171,18 @@ const showSpNav = ref<boolean>(false)
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .layout {
   display: grid;
-  grid-template-columns: 20rem minmax(0, $spwidth);
+  grid-template-columns: 20rem minmax(0, vars.$spwidth);
   justify-content: center;
 
   header {
     position: sticky;
     top: 0;
     z-index: 12;
-    background: rgba($bg, 0.85);
+    background: rgba(vars.$bg, 0.85);
     backdrop-filter: blur(1rem);
     grid-column: 1 / 3;
     padding: 1rem;
@@ -206,7 +208,7 @@ const showSpNav = ref<boolean>(false)
 
     .divider {
       height: 2px;
-      background: $primary;
+      background: vars.$primary;
       flex-grow: 1;
       opacity: 0.25;
     }
@@ -226,12 +228,12 @@ const showSpNav = ref<boolean>(false)
   }
 
   .nav.--pc {
-    background: $bg;
+    background: vars.$bg;
     margin: 1rem;
     padding: 1rem 0;
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 0.25rem 0.5rem 0 $border;
+    box-shadow: 0 0.25rem 0.5rem 0 vars.$border;
     height: max-content;
     position: sticky;
     top: 6rem;
@@ -239,20 +241,20 @@ const showSpNav = ref<boolean>(false)
 
   main {
     grid-column: 2 / 3;
-    max-width: $spwidth;
+    max-width: vars.$spwidth;
     flex-grow: 1;
-    color: $text;
+    color: vars.$text;
   }
 
   footer {
     grid-column: 1 / 3;
     padding: 1rem;
     text-align: center;
-    border-top: 1px solid $border;
+    border-top: 1px solid vars.$border;
 
     p {
       font-size: 0.75rem;
-      color: $sub;
+      color: vars.$sub;
       margin-bottom: 1rem;
     }
 
@@ -287,7 +289,7 @@ const showSpNav = ref<boolean>(false)
   }
 }
 
-@media (max-width: $spwidth) {
+@media (max-width: vars.$spwidth) {
   .layout {
     display: flex;
     flex-direction: column;

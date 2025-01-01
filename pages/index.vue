@@ -212,6 +212,8 @@ useSeoMeta({
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .heading {
   margin: 1rem 0;
   justify-content: center;
@@ -273,8 +275,8 @@ useSeoMeta({
     text-align: center;
     font-size: 0.7rem;
     font-weight: bold;
-    color: $bg;
-    background: $otofuda-gradient;
+    color: vars.$bg;
+    background: vars.$otofuda-gradient;
     clip-path: polygon(
       0% 50%,
       10% 0,
@@ -297,7 +299,7 @@ useSeoMeta({
   img {
     width: 100%;
     max-width: 25rem;
-    filter: drop-shadow(0 0.25rem 0.5rem rgba($green, 0.2));
+    filter: drop-shadow(0 0.25rem 0.5rem rgba(vars.$green, 0.2));
   }
 }
 
@@ -313,7 +315,7 @@ useSeoMeta({
   aspect-ratio: 16 / 9;
   margin: 2rem 0;
   border-radius: 1rem;
-  box-shadow: 0 0.25rem 0.5rem 0 rgba($text, 0.125);
+  box-shadow: 0 0.25rem 0.5rem 0 rgba(vars.$text, 0.125);
 }
 
 .banners {
@@ -325,7 +327,7 @@ useSeoMeta({
 
   a {
     border-radius: 0.5rem;
-    box-shadow: 0 0.25rem 0.5rem 0 rgba($border, 0.5);
+    box-shadow: 0 0.25rem 0.5rem 0 rgba(vars.$border, 0.5);
 
     img {
       border-radius: 0.5rem;
@@ -338,7 +340,7 @@ useSeoMeta({
   margin-bottom: 2rem;
 }
 
-@media (max-width: $spwidth) {
+@media (max-width: vars.$spwidth) {
   .video {
     border-radius: 0;
     box-shadow: none;

@@ -44,6 +44,8 @@ const goToTop = () => {
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .top {
   cursor: pointer;
   position: fixed;
@@ -53,7 +55,7 @@ const goToTop = () => {
   padding: 1rem;
 
   button img {
-    filter: drop-shadow(0 0.125rem 0.25rem rgba($blue, 0.4));
+    filter: drop-shadow(0 0.125rem 0.25rem rgba(vars.$blue, 0.4));
   }
 }
 
