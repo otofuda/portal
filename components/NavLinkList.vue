@@ -19,7 +19,7 @@ const imgWidth = 400
         </NuxtLink>
       </li>
       <li>
-        <NuxtLink :to="undefined" class="--disabled">
+        <NuxtLink to="/characters" @click="emit('close-nav')">
           <NuxtImg src="/assets/nav/character_1.png" format="webp" :width="imgWidth" alt="キャラクター" />
           <NuxtImg src="/assets/nav/character_2.png" format="webp" :width="imgWidth" alt="キャラクター" />
         </NuxtLink>
@@ -41,6 +41,8 @@ const imgWidth = 400
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 ul {
   display: flex;
   flex-direction: column;

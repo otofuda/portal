@@ -13,6 +13,8 @@
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .heading {
   position: relative;
   display: flex;
@@ -25,7 +27,7 @@
 
   .title {
     z-index: 1;
-    background-image: $otofuda-gradient;
+    background-image: vars.$otofuda-gradient;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -39,8 +41,8 @@
     opacity: 0.5;
     text-transform: uppercase;
     background-clip: text;
-    background-image: $otofuda-gradient;
-    color: $bg;
+    background-image: vars.$otofuda-gradient;
+    color: vars.$bg;
     padding: 1px;
     -webkit-text-stroke-color: transparent;
     -webkit-text-stroke-width: 2px;

@@ -59,6 +59,8 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss" scoped>
+@use "@/assets/_vars.scss" as vars;
+
 .hero {
   position: relative;
   display: grid;
@@ -97,15 +99,15 @@ onUnmounted(() => {
     justify-self: center;
     bottom: 30%;
     padding: 0.25rem 0.5rem;
-    background: rgba($bg, 0.8);
+    background: rgba(vars.$bg, 0.8);
     backdrop-filter: blur(0.5rem);
-    box-shadow: 0 0.25rem 0.5rem -0.25rem rgba($green, 0.5);
+    box-shadow: 0 0.25rem 0.5rem -0.25rem rgba(vars.$green, 0.5);
 
     > span {
       font-weight: bold;
       font-size: 1rem;
       color: transparent;
-      background-image: linear-gradient(135deg, $green, $blue);
+      background-image: linear-gradient(135deg, vars.$green, vars.$blue);
       background-clip: text;
       background-origin: border-box;
     }
@@ -118,10 +120,10 @@ onUnmounted(() => {
     padding: 0 0.5rem;
     font-weight: bold;
     font-size: 2rem;
-    color: $bg;
-    background: linear-gradient(135deg, $green, $blue);
-    text-shadow: 0 0.25rem 0.5rem rgba($text, 0.25);
-    box-shadow: 0 0.5rem 1rem -0.25rem rgba($blue, 0.5);
+    color: vars.$bg;
+    background: linear-gradient(135deg, vars.$green, vars.$blue);
+    text-shadow: 0 0.25rem 0.5rem rgba(vars.$text, 0.25);
+    box-shadow: 0 0.5rem 1rem -0.25rem rgba(vars.$blue, 0.5);
   }
 
   .buttons {
@@ -135,16 +137,16 @@ onUnmounted(() => {
     gap: 5%;
 
     img.--arcade {
-      filter: drop-shadow(0 0.25rem 0.5rem rgba($blue, 0.4));
+      filter: drop-shadow(0 0.25rem 0.5rem rgba(vars.$blue, 0.4));
     }
 
     img.--etude {
-      filter: drop-shadow(0 0.25rem 0.5rem rgba($green, 0.2));
+      filter: drop-shadow(0 0.25rem 0.5rem rgba(vars.$green, 0.2));
     }
   }
 }
 
-@media (max-width: $spwidth) {
+@media (max-width: vars.$spwidth) {
   .hero {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto auto auto;

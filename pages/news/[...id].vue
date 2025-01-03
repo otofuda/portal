@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { type NewsArticle, type NewsPayload, type NewsTag, newsTags } from '@/types/news'
 
-const route = useRoute()
+const route = useRoute('news-id')
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
@@ -14,6 +14,7 @@ const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
 const content = computed<NewsArticle | null>(() => {
   if (!data.value) { return null }
   return data.value.contents.find((news) => {
+    if (!route.params.id) { return null }
     return route.params.id.includes(news.id)
   }) || null
 })
@@ -45,11 +46,17 @@ const tags = computed<NewsTag[]>(() => {
     : [defaultTag]
 })
 
+/** SEO用説明文 */
+const description = computed(() => {
+  const t = tags.value.map(tag => tag.label).join(', ')
+  return `${dateString.value}のお知らせ | タグ: ${t}`
+})
+
 useSeoMeta({
   title: title.value,
   ogTitle: title.value,
-  description: content.value?.content,
-  ogDescription: content.value?.content,
+  description,
+  ogDescription: description,
   ogImage: newsImage.value,
   twitterCard: 'summary_large_image'
 })
@@ -127,7 +134,7 @@ useSeoMeta({
 </template>
 
 <style lang="scss" scoped>
-@import "@primer/css/markdown/index.scss";
+@use "@/assets/_vars.scss" as vars;
 
 .news {
   display: flex;
@@ -148,12 +155,13 @@ useSeoMeta({
   .detail {
     margin-bottom: 1rem;
     padding: 0 1rem;
-    color: $sub;
+    color: vars.$sub;
   }
 
   .tags {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
     align-items: flex-start;
     margin-bottom: 1rem;
     padding: 0 1rem;
@@ -167,16 +175,16 @@ useSeoMeta({
 .article {
   padding: 0 1rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid vars.$border;
   margin-bottom: 2rem;
-  font-family: $fonts;
+  font-family: vars.$fonts;
 
   :deep(p) {
     line-height: 2;
   }
 
   :deep(a) {
-    color: $primary;
+    color: vars.$primary;
   }
 
   :deep(img) {
@@ -186,20 +194,19 @@ useSeoMeta({
   :deep(h2) {
     font-weight: bold;
     font-size: 1.5rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
   }
 
   :deep(h3) {
     font-weight: bold;
     font-size: 1.25rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
   }
 
   :deep(ul) {
     list-style: disc inside;
     line-height: 2;
-    margin-left: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-left: 1rem;
   }
 }
 

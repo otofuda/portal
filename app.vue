@@ -18,8 +18,10 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+@use "@/assets/_vars.scss" as vars;
+
 body {
-  font-family: $fonts;
+  font-family: vars.$fonts;
   line-height: 1.5;
 }
 

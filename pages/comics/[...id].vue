@@ -2,7 +2,7 @@
 import type { BreadcrumbLink } from '#ui/types'
 import type { ComicInfo, ComicPayload } from '~/types/comics'
 
-const route = useRoute()
+const route = useRoute('comics-id')
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending } = await useAsyncData<ComicPayload>('comics', () => {
@@ -15,6 +15,7 @@ const { data, pending } = await useAsyncData<ComicPayload>('comics', () => {
 const content = computed<ComicInfo | null>(() => {
   if (!data.value) { return null }
   return data.value.contents.find((comic) => {
+    if (!route.params.id) { return null }
     return route.params.id.includes(comic.id)
   }) || null
 })

@@ -23,18 +23,23 @@ export default defineNuxtConfig({
     }
   },
 
+  experimental: {
+    typedPages: true,
+    sharedPrerenderData: true
+  },
+
   vue: {
     compilerOptions: {}
   },
 
   // 使用するモジュール
   modules: [
-    ['@nuxtjs/eslint-module', { lintOnStart: false }],
+    // ['@nuxtjs/eslint-module', { lintOnStart: false }],
     ['@nuxt/ui', {
       icons: ['fa6-brands']
     }],
     ['@nuxt/image', {
-      provider: process.env.VERCEL_ENV ? 'vercel' : 'ipx',
+      provider: process.env.VERCEL_ENV ? 'vercel' : undefined,
       quality: 100,
       format: ['webp', 'png'],
       domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
@@ -42,8 +47,18 @@ export default defineNuxtConfig({
         microcms: 'https://images.microcms-assets.io',
         twimg: 'https://pbs.twimg.com'
       }
-    }]
+    }],
+    ['@nuxtjs/seo', {}]
   ],
+
+  // Nuxt SEO 関連
+  site: {
+    url: 'otofuda.com',
+    name: '音札ポータル',
+    description: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。'
+  },
+  ogImage: { enabled: false },
+  linkChecker: { enabled: false },
 
   devServer: { port: 8080 },
 
@@ -64,9 +79,11 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         // 色変数のscss
         scss: {
-          additionalData: '@use "@/assets/_vars.scss" as *;'
+          // additionalData: '@use "@/assets/_vars.scss" as vars;'
         }
       }
     }
-  }
+  },
+
+  compatibilityDate: '2024-07-19'
 })

@@ -1,8 +1,10 @@
+import type { ButtonColor } from '#ui/types/button'
+
 export type NewsTagString = 'お知らせ' | 'ゲーム情報' | '音札Étude' | 'アーケード版' | 'イベント情報' | 'おとふだNET' | '音札ポータル' | 'おとふだびより♪'
 
 export interface NewsTag {
   label: NewsTagString;
-  color: string;
+  color: ButtonColor;
 }
 
 export interface NewsArticle {

@@ -1,7 +1,7 @@
 # Otofuda Portal
 
-- Nuxt 3.9
-- Node.js v20
+- Nuxt 3.14
+- Node.js v20.15
 - npm v10
 
 ![Otofuda Portal](public/thumb.png)
@@ -17,5 +17,5 @@ npm run dev
 
 ```sh
 npm run generate
-npm run serve
+npx serve .output/public
 ```
