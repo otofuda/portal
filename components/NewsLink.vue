@@ -21,10 +21,10 @@ const newsImage = computed<string>(() => {
 /** お知らせの種類(色とラベル) */
 const tags = computed<NewsTag[]>(() => {
   const defaultTag: NewsTag = {
-    label: 'お知らせ', color: 'sky'
+    label: 'お知らせ', color: 'primary'
   }
   return props.article.tags.length > 0
-    ? props.article.tags.map(tag => newsTags.get(tag) || { label: tag, color: 'sky' })
+    ? props.article.tags.map(tag => newsTags.get(tag) || { label: tag, color: 'primary' })
     : [defaultTag]
 })
 </script>

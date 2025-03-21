@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '#ui/types'
+import type { BreadcrumbItem } from '#ui/types'
 import type { ComicInfo, ComicPayload } from '~/types/comics'
 
 const title = ref('マンガ一覧')
@@ -17,7 +17,7 @@ const comics = computed<ComicInfo[]>(() => {
   return data.value ? data.value.contents : []
 })
 
-const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
+const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: 'マンガ一覧', to: '' }

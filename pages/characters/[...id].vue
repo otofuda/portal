@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '#ui/types'
+import type { BreadcrumbItem } from '#ui/types'
 import type SimpleParallax from 'simple-parallax-js'
 import { characters } from '~/assets/characters'
 
@@ -11,7 +11,7 @@ const character = characters.find((character) => {
 
 const title = `${character?.name} キャラクター紹介`
 
-const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
+const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: 'キャラクター', to: '/characters' },

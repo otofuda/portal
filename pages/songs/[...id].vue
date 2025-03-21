@@ -2,7 +2,7 @@
 import type { BreadcrumbLink } from '#ui/types'
 import type { SongInfo, SongsPayload } from '@/types/songs'
 
-const route = useRoute()
+const route = useRoute('songs-id')
 const runtimeConfig = useRuntimeConfig()
 
 const { data, pending } = await useAsyncData<SongsPayload>('songs', () => {
@@ -14,8 +14,7 @@ const { data, pending } = await useAsyncData<SongsPayload>('songs', () => {
 
 const content = computed<SongInfo | null>(() => {
   if (!data.value) { return null }
-  // @ts-expect-error
-  const id = route.params.id as string
+  const id = route.params.id || []
   return data.value.contents.find((song) => {
     return id.includes(song.song_id)
   }) || null
@@ -29,6 +28,27 @@ const links = computed<BreadcrumbLink[]>(() => {
     { label: '楽曲一覧', to: '/songs' },
     { label: content.value?.name || '' }
   ]
+})
+
+/** SEO用説明文 */
+const description = computed(() => {
+  return `音札の収録楽曲「${content.value?.name} - ${content.value?.artist}」をご紹介します`
+})
+
+/** SEO用ジャケット画像 */
+const jacketImage = computed<string | null>(() => {
+  if (!content.value) { return null }
+  const size = Math.min(640, content.value.jacket.width)
+  return `${content.value.jacket.url}?w=${size}`
+})
+
+useSeoMeta({
+  title: title.value,
+  ogTitle: title.value,
+  description,
+  ogDescription: description,
+  ogImage: jacketImage.value,
+  twitterCard: 'summary'
 })
 </script>
 

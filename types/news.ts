@@ -1,10 +1,10 @@
-import type { ButtonColor } from '#ui/types/button'
+import type { ButtonProps } from '#ui/types'
 
 export type NewsTagString = 'お知らせ' | 'ゲーム情報' | '音札Étude' | 'アーケード版' | 'イベント情報' | 'おとふだNET' | '音札ポータル' | 'おとふだびより♪'
 
 export interface NewsTag {
   label: NewsTagString;
-  color: ButtonColor;
+  color: ButtonProps['color'];
 }
 
 export interface NewsArticle {
@@ -50,7 +50,7 @@ export const newsTags = new Map<NewsTagString, NewsTag>([
   ],
   [
     'おとふだNET',
-    { label: 'おとふだNET', color: 'white' }
+    { label: 'おとふだNET', color: 'neutral' }
   ],
   [
     '音札ポータル',

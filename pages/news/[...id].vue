@@ -40,7 +40,7 @@ const newsImage = computed<string>(() => {
 /** お知らせの種類(色とラベル) */
 const tags = computed<NewsTag[]>(() => {
   const article = content.value
-  const defaultTag: NewsTag = { label: 'お知らせ', color: 'sky' }
+  const defaultTag: NewsTag = { label: 'お知らせ', color: 'primary' }
   return article && article.tags.length > 0
     ? article.tags.map(tag => newsTags.get(tag) || defaultTag)
     : [defaultTag]

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '#ui/types'
+import type { BreadcrumbItem } from '#ui/types'
 import { type NewsArticle, type NewsPayload, type NewsTagString, newsTags } from '@/types/news'
 
 const route = useRoute()
@@ -40,7 +40,7 @@ const filteredContents = computed<NewsArticle[]>(() => {
   })
 })
 
-const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
+const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: 'お知らせ一覧', to: '' }
@@ -80,14 +80,16 @@ const onClickTag = (tag: NewsTagString) => {
         size="lg"
         color="primary"
         placeholder="検索ワードを入力"
+        class="w-full"
       />
 
       <UAlert
         v-show="searchWord"
         class="mt-4"
         :title="`「${ searchWord }」で検索中`"
-        :close-button="{ icon: 'i-heroicons-x-mark-20-solid', color: 'white', variant: 'ghost', padded: false }"
-        @close="searchWord = ''"
+        :close="{ icon: 'i-heroicons-x-mark-20-solid', color: 'white', variant: 'ghost' }"
+        @update:open="searchWord = ''"
+        variant="subtle"
       />
     </div>
 

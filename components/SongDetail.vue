@@ -84,17 +84,17 @@ const levels = computed<LevelInfo[]>(() => {
           <UIcon name="i-heroicons-musical-note" />
           音札
         </UBadge>
-        <UBadge v-else color="gray" variant="soft" class="badge --d">
+        <UBadge v-else color="neutral" variant="soft" class="badge --d">
           <UIcon name="i-heroicons-minus" />
           音札
         </UBadge>
 
         <!-- 音札Étude -->
-        <UBadge v-if="props.song.for_mb" color="teal" variant="subtle" class="badge">
+        <UBadge v-if="props.song.for_mb" color="success" variant="subtle" class="badge">
           <UIcon name="i-heroicons-musical-note" />
           音札Étude
         </UBadge>
-        <UBadge v-else color="gray" variant="soft" class="badge --d">
+        <UBadge v-else color="neutral" variant="soft" class="badge --d">
           <UIcon name="i-heroicons-minus" />
           音札Étude
         </UBadge>
@@ -107,7 +107,7 @@ const levels = computed<LevelInfo[]>(() => {
         :to="props.song.youtube_music"
         target="_blank"
         color="primary"
-        variant="outline"
+        variant="solid"
         icon="i-heroicons-musical-note"
       >
         楽曲を聴く
@@ -118,7 +118,7 @@ const levels = computed<LevelInfo[]>(() => {
         :to="props.song.youtube_chart"
         target="_blank"
         color="rose"
-        variant="outline"
+        variant="solid"
         icon="i-fa6-brands-youtube"
       >
         譜面攻略動画を見る
@@ -272,6 +272,7 @@ const levels = computed<LevelInfo[]>(() => {
 
   .links {
     justify-self: center;
+    padding-top: 1rem;
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column;

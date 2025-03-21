@@ -36,7 +36,10 @@ export default defineNuxtConfig({
   modules: [
     // ['@nuxtjs/eslint-module', { lintOnStart: false }],
     ['@nuxt/ui', {
-      icons: ['fa6-brands']
+      icons: ['fa6-brands'],
+      theme: {
+        colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error', 'rose', 'emerald', 'blue', 'orange', 'white', 'lime', 'cyan']
+      }
     }],
     ['@nuxt/image', {
       provider: process.env.VERCEL_ENV ? 'vercel' : undefined,

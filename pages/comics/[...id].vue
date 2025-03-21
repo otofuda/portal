@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '#ui/types'
+import type { BreadcrumbItem } from '#ui/types'
 import type { ComicInfo, ComicPayload } from '~/types/comics'
 
 const route = useRoute('comics-id')
@@ -22,7 +22,7 @@ const content = computed<ComicInfo | null>(() => {
 
 const title = ref(content.value?.title)
 
-const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
+const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: 'マンガ一覧', to: '/comics' },
@@ -30,11 +30,19 @@ const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
   ]
 })
 
+/** SEO用画像 */
+const imageSrc = computed<string | null>(() => {
+  if (!content.value) { return null }
+  return content.value.image.url.replace('https://images.microcms-assets.io', 'microcms')
+})
+
 useSeoMeta({
   title: `「おとふだびより♪」${title.value}｜音札ポータル`,
   ogTitle: `「おとふだびより♪」${title.value}｜音札ポータル`,
   description: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！',
-  ogDescription: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！'
+  ogDescription: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！',
+  ogImage: imageSrc.value,
+  twitterCard: 'summary'
 })
 </script>
 

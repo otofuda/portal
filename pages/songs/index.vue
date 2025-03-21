@@ -127,7 +127,7 @@ const allCopyrights = computed(() => {
         v-model="filterText"
         icon="i-heroicons-magnifying-glass-20-solid"
         size="lg"
-        color="white"
+        class="flex-grow"
         placeholder="検索ワードを入力"
       />
     </div>
@@ -136,8 +136,13 @@ const allCopyrights = computed(() => {
     <div class="sort-form">
       <span>ならびかえ</span>
       <UButtonGroup size="lg" orientation="horizontal">
-        <USelectMenu v-model="songSort" :options="sortOptions" class="flex-grow">
-          <template #label>
+        <USelectMenu
+          v-model="songSort"
+          :items="sortOptions"
+          :search-input="false"
+          class="flex-grow"
+        >
+          <template #default>
             <span
               v-if="songSort.type === 'level' || songSort.type === 'notes'"
               class="flex-shrink-0 w-2 h-2 mt-px rounded-full"
@@ -145,26 +150,26 @@ const allCopyrights = computed(() => {
             />
             {{ songSort.label }}
           </template>
-          <template #option="{ option }: { option: SongSort }">
+          <template #item="{ item }: { item: SongSort }">
             <span
-              v-if="option.type === 'level' || option.type === 'notes'"
+              v-if="item.type === 'level' || item.type === 'notes'"
               class="flex-shrink-0 w-2 h-2 mt-px rounded-full"
-              :style="{ background: option.color }"
+              :style="{ background: item.color }"
             />
-            <span class="truncate">{{ option.label }}</span>
+            <span class="truncate">{{ item.label }}</span>
           </template>
         </USelectMenu>
         <!-- 昇順／降順 -->
         <UButton
           v-if="isDesc"
           icon="i-heroicons-bars-arrow-down"
-          color="gray"
+          variant="subtle"
           @click="isDesc = false"
         />
         <UButton
           v-else
           icon="i-heroicons-bars-arrow-up"
-          color="gray"
+          variant="subtle"
           @click="isDesc = true"
         />
       </UButtonGroup>
@@ -198,6 +203,7 @@ const allCopyrights = computed(() => {
 }
 
 .search-form {
+  display: flex;
   margin: 1rem 0;
   padding: 0 1rem;
 }

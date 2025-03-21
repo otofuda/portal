@@ -3,9 +3,7 @@ const showSpNav = ref<boolean>(false)
 </script>
 
 <template>
-  <div
-    class="layout"
-  >
+  <div class="layout">
     <header>
       <NuxtLink to="/" class="logo">
         <NuxtImg
@@ -39,16 +37,18 @@ const showSpNav = ref<boolean>(false)
     </header>
 
     <!-- ナビゲーション(スマホ用) -->
-    <USlideover v-model="showSpNav" class="nav --sp">
-      <UButton
-        icon="i-heroicons-x-mark"
-        size="xl"
-        color="primary"
-        variant="ghost"
-        trailing
-        @click="showSpNav = false"
-      />
-      <NavLinkList @close-nav="showSpNav = false" />
+    <USlideover v-model:open="showSpNav" class="nav --sp">
+      <template #content>
+        <UButton
+          icon="i-heroicons-x-mark"
+          size="xl"
+          color="primary"
+          variant="ghost"
+          trailing
+          @click="showSpNav = false"
+        />
+        <NavLinkList @close-nav="showSpNav = false" />
+      </template>
     </USlideover>
 
     <!-- TheHeroのTeleport用 -->
@@ -115,8 +115,7 @@ const showSpNav = ref<boolean>(false)
         <UButton
           icon="i-fa6-brands-x-twitter"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
           to="https://twitter.com/otofuda"
           target="_blank"
@@ -124,8 +123,7 @@ const showSpNav = ref<boolean>(false)
         <UButton
           icon="i-fa6-brands-instagram"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
           to="https://www.instagram.com/otfdpr/"
           target="_blank"
@@ -133,8 +131,7 @@ const showSpNav = ref<boolean>(false)
         <UButton
           icon="i-fa6-brands-youtube"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
           to="https://www.youtube.com/@youtube"
           target="_blank"
@@ -142,8 +139,7 @@ const showSpNav = ref<boolean>(false)
         <UButton
           icon="i-fa6-brands-pixiv"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
           to="https://www.pixiv.net/users/44346167"
           target="_blank"
@@ -151,8 +147,7 @@ const showSpNav = ref<boolean>(false)
         <UButton
           icon="i-fa6-brands-github"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
           to="https://github.com/otofuda"
           target="_blank"
