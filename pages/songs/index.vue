@@ -1,15 +1,9 @@
 <script lang="ts" setup>
-import type { SongInfo, SongSort, SongsPayload } from '~/types/songs'
+import type { SongInfo, SongSort } from '~/types/songs'
 
 const title = ref('収録楽曲一覧')
-const runtimeConfig = useRuntimeConfig()
 
-const { data, pending, error } = await useAsyncData<SongsPayload>('songs', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/songs`, {
-    params: { limit: 1000 },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending, error } = await useFetch('/api/songs')
 
 const SORT_OPTIONS: SongSort[] = [
   { type: 'default', label: '新着順' },
@@ -163,13 +157,13 @@ const allCopyrights = computed(() => {
         <UButton
           v-if="isDesc"
           icon="i-heroicons-bars-arrow-down"
-          variant="subtle"
+          variant="outline"
           @click="isDesc = false"
         />
         <UButton
           v-else
           icon="i-heroicons-bars-arrow-up"
-          variant="subtle"
+          variant="outline"
           @click="isDesc = true"
         />
       </UButtonGroup>

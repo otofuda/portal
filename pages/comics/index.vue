@@ -1,17 +1,10 @@
 <script lang="ts" setup>
 import type { BreadcrumbItem } from '#ui/types'
-import type { ComicInfo, ComicPayload } from '~/types/comics'
+import type { ComicInfo } from '~/types/comics'
 
 const title = ref('マンガ一覧')
 
-const runtimeConfig = useRuntimeConfig()
-
-const { data, pending } = await useAsyncData<ComicPayload>('comics', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/comics`, {
-    params: { limit: 1000 },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending } = await useFetch('/api/comics')
 
 const comics = computed<ComicInfo[]>(() => {
   return data.value ? data.value.contents : []

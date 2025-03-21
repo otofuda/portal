@@ -1,15 +1,9 @@
 <script lang="ts" setup>
-import { type NewsArticle, type NewsPayload, type NewsTag, newsTags } from '@/types/news'
+import { type NewsArticle, type NewsTag, newsTags } from '@/types/news'
 
 const route = useRoute('news-id')
-const runtimeConfig = useRuntimeConfig()
 
-const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/news`, {
-    params: { limit: 1000, filters: 'for_portal[equals]true' },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending } = await useFetch('/api/news')
 
 const content = computed<NewsArticle | null>(() => {
   if (!data.value) { return null }

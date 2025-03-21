@@ -1,16 +1,10 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '#ui/types'
-import type { SongInfo, SongsPayload } from '@/types/songs'
+import type { BreadcrumbItem } from '#ui/types'
+import type { SongInfo } from '@/types/songs'
 
 const route = useRoute('songs-id')
-const runtimeConfig = useRuntimeConfig()
 
-const { data, pending } = await useAsyncData<SongsPayload>('songs', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/songs`, {
-    params: { limit: 1000 },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending } = await useFetch('/api/songs')
 
 const content = computed<SongInfo | null>(() => {
   if (!data.value) { return null }
@@ -22,7 +16,7 @@ const content = computed<SongInfo | null>(() => {
 
 const title = ref(`${content.value?.name} - 楽曲情報`)
 
-const links = computed<BreadcrumbLink[]>(() => {
+const links = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: '楽曲一覧', to: '/songs' },
