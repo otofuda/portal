@@ -44,7 +44,7 @@ const showSpNav = ref<boolean>(false)
           size="xl"
           color="primary"
           variant="ghost"
-          trailing
+          class="rounded-none"
           @click="showSpNav = false"
         />
         <NavLinkList @close-nav="showSpNav = false" />

@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
-import 'vue3-carousel/dist/carousel.css'
-
 import type { TopicInfo, TopicPayload } from '~/types/topics'
 import type { NewsArticle, NewsPayload } from '~/types/news'
 
@@ -64,13 +61,21 @@ useSeoMeta({
       音札の最新情報はこちら！
     </p>
 
-    <Carousel class="slider" :items-to-show="1.2" :wrap-around="true">
-      <Slide
-        v-for="topic in topics"
-        :key="`topic-${topic.id}`"
-        class="topic"
-      >
-        <NuxtLink :to="topic.link" target="_blank">
+    <UCarousel
+      v-slot="{ item: topic }"
+      :items="topics"
+      dots
+      arrows
+      loop
+      class="mt-4 mb-16"
+      :ui="{
+        dots: 'gap-1',
+        dot: 'size-2 rounded-none',
+        prev: 'start-2',
+        next: 'end-2',
+      }"
+    >
+      <NuxtLink :to="topic.link" target="_blank" class="flex justify-center">
           <NuxtPicture
             format="webp"
             :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg`"
@@ -78,12 +83,7 @@ useSeoMeta({
             :alt="topic.alt"
           />
         </NuxtLink>
-      </Slide>
-      <template #addons>
-        <Navigation />
-        <Pagination />
-      </template>
-    </Carousel>
+    </UCarousel>
 
     <!-- お知らせ -->
     <HeadingTitle>
@@ -93,18 +93,22 @@ useSeoMeta({
       </template>
     </HeadingTitle>
 
-    <Carousel class="slider">
-      <Slide
-        v-for="news in latestNews"
-        :key="`latest-news-${news.id}`"
-      >
-        <NewsLink :article="news" />
-      </Slide>
-      <template #addons>
-        <Navigation />
-        <Pagination />
-      </template>
-    </Carousel>
+    <UCarousel
+      v-slot="{ item }"
+      :items="latestNews"
+      dots
+      arrows
+      loop
+      class="mb-16"
+      :ui="{
+        dots: 'gap-1',
+        dot: 'size-2 rounded-none',
+        prev: 'start-2',
+        next: 'end-2',
+      }"
+    >
+      <NewsLink :article="item" />
+    </UCarousel>
 
     <div class="menu">
       <UButton
@@ -217,41 +221,6 @@ useSeoMeta({
 .heading {
   margin: 1rem 0;
   justify-content: center;
-}
-
-.slider {
-  margin-bottom: 2rem;
-  --vc-pgn-margin: 0 2px;
-  --vc-pgn-width: 8px;
-  --vc-pgn-active-color: rgb(var(--color-primary-DEFAULT));
-  --vc-pgn-background-color: rgb(var(--color-primary-100));
-  --vc-nav-color: rgb(var(--color-primary-DEFAULT));
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 1rem;
-    height: 100%;
-    background: linear-gradient(to right, #ffffff88, #ffffff00);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    width: 1rem;
-    height: 100%;
-    background: linear-gradient(to left, #ffffff88, #ffffff00);
-  }
-
-  .carousel__slide {
-    padding: 1rem;
-  }
 }
 
 .description {

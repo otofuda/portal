@@ -156,12 +156,14 @@ const allCopyrights = computed(() => {
         <!-- 昇順／降順 -->
         <UButton
           v-if="isDesc"
+          color="neutral"
           icon="i-heroicons-bars-arrow-down"
           variant="outline"
           @click="isDesc = false"
         />
         <UButton
           v-else
+          color="neutral"
           icon="i-heroicons-bars-arrow-up"
           variant="outline"
           @click="isDesc = true"
