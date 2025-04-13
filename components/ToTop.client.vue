@@ -69,4 +69,10 @@ const goToTop = () => {
   opacity: 0;
   transform: translateY(1rem);
 }
+
+@media (max-width: vars.$spwidth) {
+  .top img {
+    width: 5rem;
+  }
+}
 </style>

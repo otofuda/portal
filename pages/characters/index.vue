@@ -6,25 +6,37 @@ const title = ref('キャラクター')
 
 const instances: SimpleParallax[] = []
 
-onMounted(async () => {
-  const SimpleParallax = await import('simple-parallax-js')
+const { onLoaded } = useScriptNpm({
+  packageName: 'simple-parallax-js',
+  file: 'dist/simpleParallax.min.js',
+  version: '5.6.2',
+  scriptOptions: {
+    use() {
+      return { SimpleParallax: window.simpleParallax }
+    },
+    trigger: 'client'
+  }
+})
 
-  const parallaxConfig = [
-    { scale: 1.5, el: document.querySelector<HTMLImageElement>('.pictures .character.--kanon > img')! },
-    { scale: 1.75, el: document.querySelector<HTMLImageElement>('.pictures .character.--kadone > img')! },
-    { scale: 1.75, el: document.querySelector<HTMLImageElement>('.pictures .character.--kunon > img')! },
-    { scale: 1.5, el: document.querySelector<HTMLImageElement>('.pictures .character.--hirono > img')! }
-  ]
+onMounted(() => {
+  onLoaded(({ SimpleParallax }) => {
+    const parallaxConfig = [
+      { scale: 1.5, el: document.querySelector<HTMLImageElement>('.pictures .character.--kanon > img')! },
+      { scale: 1.75, el: document.querySelector<HTMLImageElement>('.pictures .character.--kadone > img')! },
+      { scale: 1.75, el: document.querySelector<HTMLImageElement>('.pictures .character.--kunon > img')! },
+      { scale: 1.5, el: document.querySelector<HTMLImageElement>('.pictures .character.--hirono > img')! }
+    ]
 
-  parallaxConfig.forEach((config) => {
-    // eslint-disable-next-line new-cap
-    instances.push(new SimpleParallax.default(config.el, {
-      delay: 1,
-      orientation: 'down',
-      scale: config.scale,
-      transition: 'cubic-bezier(0, 0, 0, 1)',
-      overflow: true
-    }))
+    parallaxConfig.forEach((config) => {
+      // eslint-disable-next-line new-cap
+      instances.push(new SimpleParallax(config.el, {
+        delay: 1,
+        orientation: 'down',
+        scale: config.scale,
+        transition: 'cubic-bezier(0, 0, 0, 1)',
+        overflow: true
+      }))
+    })
   })
 })
 

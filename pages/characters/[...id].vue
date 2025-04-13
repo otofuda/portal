@@ -21,16 +21,29 @@ const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
 
 let instance: SimpleParallax | null = null
 
-onMounted(async () => {
-  const SimpleParallax = await import('simple-parallax-js')
-  const el = document.querySelector<HTMLImageElement>('.character .intro-image-picture > img')!
-  // eslint-disable-next-line new-cap
-  instance = new SimpleParallax.default(el, {
-    delay: 1,
-    orientation: 'down',
-    scale: 1.5,
-    transition: 'cubic-bezier(0, 0, 0, 1)',
-    overflow: true
+const { onLoaded } = useScriptNpm({
+  packageName: 'simple-parallax-js',
+  file: 'dist/simpleParallax.min.js',
+  version: '5.6.2',
+  scriptOptions: {
+    use() {
+      return { SimpleParallax: window.simpleParallax }
+    },
+    trigger: 'client'
+  }
+})
+
+onMounted(() => {
+  onLoaded(({ SimpleParallax }) => {
+    const el = document.querySelector<HTMLImageElement>('.character .intro-image-picture > img')!
+    // eslint-disable-next-line new-cap
+    instance = new SimpleParallax(el, {
+      delay: 1,
+      orientation: 'down',
+      scale: 1.5,
+      transition: 'cubic-bezier(0, 0, 0, 1)',
+      overflow: true
+    })
   })
 })
 

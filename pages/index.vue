@@ -44,11 +44,9 @@ useSeoMeta({
       <Title>{{ title }}</Title>
     </Head>
 
-    <ClientOnly>
-      <Teleport to="#hero">
-        <TheHero />
-      </Teleport>
-    </ClientOnly>
+    <Teleport to="#hero">
+      <TheHero />
+    </Teleport>
 
     <!-- トピックス -->
     <HeadingTitle>
@@ -140,13 +138,9 @@ useSeoMeta({
       <dt>プラットフォーム</dt>
       <dd>アーケード</dd>
     </dl>
-    <iframe
+    <ScriptYouTubePlayer
       class="video"
-      src="https://www.youtube-nocookie.com/embed/94LRZjHgpM0?si=476AppZZNFs0jQPY&amp;controls=0"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
+      video-id="94LRZjHgpM0"
     />
 
     <HeadingTitle>
@@ -175,13 +169,9 @@ useSeoMeta({
       <dt>プラットフォーム</dt>
       <dd>Android, iOS, iPad OS, Windows</dd>
     </dl>
-    <iframe
+    <ScriptYouTubePlayer
       class="video"
-      src="https://www.youtube-nocookie.com/embed/nQ7wnzQEDpM?si=_AQUAGihH8h7sCQl&amp;controls=0"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
+      video-id="nQ7wnzQEDpM"
     />
 
     <!-- バナー -->
@@ -285,6 +275,7 @@ useSeoMeta({
   margin: 2rem 0;
   border-radius: 1rem;
   box-shadow: 0 0.25rem 0.5rem 0 rgba(vars.$text, 0.125);
+  overflow: hidden;
 }
 
 .banners {
