@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { BreadcrumbItem } from '#ui/types'
 import type SimpleParallax from 'simple-parallax-js'
+import type { BreadcrumbItem } from '#ui/types'
 import { characters } from '~/assets/characters'
 
 const route = useRoute('characters-id')
@@ -15,7 +15,7 @@ const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: 'キャラクター', to: '/characters' },
-    { label: character?.name || '？' }
+    { label: character?.name || '？' },
   ]
 })
 
@@ -29,20 +29,20 @@ const { onLoaded } = useScriptNpm({
     use() {
       return { SimpleParallax: window.simpleParallax }
     },
-    trigger: 'client'
-  }
+    trigger: 'client',
+  },
 })
 
 onMounted(() => {
   onLoaded(({ SimpleParallax }) => {
     const el = document.querySelector<HTMLImageElement>('.character .intro-image-picture > img')!
-    // eslint-disable-next-line new-cap
+
     instance = new SimpleParallax(el, {
       delay: 1,
       orientation: 'down',
       scale: 1.5,
       transition: 'cubic-bezier(0, 0, 0, 1)',
-      overflow: true
+      overflow: true,
     })
   })
 })
@@ -57,7 +57,7 @@ useSeoMeta({
   description: `音札のキャラクター「${character?.name}」の紹介ページです！`,
   ogDescription: `音札のキャラクター「${character?.name}」の紹介ページです！`,
   ogImage: '/thumb.png',
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
 })
 </script>
 
@@ -71,7 +71,10 @@ useSeoMeta({
       <UBreadcrumb :links="breadcrumbLinks" />
     </div>
 
-    <div v-if="character" class="intro">
+    <div
+      v-if="character"
+      class="intro"
+    >
       <div class="intro-image">
         <NuxtPicture
           format="webp"
@@ -120,7 +123,10 @@ useSeoMeta({
       </div>
     </div>
 
-    <ShareButtons v-if="character" :text="character.name" />
+    <ShareButtons
+      v-if="character"
+      :text="character.name"
+    />
 
     <div class="character-menu">
       <UButton

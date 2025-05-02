@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import '@/assets/normalize.css'
+
 onMounted(() => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js', { scope: '/' })

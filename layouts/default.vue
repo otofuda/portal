@@ -5,7 +5,10 @@ const showSpNav = ref<boolean>(false)
 <template>
   <div class="layout">
     <header>
-      <NuxtLink to="/" class="logo">
+      <NuxtLink
+        to="/"
+        class="logo"
+      >
         <NuxtImg
           class="icon"
           format="webp"
@@ -37,7 +40,10 @@ const showSpNav = ref<boolean>(false)
     </header>
 
     <!-- ナビゲーション(スマホ用) -->
-    <USlideover v-model:open="showSpNav" class="nav --sp">
+    <USlideover
+      v-model:open="showSpNav"
+      class="nav --sp"
+    >
       <template #content>
         <UButton
           icon="i-heroicons-x-mark"
@@ -52,7 +58,10 @@ const showSpNav = ref<boolean>(false)
     </USlideover>
 
     <!-- TheHeroのTeleport用 -->
-    <div id="hero" class="hero" />
+    <div
+      id="hero"
+      class="hero"
+    />
 
     <!-- ナビゲーション(PC用) -->
     <div class="nav-wrapper">
@@ -69,7 +78,11 @@ const showSpNav = ref<boolean>(false)
       <p>音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。</p>
 
       <div class="banners">
-        <NuxtLink to="https://arcade.otofuda.com" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://arcade.otofuda.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"
@@ -77,7 +90,11 @@ const showSpNav = ref<boolean>(false)
             alt="音札公式ホームページ"
           />
         </NuxtLink>
-        <NuxtLink to="https://net.otofuda.com" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://net.otofuda.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"
@@ -85,7 +102,11 @@ const showSpNav = ref<boolean>(false)
             alt="おとふだNET"
           />
         </NuxtLink>
-        <NuxtLink to="https://www.youtube.com/@otofuda" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://www.youtube.com/@otofuda"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"
@@ -93,7 +114,11 @@ const showSpNav = ref<boolean>(false)
             alt="YouTube公式チャンネル"
           />
         </NuxtLink>
-        <NuxtLink to="https://twitter.com/otofuda" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://twitter.com/otofuda"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"
@@ -101,7 +126,11 @@ const showSpNav = ref<boolean>(false)
             alt="公式Twitterアカウント"
           />
         </NuxtLink>
-        <NuxtLink to="https://otofuda.booth.pm" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://otofuda.booth.pm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"

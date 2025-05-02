@@ -1,15 +1,15 @@
 interface OtofudaCharacter {
-  id: string;
-  name: string;
-  ruby: string;
-  image: string;
-  battleImage: string;
-  blood: 'A' | 'B' | 'O' | 'AB';
-  height: number;
-  weight: 'ヒミツ';
-  hobby: string;
-  favorite: string;
-  comic?: string;
+  id: string
+  name: string
+  ruby: string
+  image: string
+  battleImage: string
+  blood: 'A' | 'B' | 'O' | 'AB'
+  height: number
+  weight: 'ヒミツ'
+  hobby: string
+  favorite: string
+  comic?: string
 }
 
 export const characters: OtofudaCharacter[] = [
@@ -24,7 +24,7 @@ export const characters: OtofudaCharacter[] = [
     weight: 'ヒミツ',
     hobby: '食べること、歌うこと',
     favorite: 'ハンバーグ',
-    comic: '/comics/gj-jyeb9j'
+    comic: '/comics/gj-jyeb9j',
   },
   {
     id: 'kadone',
@@ -37,7 +37,7 @@ export const characters: OtofudaCharacter[] = [
     weight: 'ヒミツ',
     hobby: 'イタズラすること',
     favorite: '辛いラーメン',
-    comic: '/comics/r1gyujnpb'
+    comic: '/comics/r1gyujnpb',
   },
   {
     id: 'kunon',
@@ -50,7 +50,7 @@ export const characters: OtofudaCharacter[] = [
     weight: 'ヒミツ',
     hobby: '旅行、泳ぐこと',
     favorite: 'ぶどう',
-    comic: '/comics/3sgakuhqj'
+    comic: '/comics/3sgakuhqj',
   },
   {
     id: 'hirono',
@@ -63,7 +63,7 @@ export const characters: OtofudaCharacter[] = [
     weight: 'ヒミツ',
     hobby: '高いところに行く、登山',
     favorite: '骨付き肉、牛乳',
-    comic: '/comics/qzeg_qmth'
+    comic: '/comics/qzeg_qmth',
   },
   {
     id: 'shuon',
@@ -75,6 +75,6 @@ export const characters: OtofudaCharacter[] = [
     height: 170,
     weight: 'ヒミツ',
     hobby: '知らない街のお店に入ること',
-    favorite: 'ポテトサラダ'
-  }
+    favorite: 'ポテトサラダ',
+  },
 ] as const

@@ -20,7 +20,7 @@ const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: 'マンガ一覧', to: '/comics' },
-    { label: content.value?.title || '' }
+    { label: content.value?.title || '' },
   ]
 })
 
@@ -36,7 +36,7 @@ useSeoMeta({
   description: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！',
   ogDescription: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！',
   ogImage: imageSrc.value,
-  twitterCard: 'summary'
+  twitterCard: 'summary',
 })
 </script>
 
@@ -57,11 +57,17 @@ useSeoMeta({
       </template>
     </HeadingTitle>
 
-    <div v-if="pending" class="loading">
+    <div
+      v-if="pending"
+      class="loading"
+    >
       Loading...
     </div>
 
-    <div v-else-if="content" class="comic-img">
+    <div
+      v-else-if="content"
+      class="comic-img"
+    >
       <NuxtPicture
         :src="content.image.url.replace('https://images.microcms-assets.io', 'microcms')"
         :alt="title"
@@ -70,11 +76,17 @@ useSeoMeta({
       />
     </div>
 
-    <div v-else class="error">
+    <div
+      v-else
+      class="error"
+    >
       マンガが見つかりません
     </div>
 
-    <ShareButtons v-if="content" :text="content.title" />
+    <ShareButtons
+      v-if="content"
+      :text="content.title"
+    />
 
     <div class="comic-menu">
       <UButton

@@ -9,7 +9,7 @@ const runtimeConfig = useRuntimeConfig()
 const topicsData = await useAsyncData<TopicPayload>('topics', () => {
   return $fetch(`${runtimeConfig.public.apiBase}api/v1/topics`, {
     params: { limit: 1000 },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
+    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken },
   })
 })
 
@@ -20,7 +20,7 @@ const topics = computed<TopicInfo[]>(() => {
 const newsData = await useAsyncData<NewsPayload>('news', () => {
   return $fetch(`${runtimeConfig.public.apiBase}api/v1/news`, {
     params: { limit: 1000, filters: 'for_portal[equals]true' },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
+    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken },
   })
 })
 
@@ -34,7 +34,7 @@ useSeoMeta({
   description: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。',
   ogDescription: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。',
   ogImage: '/thumb.png',
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
 })
 </script>
 
@@ -73,14 +73,18 @@ useSeoMeta({
         next: 'end-2',
       }"
     >
-      <NuxtLink :to="topic.link" target="_blank" class="flex justify-center">
-          <NuxtPicture
-            format="webp"
-            :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg`"
-            sizes="500"
-            :alt="topic.alt"
-          />
-        </NuxtLink>
+      <NuxtLink
+        :to="topic.link"
+        target="_blank"
+        class="flex justify-center"
+      >
+        <NuxtPicture
+          format="webp"
+          :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg`"
+          sizes="500"
+          :alt="topic.alt"
+        />
+      </NuxtLink>
     </UCarousel>
 
     <!-- お知らせ -->
@@ -153,8 +157,17 @@ useSeoMeta({
       「音札Étude」はスマホやPCで一人で手軽に遊べる対戦音楽ゲームです。<br>
       敵との勝敗を決めるのは、音ゲーの上手さとカードゲームの上手さ！「音札」を使って敵を妨害し、音ゲーを有利に進めよう！
     </p>
-    <a class="etude-link" href="https://etude.otofuda.com/" target="_blank">
-      <NuxtImg format="webp" :width="500" class="--etude" src="/assets/button_etude.png" />
+    <a
+      class="etude-link"
+      href="https://etude.otofuda.com/"
+      target="_blank"
+    >
+      <NuxtImg
+        format="webp"
+        :width="500"
+        class="--etude"
+        src="/assets/button_etude.png"
+      />
     </a>
     <p class="description">
       デッキ編成や戦略を研究する、同じ譜面を繰り返し練習する、好きな楽曲をひたすらリピートする、など楽しみ方はあなた次第！

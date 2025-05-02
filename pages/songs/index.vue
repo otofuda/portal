@@ -15,7 +15,7 @@ const SORT_OPTIONS: SongSort[] = [
   { type: 'bpm', label: 'BPM順' },
   { type: 'notes', label: 'ノーツ数順', difficulty: 'e', color: '#25ca25' },
   { type: 'notes', label: 'ノーツ数順', difficulty: 'n', color: '#ffb223' },
-  { type: 'notes', label: 'ノーツ数順', difficulty: 'h', color: '#ff0984' }
+  { type: 'notes', label: 'ノーツ数順', difficulty: 'h', color: '#ff0984' },
 ] as const
 
 const filterText = ref<string>('')
@@ -27,8 +27,8 @@ const songs = computed<SongInfo[]>(() => {
   let songs = data.value ? [...data.value.contents] : []
   // 検索ワードの処理
   if (filterText.value) {
-    const word = filterText.value.toLowerCase();
-    songs = songs.filter(song => {
+    const word = filterText.value.toLowerCase()
+    songs = songs.filter((song) => {
       if (song.name.toLowerCase().includes(word)) { return true }
       if (song.artist.toLowerCase().includes(word)) { return true }
       if (song.illustrator.toLowerCase().includes(word)) { return true }
@@ -66,11 +66,14 @@ const songs = computed<SongInfo[]>(() => {
         const B = b[key]
         if (typeof A === 'string' && typeof B === 'string') {
           return A.localeCompare(B)
-        } else if (A < B) {
+        }
+        else if (A < B) {
           return -1
-        } else if (B < A) {
+        }
+        else if (B < A) {
           return 1
-        } else {
+        }
+        else {
           return 0
         }
       })
@@ -129,7 +132,10 @@ const allCopyrights = computed(() => {
     <!-- ならびかえ -->
     <div class="sort-form">
       <span>ならびかえ</span>
-      <UButtonGroup size="lg" orientation="horizontal">
+      <UButtonGroup
+        size="lg"
+        orientation="horizontal"
+      >
         <USelectMenu
           v-model="songSort"
           :items="sortOptions"
@@ -171,7 +177,10 @@ const allCopyrights = computed(() => {
       </UButtonGroup>
     </div>
 
-    <div v-if="songs" class="songs-list">
+    <div
+      v-if="songs"
+      class="songs-list"
+    >
       <SongLink
         v-for="song in songs"
         :key="`songs-${song.song_id}`"
@@ -182,7 +191,10 @@ const allCopyrights = computed(() => {
     </div>
 
     <ul class="copyrights">
-      <li v-for="(copyright, i) in allCopyrights" :key="`copyright-${i}`">
+      <li
+        v-for="(copyright, i) in allCopyrights"
+        :key="`copyright-${i}`"
+      >
         {{ copyright }}
       </li>
     </ul>

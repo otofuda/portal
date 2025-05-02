@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 const isVisible = ref(false)
 const props = defineProps<{
-  root?: IntersectionObserver['root'];
-  rootMargin?: string;
-  threshold?: number[];
+  root?: IntersectionObserver['root']
+  rootMargin?: string
+  threshold?: number[]
 }>()
 
 const observer = new IntersectionObserver((entries) => {
@@ -15,7 +15,7 @@ const observer = new IntersectionObserver((entries) => {
 }, {
   root: props.root || null,
   rootMargin: props.rootMargin || '0px 0px 0px 0px',
-  threshold: props.threshold || [0.5]
+  threshold: props.threshold || [0.5],
 })
 
 const intersectionElement = ref<HTMLElement | null>(null)

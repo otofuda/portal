@@ -2,7 +2,7 @@
 import { type NewsArticle, type NewsTag, newsTags } from '~/types/news'
 
 const props = defineProps<{
-  article: NewsArticle;
+  article: NewsArticle
 }>()
 
 /** 公開日 */
@@ -21,7 +21,7 @@ const newsImage = computed<string>(() => {
 /** お知らせの種類(色とラベル) */
 const tags = computed<NewsTag[]>(() => {
   const defaultTag: NewsTag = {
-    label: 'お知らせ', color: 'primary'
+    label: 'お知らせ', color: 'primary',
   }
   return props.article.tags.length > 0
     ? props.article.tags.map(tag => newsTags.get(tag) || { label: tag, color: 'primary' })

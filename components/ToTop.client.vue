@@ -11,7 +11,7 @@ onMounted(() => {
     })
   }, {
     rootMargin: `${0}px 0px ${-height}px 0px`,
-    threshold: [0]
+    threshold: [0],
   })
   observer.observe(mainEl)
 })
@@ -19,7 +19,7 @@ onMounted(() => {
 const goToTop = () => {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth'
+    behavior: 'smooth',
   })
 }
 </script>

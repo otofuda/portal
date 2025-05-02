@@ -2,7 +2,7 @@
 import type { SongInfo } from '~/types/songs'
 
 const props = defineProps<{
-  song: SongInfo;
+  song: SongInfo
 }>()
 
 const jacketSrc = computed<string>(() => {
@@ -11,10 +11,10 @@ const jacketSrc = computed<string>(() => {
 })
 
 interface LevelInfo {
-  difficulty: number;
-  nd: string;
-  notes: number;
-  video?: string;
+  difficulty: number
+  nd: string
+  notes: number
+  video?: string
 }
 
 const levels = computed<LevelInfo[]>(() => {
@@ -23,20 +23,20 @@ const levels = computed<LevelInfo[]>(() => {
       difficulty: props.song.easy,
       nd: props.song.easy_nd,
       notes: props.song.easy_notes,
-      video: props.song.easy_video
+      video: props.song.easy_video,
     },
     {
       difficulty: props.song.normal,
       nd: props.song.normal_nd,
       notes: props.song.normal_notes,
-      video: props.song.normal_video
+      video: props.song.normal_video,
     },
     {
       difficulty: props.song.hard,
       nd: props.song.hard_nd,
       notes: props.song.hard_notes,
-      video: props.song.hard_video
-    }
+      video: props.song.hard_video,
+    },
   ]
 })
 </script>
@@ -57,10 +57,16 @@ const levels = computed<LevelInfo[]>(() => {
       {{ props.song.artist }}
     </div>
 
-    <div v-if="props.song.comment || $props.song.copyright" class="comment">
+    <div
+      v-if="props.song.comment || $props.song.copyright"
+      class="comment"
+    >
       {{ props.song.comment }}
 
-      <div v-if="props.song.copyright" class="copyright">
+      <div
+        v-if="props.song.copyright"
+        class="copyright"
+      >
         {{ props.song.copyright }}
       </div>
     </div>
@@ -80,21 +86,40 @@ const levels = computed<LevelInfo[]>(() => {
 
       <div class="detail-badges">
         <!-- 音札(AC) -->
-        <UBadge v-if="props.song.for_ac" variant="subtle" class="badge">
+        <UBadge
+          v-if="props.song.for_ac"
+          variant="subtle"
+          class="badge"
+        >
           <UIcon name="i-heroicons-musical-note" />
           音札
         </UBadge>
-        <UBadge v-else color="neutral" variant="soft" class="badge --d">
+        <UBadge
+          v-else
+          color="neutral"
+          variant="soft"
+          class="badge --d"
+        >
           <UIcon name="i-heroicons-minus" />
           音札
         </UBadge>
 
         <!-- 音札Étude -->
-        <UBadge v-if="props.song.for_mb" color="success" variant="subtle" class="badge">
+        <UBadge
+          v-if="props.song.for_mb"
+          color="success"
+          variant="subtle"
+          class="badge"
+        >
           <UIcon name="i-heroicons-musical-note" />
           音札Étude
         </UBadge>
-        <UBadge v-else color="neutral" variant="soft" class="badge --d">
+        <UBadge
+          v-else
+          color="neutral"
+          variant="soft"
+          class="badge --d"
+        >
           <UIcon name="i-heroicons-minus" />
           音札Étude
         </UBadge>

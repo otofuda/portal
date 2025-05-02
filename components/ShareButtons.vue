@@ -3,7 +3,7 @@ const route = useRoute()
 
 const props = defineProps<{
   // シェアするテキスト
-  text: string;
+  text: string
 }>()
 
 const text = computed(() => props.text + ' | 音札ポータル')
@@ -24,14 +24,17 @@ const lineLink = computed(() => {
 const onShare = () => {
   navigator.share({
     text: text.value,
-    url
+    url,
   })
 }
 </script>
 
 <template>
   <div class="share">
-    <UBadge color="neutral" variant="subtle">
+    <UBadge
+      color="neutral"
+      variant="subtle"
+    >
       共有
     </UBadge>
     <!-- X(Twitter) -->

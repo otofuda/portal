@@ -38,14 +38,15 @@ const filteredContents = computed<NewsArticle[]>(() => {
 const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
-    { label: 'お知らせ一覧', to: '' }
+    { label: 'お知らせ一覧', to: '' },
   ]
 })
 
 const onClickTag = (tag: NewsTagString) => {
   if (searchTag.value === tag) {
     searchTag.value = null
-  } else {
+  }
+  else {
     searchTag.value = tag
   }
 }
@@ -81,10 +82,10 @@ const onClickTag = (tag: NewsTagString) => {
       <UAlert
         v-show="searchWord"
         class="mt-4"
-        :title="`「${ searchWord }」で検索中`"
+        :title="`「${searchWord}」で検索中`"
         :close="{ icon: 'i-heroicons-x-mark-20-solid', color: 'white', variant: 'ghost' }"
-        @update:open="searchWord = ''"
         variant="subtle"
+        @update:open="searchWord = ''"
       />
     </div>
 
@@ -102,11 +103,17 @@ const onClickTag = (tag: NewsTagString) => {
     </div>
 
     <div class="news-list">
-      <div v-if="pending" class="px-4">
+      <div
+        v-if="pending"
+        class="px-4"
+      >
         Loading...
       </div>
 
-      <div v-if="filteredContents.length === 0" class="px-4">
+      <div
+        v-if="filteredContents.length === 0"
+        class="px-4"
+      >
         <UAlert
           title="条件に一致するお知らせが見つかりませんでした"
           color="primary"

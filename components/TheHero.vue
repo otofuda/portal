@@ -11,8 +11,8 @@ const { onLoaded } = useScriptNpm({
     use() {
       return { SimpleParallax: window.simpleParallax }
     },
-    trigger: 'client'
-  }
+    trigger: 'client',
+  },
 })
 
 onMounted(() => {
@@ -22,17 +22,16 @@ onMounted(() => {
       { scale: 1.5, el: document.querySelector<HTMLImageElement>('.character.--kadone > img')! },
       { scale: 1.75, el: document.querySelector<HTMLImageElement>('.character.--kunon > img')! },
       { scale: 1.5, el: document.querySelector<HTMLImageElement>('.character.--hirono > img')! },
-      { scale: 1.25, el: document.querySelector<HTMLImageElement>('.character.--shuon > img')! }
+      { scale: 1.25, el: document.querySelector<HTMLImageElement>('.character.--shuon > img')! },
     ]
 
     parallaxConfig.forEach((config) => {
-      // eslint-disable-next-line new-cap
       instances.push(new SimpleParallax(config.el, {
         delay: 1,
         orientation: 'down',
         scale: config.scale,
         transition: 'cubic-bezier(0, 0, 0, 1)',
-        overflow: true
+        overflow: true,
       }))
     })
   })
@@ -45,11 +44,36 @@ onMounted(() => {
 
 <template>
   <div class="hero">
-    <NuxtPicture format="webp" class="character --kanon" sizes="640" src="/characters/kanon.png" />
-    <NuxtPicture format="webp" class="character --kadone" sizes="640" src="/characters/kadone.png" />
-    <NuxtPicture format="webp" class="character --kunon" sizes="640" src="/characters/kunon.png" />
-    <NuxtPicture format="webp" class="character --hirono" sizes="640" src="/characters/hirono.png" />
-    <NuxtPicture format="webp" class="character --shuon" sizes="640" src="/characters/shuon.png" />
+    <NuxtPicture
+      format="webp"
+      class="character --kanon"
+      sizes="640"
+      src="/characters/kanon.png"
+    />
+    <NuxtPicture
+      format="webp"
+      class="character --kadone"
+      sizes="640"
+      src="/characters/kadone.png"
+    />
+    <NuxtPicture
+      format="webp"
+      class="character --kunon"
+      sizes="640"
+      src="/characters/kunon.png"
+    />
+    <NuxtPicture
+      format="webp"
+      class="character --hirono"
+      sizes="640"
+      src="/characters/hirono.png"
+    />
+    <NuxtPicture
+      format="webp"
+      class="character --shuon"
+      sizes="640"
+      src="/characters/shuon.png"
+    />
 
     <div class="copy">
       <span>これまでにない、新感覚<wbr>「対戦型音楽カードゲーム」</span>
@@ -60,11 +84,27 @@ onMounted(() => {
     </div>
 
     <div class="buttons">
-      <a href="https://arcade.otofuda.com" target="_blank">
-        <NuxtImg format="webp" :width="500" class="--arcade" src="/assets/button_arcade.png" />
+      <a
+        href="https://arcade.otofuda.com"
+        target="_blank"
+      >
+        <NuxtImg
+          format="webp"
+          :width="500"
+          class="--arcade"
+          src="/assets/button_arcade.png"
+        />
       </a>
-      <a href="https://etude.otofuda.com/" target="_blank">
-        <NuxtImg format="webp" :width="500" class="--etude" src="/assets/button_etude.png" />
+      <a
+        href="https://etude.otofuda.com/"
+        target="_blank"
+      >
+        <NuxtImg
+          format="webp"
+          :width="500"
+          class="--etude"
+          src="/assets/button_etude.png"
+        />
       </a>
     </div>
   </div>

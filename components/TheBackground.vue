@@ -1,6 +1,9 @@
 <template>
   <ul class="background">
-    <li v-for="i in 20" :key="`bg-li-${i}`" />
+    <li
+      v-for="i in 20"
+      :key="`bg-li-${i}`"
+    />
   </ul>
 </template>
 

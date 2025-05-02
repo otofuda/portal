@@ -20,7 +20,7 @@ const links = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: '楽曲一覧', to: '/songs' },
-    { label: content.value?.name || '' }
+    { label: content.value?.name || '' },
   ]
 })
 
@@ -42,7 +42,7 @@ useSeoMeta({
   description,
   ogDescription: description,
   ogImage: jacketImage.value,
-  twitterCard: 'summary'
+  twitterCard: 'summary',
 })
 </script>
 
@@ -60,7 +60,10 @@ useSeoMeta({
       Loading...
     </div>
 
-    <SongDetail v-else-if="content" :song="content" />
+    <SongDetail
+      v-else-if="content"
+      :song="content"
+    />
 
     <div v-else>
       Not Found

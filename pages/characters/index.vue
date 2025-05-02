@@ -14,8 +14,8 @@ const { onLoaded } = useScriptNpm({
     use() {
       return { SimpleParallax: window.simpleParallax }
     },
-    trigger: 'client'
-  }
+    trigger: 'client',
+  },
 })
 
 onMounted(() => {
@@ -24,17 +24,16 @@ onMounted(() => {
       { scale: 1.5, el: document.querySelector<HTMLImageElement>('.pictures .character.--kanon > img')! },
       { scale: 1.75, el: document.querySelector<HTMLImageElement>('.pictures .character.--kadone > img')! },
       { scale: 1.75, el: document.querySelector<HTMLImageElement>('.pictures .character.--kunon > img')! },
-      { scale: 1.5, el: document.querySelector<HTMLImageElement>('.pictures .character.--hirono > img')! }
+      { scale: 1.5, el: document.querySelector<HTMLImageElement>('.pictures .character.--hirono > img')! },
     ]
 
     parallaxConfig.forEach((config) => {
-      // eslint-disable-next-line new-cap
       instances.push(new SimpleParallax(config.el, {
         delay: 1,
         orientation: 'down',
         scale: config.scale,
         transition: 'cubic-bezier(0, 0, 0, 1)',
-        overflow: true
+        overflow: true,
       }))
     })
   })
@@ -50,7 +49,7 @@ useSeoMeta({
   description: '音札のストーリーとキャラクターを紹介するページです！',
   ogDescription: '音札のストーリーとキャラクターを紹介するページです！',
   ogImage: '/thumb.png',
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
 })
 </script>
 
@@ -68,10 +67,30 @@ useSeoMeta({
     </HeadingTitle>
 
     <div class="pictures">
-      <NuxtPicture format="webp" class="character --kanon" sizes="640" src="/characters/ac/kanon.png" />
-      <NuxtPicture format="webp" class="character --kadone" sizes="640" src="/characters/ac/kadone.png" />
-      <NuxtPicture format="webp" class="character --kunon" sizes="640" src="/characters/ac/kunon.png" />
-      <NuxtPicture format="webp" class="character --hirono" sizes="640" src="/characters/ac/hirono.png" />
+      <NuxtPicture
+        format="webp"
+        class="character --kanon"
+        sizes="640"
+        src="/characters/ac/kanon.png"
+      />
+      <NuxtPicture
+        format="webp"
+        class="character --kadone"
+        sizes="640"
+        src="/characters/ac/kadone.png"
+      />
+      <NuxtPicture
+        format="webp"
+        class="character --kunon"
+        sizes="640"
+        src="/characters/ac/kunon.png"
+      />
+      <NuxtPicture
+        format="webp"
+        class="character --hirono"
+        sizes="640"
+        src="/characters/ac/hirono.png"
+      />
     </div>
 
     <div class="story">

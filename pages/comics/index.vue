@@ -13,7 +13,7 @@ const comics = computed<ComicInfo[]>(() => {
 const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
-    { label: 'マンガ一覧', to: '' }
+    { label: 'マンガ一覧', to: '' },
   ]
 })
 
@@ -21,7 +21,7 @@ useSeoMeta({
   title: 'マンガ一覧｜音札ポータル',
   ogTitle: 'マンガ一覧｜音札ポータル',
   description: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！',
-  ogDescription: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！'
+  ogDescription: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！',
 })
 </script>
 

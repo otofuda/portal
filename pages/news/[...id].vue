@@ -52,7 +52,7 @@ useSeoMeta({
   description,
   ogDescription: description,
   ogImage: newsImage.value,
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
 })
 </script>
 
@@ -61,7 +61,10 @@ useSeoMeta({
   <div class="news">
     <Head>
       <Title>{{ title }}</Title>
-      <Meta name="thumbnail" :content="newsImage" />
+      <Meta
+        name="thumbnail"
+        :content="newsImage"
+      />
     </Head>
 
     <NuxtImg
@@ -77,7 +80,10 @@ useSeoMeta({
       {{ title }}
     </h1>
 
-    <div v-if="pending" class="loading">
+    <div
+      v-if="pending"
+      class="loading"
+    >
       Loading...
     </div>
 
@@ -110,7 +116,10 @@ useSeoMeta({
       <ShareButtons :text="content.title" />
     </template>
 
-    <div v-else class="detail">
+    <div
+      v-else
+      class="detail"
+    >
       記事が見つかりません
     </div>
 
