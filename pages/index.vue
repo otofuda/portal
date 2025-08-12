@@ -49,12 +49,12 @@ useSeoMeta({
     </Teleport>
 
     <!-- トピックス -->
-    <HeadingTitle>
+    <CommonHeadingTitle>
       トピックス
       <template #sub>
         Topics
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
     <p class="description">
       音札の最新情報はこちら！
     </p>
@@ -63,14 +63,11 @@ useSeoMeta({
       v-slot="{ item: topic }"
       :items="topics"
       dots
-      arrows
       loop
       class="mt-4 mb-16"
       :ui="{
         dots: 'gap-1',
         dot: 'size-2 rounded-none',
-        prev: 'start-2',
-        next: 'end-2',
       }"
     >
       <NuxtLink
@@ -88,25 +85,22 @@ useSeoMeta({
     </UCarousel>
 
     <!-- お知らせ -->
-    <HeadingTitle>
+    <CommonHeadingTitle>
       最新のお知らせ
       <template #sub>
         News
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <UCarousel
       v-slot="{ item }"
       :items="latestNews"
       dots
-      arrows
       loop
       class="mb-16"
       :ui="{
         dots: 'gap-1',
         dot: 'size-2 rounded-none',
-        prev: 'start-2',
-        next: 'end-2',
       }"
     >
       <NewsLink :article="item" />
@@ -123,12 +117,12 @@ useSeoMeta({
       />
     </div>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       アーケード版「音札」紹介
       <template #sub>
         Arcade
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
     <p class="description">
       「音札」は、リズムに乗って演奏する爽快な音楽ゲームに、花札をモチーフにした「音札」によるカードバトルを組み合わせたゲームです。
     </p>
@@ -142,17 +136,17 @@ useSeoMeta({
       <dt>プラットフォーム</dt>
       <dd>アーケード</dd>
     </dl>
-    <ScriptYouTubePlayer
+    <CommonYouTube
       class="video"
       video-id="94LRZjHgpM0"
     />
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       「音札Étude」紹介
       <template #sub>
         Mobile
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
     <p class="description">
       「音札Étude」はスマホやPCで一人で手軽に遊べる対戦音楽ゲームです。<br>
       敵との勝敗を決めるのは、音ゲーの上手さとカードゲームの上手さ！「音札」を使って敵を妨害し、音ゲーを有利に進めよう！
@@ -182,18 +176,18 @@ useSeoMeta({
       <dt>プラットフォーム</dt>
       <dd>Android, iOS, iPad OS, Windows</dd>
     </dl>
-    <ScriptYouTubePlayer
+    <CommonYouTube
       class="video"
       video-id="nQ7wnzQEDpM"
     />
 
     <!-- バナー -->
-    <HeadingTitle>
+    <CommonHeadingTitle>
       コンテンツ
       <template #sub>
         Contents
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
     <div class="banners">
       <NuxtLink to="comics">
         <NuxtImg

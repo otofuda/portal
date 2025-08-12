@@ -26,6 +26,10 @@ export interface SongInfo {
   normal_video?: string
   hard_video?: string
 
+  easy_video_etude?: string
+  normal_video_etude?: string
+  hard_video_etude?: string
+
   for_ac?: boolean
   for_mb?: boolean
 
@@ -49,18 +53,18 @@ export interface SongsPayload {
 }
 
 /** 楽曲一覧のソート条件 */
-export type SongSort =
-  {
+export type SongSort
+  = {
     type: 'default' | 'name' | 'artist' | 'bpm'
     label: string
-  } |
-  {
+  }
+  | {
     type: 'level'
     label: string
     difficulty: 'e' | 'n' | 'h'
     color: string
-  } |
-  {
+  }
+  | {
     type: 'notes'
     label: string
     difficulty: 'e' | 'n' | 'h'

@@ -68,7 +68,7 @@ useSeoMeta({
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="breadcrumbLinks" />
+      <UBreadcrumb :items="breadcrumbLinks" />
     </div>
 
     <div

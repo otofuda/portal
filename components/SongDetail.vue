@@ -15,6 +15,7 @@ interface LevelInfo {
   nd: string
   notes: number
   video?: string
+  video_etude?: string
 }
 
 const levels = computed<LevelInfo[]>(() => {
@@ -24,18 +25,21 @@ const levels = computed<LevelInfo[]>(() => {
       nd: props.song.easy_nd,
       notes: props.song.easy_notes,
       video: props.song.easy_video,
+      video_etude: props.song.easy_video_etude,
     },
     {
       difficulty: props.song.normal,
       nd: props.song.normal_nd,
       notes: props.song.normal_notes,
       video: props.song.normal_video,
+      video_etude: props.song.normal_video_etude,
     },
     {
       difficulty: props.song.hard,
       nd: props.song.hard_nd,
       notes: props.song.hard_notes,
       video: props.song.hard_video,
+      video_etude: props.song.hard_video_etude,
     },
   ]
 })
@@ -138,17 +142,23 @@ const levels = computed<LevelInfo[]>(() => {
         楽曲を聴く
         <UIcon name="i-heroicons-arrow-top-right-on-square" />
       </UButton>
+    </div>
+
+    <div class="detail" v-if="props.song.youtube_chart">
+      <label>譜面攻略動画</label>
       <UButton
-        v-if="props.song.youtube_chart"
         :to="props.song.youtube_chart"
         target="_blank"
         color="rose"
-        variant="solid"
+        class="my-4"
         icon="i-fa6-brands-youtube"
       >
         譜面攻略動画を見る
-        <UIcon name="i-heroicons-arrow-top-right-on-square" />
       </UButton>
+      <CommonYouTube
+        :video-id="props.song.youtube_chart"
+        class="video mb-4"
+      />
     </div>
 
     <div class="levels">
@@ -167,22 +177,44 @@ const levels = computed<LevelInfo[]>(() => {
           <span class="level-nd">
             {{ level.nd }}
           </span>
+
           <label class="level-label">ノーツ数</label>
           <span class="level-notes">
             {{ level.notes }}
           </span>
 
-          <UButton
-            v-if="level.video"
-            :to="level.video"
-            target="_blank"
-            color="rose"
-            variant="solid"
-            icon="i-fa6-brands-youtube"
-            block
-          >
-            譜面紹介
-          </UButton>
+          <template v-if="level.video">
+            <label class="level-label">譜面紹介</label>
+            <UButton
+              :to="level.video"
+              target="_blank"
+              color="rose"
+              icon="i-fa6-brands-youtube"
+            >
+              動画を見る
+            </UButton>
+            <CommonYouTube
+              v-if="level.video"
+              :video-id="level.video"
+              class="video"
+            />
+          </template>
+
+          <template v-if="level.video_etude">
+            <label class="level-label">攻略動画</label>
+            <UButton
+              :to="level.video_etude"
+              target="_blank"
+              color="rose"
+              icon="i-fa6-brands-youtube"
+            >
+              動画を見る
+            </UButton>
+            <CommonYouTube
+              :video-id="level.video_etude"
+              class="video"
+            />
+          </template>
         </div>
       </div>
     </div>
@@ -389,6 +421,14 @@ const levels = computed<LevelInfo[]>(() => {
         padding: 0.25rem 0.5rem;
       }
     }
+  }
+
+  .video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem 0 rgba(vars.$text, 0.125);
+    overflow: hidden;
   }
 
   .share {

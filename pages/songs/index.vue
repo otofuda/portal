@@ -20,7 +20,7 @@ const SORT_OPTIONS: SongSort[] = [
 
 const filterText = ref<string>('')
 const sortOptions = ref<SongSort[]>(SORT_OPTIONS)
-const songSort = ref<SongSort>(SORT_OPTIONS[0])
+const songSort = ref<SongSort>(SORT_OPTIONS[0]!)
 const isDesc = ref<boolean>(true)
 
 const songs = computed<SongInfo[]>(() => {
@@ -99,12 +99,12 @@ const allCopyrights = computed(() => {
       <Title>{{ title }}</Title>
     </Head>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       {{ title }}
       <template #sub>
         Songs
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <p class="description">
       音札シリーズに収録されている楽曲の情報を見ることができます！

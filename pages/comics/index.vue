@@ -32,15 +32,15 @@ useSeoMeta({
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="breadcrumbLinks" />
+      <UBreadcrumb :items="breadcrumbLinks" />
     </div>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       {{ title }}
       <template #sub>
         Comics
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <p class="description">
       「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！

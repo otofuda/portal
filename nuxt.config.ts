@@ -6,11 +6,11 @@ export default defineNuxtConfig({
     ['@nuxt/ui', {
       icons: ['fa6-brands'],
       theme: {
-        colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error', 'rose', 'emerald', 'blue', 'orange', 'white', 'lime', 'cyan']
+        colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error', 'rose', 'emerald', 'blue', 'orange', 'lime', 'cyan']
       }
     }],
     ['@nuxt/image', {
-      provider: process.env.VERCEL_ENV ? 'vercel' : undefined,
+      provider: process.env.VERCEL_ENV ? 'vercel' : 'ipx',
       quality: 100,
       format: ['webp', 'png'],
       domains: ['images.microcms-assets.io', 'pbs.twimg.com'],

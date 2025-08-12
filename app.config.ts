@@ -7,7 +7,6 @@ export default defineAppConfig({
       emerald: 'emerald',
       blue: 'blue',
       orange: 'orange',
-      white: 'white',
       lime: 'lime',
       cyan: 'cyan',
       neutral: 'zinc'

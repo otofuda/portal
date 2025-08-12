@@ -6,7 +6,7 @@ export default withNuxt(
     files: ['*.js', '*.ts', '*.vue'],
     rules: {
       '@stylistic/comma-dangle': ['error', 'never'],
-      '@stylistic/max-statements-per-line': 'off',
+      '@stylistic/max-statements-per-line': ['error', { max: 4 }],},
     },
   },
 )

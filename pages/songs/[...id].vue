@@ -53,7 +53,7 @@ useSeoMeta({
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="links" />
+      <UBreadcrumb :items="links" />
     </div>
 
     <div v-if="pending">

@@ -47,15 +47,15 @@ useSeoMeta({
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="breadcrumbLinks" />
+      <UBreadcrumb :items="breadcrumbLinks" />
     </div>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       {{ title }}
       <template #sub>
         Comics
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <div
       v-if="pending"

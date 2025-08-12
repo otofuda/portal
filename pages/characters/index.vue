@@ -59,12 +59,12 @@ useSeoMeta({
       <Title>{{ title }}</Title>
     </Head>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       ストーリー
       <template #sub>
         Story
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <div class="pictures">
       <NuxtPicture
@@ -119,12 +119,12 @@ useSeoMeta({
       </IntersectionContent>
     </div>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       {{ title }}
       <template #sub>
         Characters
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <div class="character-links">
       <NuxtLink

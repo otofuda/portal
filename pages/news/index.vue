@@ -13,8 +13,6 @@ const searchTag = ref<NewsTagString | null>((() => {
   return null
 })())
 
-const runtimeConfig = useRuntimeConfig()
-
 const { data, pending } = await useFetch('/api/news')
 
 const contents = computed<NewsArticle[]>(() => {
@@ -59,15 +57,15 @@ const onClickTag = (tag: NewsTagString) => {
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="breadcrumbLinks" />
+      <UBreadcrumb :items="breadcrumbLinks" />
     </div>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       {{ title }}
       <template #sub>
         News
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <div class="news-search">
       <UInput
@@ -83,7 +81,7 @@ const onClickTag = (tag: NewsTagString) => {
         v-show="searchWord"
         class="mt-4"
         :title="`「${searchWord}」で検索中`"
-        :close="{ icon: 'i-heroicons-x-mark-20-solid', color: 'white', variant: 'ghost' }"
+        :close="{ icon: 'i-heroicons-x-mark-20-solid', color: 'neutral', variant: 'ghost' }"
         variant="subtle"
         @update:open="searchWord = ''"
       />
