@@ -1,15 +1,9 @@
 <script lang="ts" setup>
-import type { SongInfo, SongSort, SongsPayload } from '~/types/songs'
+import type { SongInfo, SongSort } from '~/types/songs'
 
 const title = ref('収録楽曲一覧')
-const runtimeConfig = useRuntimeConfig()
 
-const { data, pending, error } = await useAsyncData<SongsPayload>('songs', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/songs`, {
-    params: { limit: 1000 },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending, error } = await useFetch('/api/songs')
 
 const SORT_OPTIONS: SongSort[] = [
   { type: 'default', label: '新着順' },
@@ -21,20 +15,20 @@ const SORT_OPTIONS: SongSort[] = [
   { type: 'bpm', label: 'BPM順' },
   { type: 'notes', label: 'ノーツ数順', difficulty: 'e', color: '#25ca25' },
   { type: 'notes', label: 'ノーツ数順', difficulty: 'n', color: '#ffb223' },
-  { type: 'notes', label: 'ノーツ数順', difficulty: 'h', color: '#ff0984' }
+  { type: 'notes', label: 'ノーツ数順', difficulty: 'h', color: '#ff0984' },
 ] as const
 
 const filterText = ref<string>('')
 const sortOptions = ref<SongSort[]>(SORT_OPTIONS)
-const songSort = ref<SongSort>(SORT_OPTIONS[0])
+const songSort = ref<SongSort>(SORT_OPTIONS[0]!)
 const isDesc = ref<boolean>(true)
 
 const songs = computed<SongInfo[]>(() => {
   let songs = data.value ? [...data.value.contents] : []
   // 検索ワードの処理
   if (filterText.value) {
-    const word = filterText.value.toLowerCase();
-    songs = songs.filter(song => {
+    const word = filterText.value.toLowerCase()
+    songs = songs.filter((song) => {
       if (song.name.toLowerCase().includes(word)) { return true }
       if (song.artist.toLowerCase().includes(word)) { return true }
       if (song.illustrator.toLowerCase().includes(word)) { return true }
@@ -72,11 +66,14 @@ const songs = computed<SongInfo[]>(() => {
         const B = b[key]
         if (typeof A === 'string' && typeof B === 'string') {
           return A.localeCompare(B)
-        } else if (A < B) {
+        }
+        else if (A < B) {
           return -1
-        } else if (B < A) {
+        }
+        else if (B < A) {
           return 1
-        } else {
+        }
+        else {
           return 0
         }
       })
@@ -94,6 +91,15 @@ const allCopyrights = computed(() => {
   }
   return Array.from(result)
 })
+
+useSeoMeta({
+  title: '収録楽曲一覧｜音札ポータル',
+  ogTitle: '収録楽曲一覧｜音札ポータル',
+  description: '音札シリーズに収録されている楽曲を全曲紹介中！',
+  ogDescription: '音札シリーズに収録されている楽曲を全曲紹介中！',
+  ogImage: '/thumb.png',
+  twitterCard: 'summary_large_image',
+})
 </script>
 
 <template>
@@ -102,12 +108,12 @@ const allCopyrights = computed(() => {
       <Title>{{ title }}</Title>
     </Head>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       {{ title }}
       <template #sub>
         Songs
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <p class="description">
       音札シリーズに収録されている楽曲の情報を見ることができます！
@@ -127,7 +133,7 @@ const allCopyrights = computed(() => {
         v-model="filterText"
         icon="i-heroicons-magnifying-glass-20-solid"
         size="lg"
-        color="white"
+        class="flex-grow"
         placeholder="検索ワードを入力"
       />
     </div>
@@ -135,9 +141,17 @@ const allCopyrights = computed(() => {
     <!-- ならびかえ -->
     <div class="sort-form">
       <span>ならびかえ</span>
-      <UButtonGroup size="lg" orientation="horizontal">
-        <USelectMenu v-model="songSort" :options="sortOptions" class="flex-grow">
-          <template #label>
+      <UButtonGroup
+        size="lg"
+        orientation="horizontal"
+      >
+        <USelectMenu
+          v-model="songSort"
+          :items="sortOptions"
+          :search-input="false"
+          class="flex-grow"
+        >
+          <template #default>
             <span
               v-if="songSort.type === 'level' || songSort.type === 'notes'"
               class="flex-shrink-0 w-2 h-2 mt-px rounded-full"
@@ -145,32 +159,37 @@ const allCopyrights = computed(() => {
             />
             {{ songSort.label }}
           </template>
-          <template #option="{ option }: { option: SongSort }">
+          <template #item="{ item }: { item: SongSort }">
             <span
-              v-if="option.type === 'level' || option.type === 'notes'"
+              v-if="item.type === 'level' || item.type === 'notes'"
               class="flex-shrink-0 w-2 h-2 mt-px rounded-full"
-              :style="{ background: option.color }"
+              :style="{ background: item.color }"
             />
-            <span class="truncate">{{ option.label }}</span>
+            <span class="truncate">{{ item.label }}</span>
           </template>
         </USelectMenu>
         <!-- 昇順／降順 -->
         <UButton
           v-if="isDesc"
+          color="neutral"
           icon="i-heroicons-bars-arrow-down"
-          color="gray"
+          variant="outline"
           @click="isDesc = false"
         />
         <UButton
           v-else
+          color="neutral"
           icon="i-heroicons-bars-arrow-up"
-          color="gray"
+          variant="outline"
           @click="isDesc = true"
         />
       </UButtonGroup>
     </div>
 
-    <div v-if="songs" class="songs-list">
+    <div
+      v-if="songs"
+      class="songs-list"
+    >
       <SongLink
         v-for="song in songs"
         :key="`songs-${song.song_id}`"
@@ -181,7 +200,10 @@ const allCopyrights = computed(() => {
     </div>
 
     <ul class="copyrights">
-      <li v-for="(copyright, i) in allCopyrights" :key="`copyright-${i}`">
+      <li
+        v-for="(copyright, i) in allCopyrights"
+        :key="`copyright-${i}`"
+      >
         {{ copyright }}
       </li>
     </ul>
@@ -198,6 +220,7 @@ const allCopyrights = computed(() => {
 }
 
 .search-form {
+  display: flex;
   margin: 1rem 0;
   padding: 0 1rem;
 }

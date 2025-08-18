@@ -1,15 +1,9 @@
 <script lang="ts" setup>
-import { type NewsArticle, type NewsPayload, type NewsTag, newsTags } from '@/types/news'
+import { type NewsArticle, type NewsTag, newsTags } from '@/types/news'
 
 const route = useRoute('news-id')
-const runtimeConfig = useRuntimeConfig()
 
-const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/news`, {
-    params: { limit: 1000, filters: 'for_portal[equals]true' },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending } = await useFetch('/api/news')
 
 const content = computed<NewsArticle | null>(() => {
   if (!data.value) { return null }
@@ -40,7 +34,7 @@ const newsImage = computed<string>(() => {
 /** お知らせの種類(色とラベル) */
 const tags = computed<NewsTag[]>(() => {
   const article = content.value
-  const defaultTag: NewsTag = { label: 'お知らせ', color: 'sky' }
+  const defaultTag: NewsTag = { label: 'お知らせ', color: 'primary' }
   return article && article.tags.length > 0
     ? article.tags.map(tag => newsTags.get(tag) || defaultTag)
     : [defaultTag]
@@ -58,7 +52,7 @@ useSeoMeta({
   description,
   ogDescription: description,
   ogImage: newsImage.value,
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
 })
 </script>
 
@@ -67,7 +61,10 @@ useSeoMeta({
   <div class="news">
     <Head>
       <Title>{{ title }}</Title>
-      <Meta name="thumbnail" :content="newsImage" />
+      <Meta
+        name="thumbnail"
+        :content="newsImage"
+      />
     </Head>
 
     <NuxtImg
@@ -83,7 +80,10 @@ useSeoMeta({
       {{ title }}
     </h1>
 
-    <div v-if="pending" class="loading">
+    <div
+      v-if="pending"
+      class="loading"
+    >
       Loading...
     </div>
 
@@ -116,7 +116,10 @@ useSeoMeta({
       <ShareButtons :text="content.title" />
     </template>
 
-    <div v-else class="detail">
+    <div
+      v-else
+      class="detail"
+    >
       記事が見つかりません
     </div>
 

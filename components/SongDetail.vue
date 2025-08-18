@@ -2,7 +2,7 @@
 import type { SongInfo } from '~/types/songs'
 
 const props = defineProps<{
-  song: SongInfo;
+  song: SongInfo
 }>()
 
 const jacketSrc = computed<string>(() => {
@@ -11,10 +11,11 @@ const jacketSrc = computed<string>(() => {
 })
 
 interface LevelInfo {
-  difficulty: number;
-  nd: string;
-  notes: number;
-  video?: string;
+  difficulty: number
+  nd: string
+  notes: number
+  video?: string
+  video_etude?: string
 }
 
 const levels = computed<LevelInfo[]>(() => {
@@ -23,20 +24,23 @@ const levels = computed<LevelInfo[]>(() => {
       difficulty: props.song.easy,
       nd: props.song.easy_nd,
       notes: props.song.easy_notes,
-      video: props.song.easy_video
+      video: props.song.easy_video,
+      video_etude: props.song.easy_video_etude,
     },
     {
       difficulty: props.song.normal,
       nd: props.song.normal_nd,
       notes: props.song.normal_notes,
-      video: props.song.normal_video
+      video: props.song.normal_video,
+      video_etude: props.song.normal_video_etude,
     },
     {
       difficulty: props.song.hard,
       nd: props.song.hard_nd,
       notes: props.song.hard_notes,
-      video: props.song.hard_video
-    }
+      video: props.song.hard_video,
+      video_etude: props.song.hard_video_etude,
+    },
   ]
 })
 </script>
@@ -57,10 +61,16 @@ const levels = computed<LevelInfo[]>(() => {
       {{ props.song.artist }}
     </div>
 
-    <div v-if="props.song.comment || $props.song.copyright" class="comment">
+    <div
+      v-if="props.song.comment || $props.song.copyright"
+      class="comment"
+    >
       {{ props.song.comment }}
 
-      <div v-if="props.song.copyright" class="copyright">
+      <div
+        v-if="props.song.copyright"
+        class="copyright"
+      >
         {{ props.song.copyright }}
       </div>
     </div>
@@ -80,21 +90,40 @@ const levels = computed<LevelInfo[]>(() => {
 
       <div class="detail-badges">
         <!-- 音札(AC) -->
-        <UBadge v-if="props.song.for_ac" variant="subtle" class="badge">
+        <UBadge
+          v-if="props.song.for_ac"
+          variant="subtle"
+          class="badge"
+        >
           <UIcon name="i-heroicons-musical-note" />
           音札
         </UBadge>
-        <UBadge v-else color="gray" variant="soft" class="badge --d">
+        <UBadge
+          v-else
+          color="neutral"
+          variant="soft"
+          class="badge --d"
+        >
           <UIcon name="i-heroicons-minus" />
           音札
         </UBadge>
 
         <!-- 音札Étude -->
-        <UBadge v-if="props.song.for_mb" color="teal" variant="subtle" class="badge">
+        <UBadge
+          v-if="props.song.for_mb"
+          color="success"
+          variant="subtle"
+          class="badge"
+        >
           <UIcon name="i-heroicons-musical-note" />
           音札Étude
         </UBadge>
-        <UBadge v-else color="gray" variant="soft" class="badge --d">
+        <UBadge
+          v-else
+          color="neutral"
+          variant="soft"
+          class="badge --d"
+        >
           <UIcon name="i-heroicons-minus" />
           音札Étude
         </UBadge>
@@ -107,23 +136,29 @@ const levels = computed<LevelInfo[]>(() => {
         :to="props.song.youtube_music"
         target="_blank"
         color="primary"
-        variant="outline"
+        variant="solid"
         icon="i-heroicons-musical-note"
       >
         楽曲を聴く
         <UIcon name="i-heroicons-arrow-top-right-on-square" />
       </UButton>
+    </div>
+
+    <div class="detail" v-if="props.song.youtube_chart">
+      <label>譜面攻略動画</label>
       <UButton
-        v-if="props.song.youtube_chart"
         :to="props.song.youtube_chart"
         target="_blank"
         color="rose"
-        variant="outline"
+        class="my-4"
         icon="i-fa6-brands-youtube"
       >
         譜面攻略動画を見る
-        <UIcon name="i-heroicons-arrow-top-right-on-square" />
       </UButton>
+      <CommonYouTube
+        :video-id="props.song.youtube_chart"
+        class="video mb-4"
+      />
     </div>
 
     <div class="levels">
@@ -142,22 +177,44 @@ const levels = computed<LevelInfo[]>(() => {
           <span class="level-nd">
             {{ level.nd }}
           </span>
+
           <label class="level-label">ノーツ数</label>
           <span class="level-notes">
             {{ level.notes }}
           </span>
 
-          <UButton
-            v-if="level.video"
-            :to="level.video"
-            target="_blank"
-            color="rose"
-            variant="solid"
-            icon="i-fa6-brands-youtube"
-            block
-          >
-            譜面紹介
-          </UButton>
+          <template v-if="level.video">
+            <label class="level-label">譜面紹介</label>
+            <UButton
+              :to="level.video"
+              target="_blank"
+              color="rose"
+              icon="i-fa6-brands-youtube"
+            >
+              動画を見る
+            </UButton>
+            <CommonYouTube
+              v-if="level.video"
+              :video-id="level.video"
+              class="video"
+            />
+          </template>
+
+          <template v-if="level.video_etude">
+            <label class="level-label">攻略動画</label>
+            <UButton
+              :to="level.video_etude"
+              target="_blank"
+              color="rose"
+              icon="i-fa6-brands-youtube"
+            >
+              動画を見る
+            </UButton>
+            <CommonYouTube
+              :video-id="level.video_etude"
+              class="video"
+            />
+          </template>
         </div>
       </div>
     </div>
@@ -231,7 +288,7 @@ const levels = computed<LevelInfo[]>(() => {
   }
 
   .detail {
-    justify-self: center;
+    justify-self: stretch;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
@@ -272,6 +329,7 @@ const levels = computed<LevelInfo[]>(() => {
 
   .links {
     justify-self: center;
+    padding-top: 1rem;
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
@@ -363,6 +421,14 @@ const levels = computed<LevelInfo[]>(() => {
         padding: 0.25rem 0.5rem;
       }
     }
+  }
+
+  .video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem 0 rgba(vars.$text, 0.125);
+    overflow: hidden;
   }
 
   .share {

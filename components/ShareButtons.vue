@@ -3,7 +3,7 @@ const route = useRoute()
 
 const props = defineProps<{
   // シェアするテキスト
-  text: string;
+  text: string
 }>()
 
 const text = computed(() => props.text + ' | 音札ポータル')
@@ -24,14 +24,17 @@ const lineLink = computed(() => {
 const onShare = () => {
   navigator.share({
     text: text.value,
-    url
+    url,
   })
 }
 </script>
 
 <template>
   <div class="share">
-    <UBadge color="gray">
+    <UBadge
+      color="neutral"
+      variant="subtle"
+    >
       共有
     </UBadge>
     <!-- X(Twitter) -->
@@ -39,7 +42,7 @@ const onShare = () => {
       icon="i-fa6-brands-x-twitter"
       size="lg"
       color="primary"
-      :ui="{ rounded: 'rounded-full' }"
+      :ui="{ base: 'rounded-full' }"
       variant="outline"
       :to="twitterLink"
       target="_blank"
@@ -49,7 +52,7 @@ const onShare = () => {
       icon="i-fa6-brands-facebook"
       size="lg"
       color="primary"
-      :ui="{ rounded: 'rounded-full' }"
+      :ui="{ base: 'rounded-full' }"
       variant="outline"
       :to="facebookLink"
       target="_blank"
@@ -59,7 +62,7 @@ const onShare = () => {
       icon="i-fa6-brands-line"
       size="lg"
       color="primary"
-      :ui="{ rounded: 'rounded-full' }"
+      :ui="{ base: 'rounded-full' }"
       variant="outline"
       :to="lineLink"
       target="_blank"
@@ -69,7 +72,7 @@ const onShare = () => {
       icon="i-heroicons-share"
       size="lg"
       color="primary"
-      :ui="{ rounded: 'rounded-full' }"
+      :ui="{ base: 'rounded-full' }"
       variant="outline"
       @click="onShare"
     />

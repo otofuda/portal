@@ -1,16 +1,10 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '#ui/types'
-import type { ComicInfo, ComicPayload } from '~/types/comics'
+import type { BreadcrumbItem } from '#ui/types'
+import type { ComicInfo } from '~/types/comics'
 
 const route = useRoute('comics-id')
-const runtimeConfig = useRuntimeConfig()
 
-const { data, pending } = await useAsyncData<ComicPayload>('comics', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/comics`, {
-    params: { limit: 1000 },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending } = await useFetch('/api/comics')
 
 const content = computed<ComicInfo | null>(() => {
   if (!data.value) { return null }
@@ -22,19 +16,27 @@ const content = computed<ComicInfo | null>(() => {
 
 const title = ref(content.value?.title)
 
-const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
+const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: 'マンガ一覧', to: '/comics' },
-    { label: content.value?.title || '' }
+    { label: content.value?.title || '' },
   ]
+})
+
+/** SEO用画像 */
+const imageSrc = computed<string | null>(() => {
+  if (!content.value) { return null }
+  return content.value.image.url.replace('https://images.microcms-assets.io', 'microcms')
 })
 
 useSeoMeta({
   title: `「おとふだびより♪」${title.value}｜音札ポータル`,
   ogTitle: `「おとふだびより♪」${title.value}｜音札ポータル`,
   description: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！',
-  ogDescription: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！'
+  ogDescription: '「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！',
+  ogImage: imageSrc.value,
+  twitterCard: 'summary',
 })
 </script>
 
@@ -45,21 +47,27 @@ useSeoMeta({
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="breadcrumbLinks" />
+      <UBreadcrumb :items="breadcrumbLinks" />
     </div>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       {{ title }}
       <template #sub>
         Comics
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
-    <div v-if="pending" class="loading">
+    <div
+      v-if="pending"
+      class="loading"
+    >
       Loading...
     </div>
 
-    <div v-else-if="content" class="comic-img">
+    <div
+      v-else-if="content"
+      class="comic-img"
+    >
       <NuxtPicture
         :src="content.image.url.replace('https://images.microcms-assets.io', 'microcms')"
         :alt="title"
@@ -68,11 +76,17 @@ useSeoMeta({
       />
     </div>
 
-    <div v-else class="error">
+    <div
+      v-else
+      class="error"
+    >
       マンガが見つかりません
     </div>
 
-    <ShareButtons v-if="content" :text="content.title" />
+    <ShareButtons
+      v-if="content"
+      :text="content.title"
+    />
 
     <div class="comic-menu">
       <UButton

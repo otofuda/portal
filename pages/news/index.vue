@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '#ui/types'
-import { type NewsArticle, type NewsPayload, type NewsTagString, newsTags } from '@/types/news'
+import type { BreadcrumbItem } from '#ui/types'
+import { type NewsArticle, type NewsTagString, newsTags } from '@/types/news'
 
 const route = useRoute()
 
@@ -13,14 +13,7 @@ const searchTag = ref<NewsTagString | null>((() => {
   return null
 })())
 
-const runtimeConfig = useRuntimeConfig()
-
-const { data, pending } = await useAsyncData<NewsPayload>('news', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/news`, {
-    params: { limit: 1000, filters: 'for_portal[equals]true' },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending } = await useFetch('/api/news')
 
 const contents = computed<NewsArticle[]>(() => {
   return data.value ? data.value.contents : []
@@ -40,20 +33,30 @@ const filteredContents = computed<NewsArticle[]>(() => {
   })
 })
 
-const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
+const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
-    { label: 'お知らせ一覧', to: '' }
+    { label: 'お知らせ一覧', to: '' },
   ]
 })
 
 const onClickTag = (tag: NewsTagString) => {
   if (searchTag.value === tag) {
     searchTag.value = null
-  } else {
+  }
+  else {
     searchTag.value = tag
   }
 }
+
+useSeoMeta({
+  title: 'お知らせ一覧｜音札ポータル',
+  ogTitle: 'お知らせ一覧｜音札ポータル',
+  description: '音札シリーズの最新情報はこちら！',
+  ogDescription: '音札シリーズの最新情報はこちら！',
+  ogImage: '/thumb.png',
+  twitterCard: 'summary_large_image',
+})
 </script>
 
 <template>
@@ -63,15 +66,15 @@ const onClickTag = (tag: NewsTagString) => {
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="breadcrumbLinks" />
+      <UBreadcrumb :items="breadcrumbLinks" />
     </div>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       {{ title }}
       <template #sub>
         News
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <div class="news-search">
       <UInput
@@ -80,14 +83,16 @@ const onClickTag = (tag: NewsTagString) => {
         size="lg"
         color="primary"
         placeholder="検索ワードを入力"
+        class="w-full"
       />
 
       <UAlert
         v-show="searchWord"
         class="mt-4"
-        :title="`「${ searchWord }」で検索中`"
-        :close-button="{ icon: 'i-heroicons-x-mark-20-solid', color: 'white', variant: 'ghost', padded: false }"
-        @close="searchWord = ''"
+        :title="`「${searchWord}」で検索中`"
+        :close="{ icon: 'i-heroicons-x-mark-20-solid', color: 'neutral', variant: 'ghost' }"
+        variant="subtle"
+        @update:open="searchWord = ''"
       />
     </div>
 
@@ -105,11 +110,17 @@ const onClickTag = (tag: NewsTagString) => {
     </div>
 
     <div class="news-list">
-      <div v-if="pending" class="px-4">
+      <div
+        v-if="pending"
+        class="px-4"
+      >
         Loading...
       </div>
 
-      <div v-if="filteredContents.length === 0" class="px-4">
+      <div
+        v-if="filteredContents.length === 0"
+        class="px-4"
+      >
         <UAlert
           title="条件に一致するお知らせが見つかりませんでした"
           color="primary"

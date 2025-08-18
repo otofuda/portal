@@ -3,11 +3,12 @@ const showSpNav = ref<boolean>(false)
 </script>
 
 <template>
-  <div
-    class="layout"
-  >
+  <div class="layout">
     <header>
-      <NuxtLink to="/" class="logo">
+      <NuxtLink
+        to="/"
+        class="logo"
+      >
         <NuxtImg
           class="icon"
           format="webp"
@@ -39,20 +40,28 @@ const showSpNav = ref<boolean>(false)
     </header>
 
     <!-- ナビゲーション(スマホ用) -->
-    <USlideover v-model="showSpNav" class="nav --sp">
-      <UButton
-        icon="i-heroicons-x-mark"
-        size="xl"
-        color="primary"
-        variant="ghost"
-        trailing
-        @click="showSpNav = false"
-      />
-      <NavLinkList @close-nav="showSpNav = false" />
+    <USlideover
+      v-model:open="showSpNav"
+      class="nav --sp"
+    >
+      <template #content>
+        <UButton
+          icon="i-heroicons-x-mark"
+          size="xl"
+          color="primary"
+          variant="ghost"
+          class="rounded-none"
+          @click="showSpNav = false"
+        />
+        <NavLinkList @close-nav="showSpNav = false" />
+      </template>
     </USlideover>
 
     <!-- TheHeroのTeleport用 -->
-    <div id="hero" class="hero" />
+    <div
+      id="hero"
+      class="hero"
+    />
 
     <!-- ナビゲーション(PC用) -->
     <div class="nav-wrapper">
@@ -69,7 +78,11 @@ const showSpNav = ref<boolean>(false)
       <p>音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。</p>
 
       <div class="banners">
-        <NuxtLink to="https://arcade.otofuda.com" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://arcade.otofuda.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"
@@ -77,7 +90,11 @@ const showSpNav = ref<boolean>(false)
             alt="音札公式ホームページ"
           />
         </NuxtLink>
-        <NuxtLink to="https://net.otofuda.com" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://net.otofuda.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"
@@ -85,7 +102,11 @@ const showSpNav = ref<boolean>(false)
             alt="おとふだNET"
           />
         </NuxtLink>
-        <NuxtLink to="https://www.youtube.com/@otofuda" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://www.youtube.com/@otofuda"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"
@@ -93,7 +114,11 @@ const showSpNav = ref<boolean>(false)
             alt="YouTube公式チャンネル"
           />
         </NuxtLink>
-        <NuxtLink to="https://twitter.com/otofuda" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://twitter.com/otofuda"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"
@@ -101,7 +126,11 @@ const showSpNav = ref<boolean>(false)
             alt="公式Twitterアカウント"
           />
         </NuxtLink>
-        <NuxtLink to="https://otofuda.booth.pm" target="_blank" rel="noopener noreferrer">
+        <NuxtLink
+          to="https://otofuda.booth.pm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <NuxtImg
             format="webp"
             width="360"
@@ -115,35 +144,39 @@ const showSpNav = ref<boolean>(false)
         <UButton
           icon="i-fa6-brands-x-twitter"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
           to="https://twitter.com/otofuda"
           target="_blank"
         />
         <UButton
+          icon="i-fa6-brands-youtube"
+          size="lg"
+          color="neutral"
+          variant="ghost"
+          to="https://www.youtube.com/@otofuda"
+          target="_blank"
+        />
+        <UButton
           icon="i-fa6-brands-instagram"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
           to="https://www.instagram.com/otfdpr/"
           target="_blank"
         />
         <UButton
-          icon="i-fa6-brands-youtube"
+          icon="i-fa6-brands-facebook"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
-          to="https://www.youtube.com/@youtube"
+          to="https://www.facebook.com/profile.php?id=61578734092510"
           target="_blank"
         />
         <UButton
           icon="i-fa6-brands-pixiv"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
           to="https://www.pixiv.net/users/44346167"
           target="_blank"
@@ -151,8 +184,7 @@ const showSpNav = ref<boolean>(false)
         <UButton
           icon="i-fa6-brands-github"
           size="lg"
-          color="gray"
-          :ui="{ rounded: 'rounded-full' }"
+          color="neutral"
           variant="ghost"
           to="https://github.com/otofuda"
           target="_blank"

@@ -1,26 +1,19 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '#ui/types'
-import type { ComicInfo, ComicPayload } from '~/types/comics'
+import type { BreadcrumbItem } from '#ui/types'
+import type { ComicInfo } from '~/types/comics'
 
 const title = ref('マンガ一覧')
 
-const runtimeConfig = useRuntimeConfig()
-
-const { data, pending } = await useAsyncData<ComicPayload>('comics', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/comics`, {
-    params: { limit: 1000 },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending } = await useFetch('/api/comics')
 
 const comics = computed<ComicInfo[]>(() => {
   return data.value ? data.value.contents : []
 })
 
-const breadcrumbLinks = computed<BreadcrumbLink[]>(() => {
+const breadcrumbLinks = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
-    { label: 'マンガ一覧', to: '' }
+    { label: 'マンガ一覧', to: '' },
   ]
 })
 
@@ -28,7 +21,9 @@ useSeoMeta({
   title: 'マンガ一覧｜音札ポータル',
   ogTitle: 'マンガ一覧｜音札ポータル',
   description: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！',
-  ogDescription: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！'
+  ogDescription: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！',
+  ogImage: '/thumb.png',
+  twitterCard: 'summary_large_image',
 })
 </script>
 
@@ -39,15 +34,15 @@ useSeoMeta({
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="breadcrumbLinks" />
+      <UBreadcrumb :items="breadcrumbLinks" />
     </div>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       {{ title }}
       <template #sub>
         Comics
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
     <p class="description">
       「おとふだびより♪」は音札の世界をゆる〜くお届けする4コマ漫画です！

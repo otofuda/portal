@@ -5,20 +5,25 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview --port 8080",
     "postinstall": "nuxt prepare",
-    "lint": "eslint . --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@nuxt/image": "^1.9.0",
-    "@nuxtjs/seo": "^2.1.0",
-    "nuxt": "^3.15.2",
-    "sass": "^1.77.8"
+    "@iconify-json/heroicons": "^1.2.2",
+    "@nuxt/eslint": "^1.8.0",
+    "@nuxt/image": "^1.11.0",
+    "@nuxt/scripts": "^0.11.10",
+    "@unhead/vue": "^2.0.5",
+    "eslint": "^9.33.0",
+    "nuxt": "^4.0.3",
+    "sass": "^1.90.0"
   },
   "dependencies": {
     "@iconify-json/fa6-brands": "^1.1.18",
-    "@nuxt/ui": "^2.21.0",
-    "sharp": "^0.33.4",
-    "simple-parallax-js": "^5.6.2",
-    "vue3-carousel": "^0.3.1"
+    "@nuxt/ui": "^3.3.0",
+    "@nuxtjs/seo": "^3.1.0",
+    "sharp": "^0.33.5",
+    "simple-parallax-js": "^5.6.2"
   },
   "volta": {
     "node": "22.13.1",

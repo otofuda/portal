@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import '@/assets/normalize.css'
+
 onMounted(() => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js', { scope: '/' })
@@ -8,13 +9,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <UApp>
     <TheBackground />
     <NuxtLayout>
       <NuxtLoadingIndicator color="#52a9ff" />
       <NuxtPage />
     </NuxtLayout>
-  </div>
+  </UApp>
 </template>
 
 <style lang="scss">

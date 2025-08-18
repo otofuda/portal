@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
-import 'vue3-carousel/dist/carousel.css'
-
 import type { TopicInfo, TopicPayload } from '~/types/topics'
 import type { NewsArticle, NewsPayload } from '~/types/news'
 
@@ -12,7 +9,7 @@ const runtimeConfig = useRuntimeConfig()
 const topicsData = await useAsyncData<TopicPayload>('topics', () => {
   return $fetch(`${runtimeConfig.public.apiBase}api/v1/topics`, {
     params: { limit: 1000 },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
+    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken },
   })
 })
 
@@ -23,12 +20,16 @@ const topics = computed<TopicInfo[]>(() => {
 const newsData = await useAsyncData<NewsPayload>('news', () => {
   return $fetch(`${runtimeConfig.public.apiBase}api/v1/news`, {
     params: { limit: 1000, filters: 'for_portal[equals]true' },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
+    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken },
   })
 })
 
 const latestNews = computed<NewsArticle[]>(() => {
   return newsData.data.value ? newsData.data.value.contents.slice(0, 5) : []
+})
+
+useHead({
+  titleTemplate: '音札ポータル',
 })
 
 useSeoMeta({
@@ -37,74 +38,77 @@ useSeoMeta({
   description: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。',
   ogDescription: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。',
   ogImage: '/thumb.png',
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
 })
 </script>
 
 <template>
   <div>
     <Head>
-      <Title>{{ title }}</Title>
+      <Title>{{ '' }}</Title>
     </Head>
 
-    <ClientOnly>
-      <Teleport to="#hero">
-        <TheHero />
-      </Teleport>
-    </ClientOnly>
+    <Teleport to="#hero">
+      <TheHero />
+    </Teleport>
 
     <!-- トピックス -->
-    <HeadingTitle>
+    <CommonHeadingTitle>
       トピックス
       <template #sub>
         Topics
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
     <p class="description">
       音札の最新情報はこちら！
     </p>
 
-    <Carousel class="slider" :items-to-show="1.2" :wrap-around="true">
-      <Slide
-        v-for="topic in topics"
-        :key="`topic-${topic.id}`"
-        class="topic"
+    <UCarousel
+      v-slot="{ item: topic }"
+      :items="topics"
+      dots
+      loop
+      class="mt-4 mb-16"
+      :ui="{
+        dots: 'gap-1',
+        dot: 'size-2 rounded-none',
+      }"
+    >
+      <NuxtLink
+        :to="topic.link"
+        target="_blank"
+        class="flex justify-center"
       >
-        <NuxtLink :to="topic.link" target="_blank">
-          <NuxtPicture
-            format="webp"
-            :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg`"
-            sizes="500"
-            :alt="topic.alt"
-          />
-        </NuxtLink>
-      </Slide>
-      <template #addons>
-        <Navigation />
-        <Pagination />
-      </template>
-    </Carousel>
+        <NuxtPicture
+          format="webp"
+          :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg`"
+          sizes="500"
+          :alt="topic.alt"
+        />
+      </NuxtLink>
+    </UCarousel>
 
     <!-- お知らせ -->
-    <HeadingTitle>
+    <CommonHeadingTitle>
       最新のお知らせ
       <template #sub>
         News
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
 
-    <Carousel class="slider">
-      <Slide
-        v-for="news in latestNews"
-        :key="`latest-news-${news.id}`"
-      >
-        <NewsLink :article="news" />
-      </Slide>
-      <template #addons>
-        <Navigation />
-        <Pagination />
-      </template>
-    </Carousel>
+    <UCarousel
+      v-slot="{ item }"
+      :items="latestNews"
+      dots
+      loop
+      class="mb-16"
+      :ui="{
+        dots: 'gap-1',
+        dot: 'size-2 rounded-none',
+      }"
+    >
+      <NewsLink :article="item" />
+    </UCarousel>
 
     <div class="menu">
       <UButton
@@ -117,12 +121,12 @@ useSeoMeta({
       />
     </div>
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       アーケード版「音札」紹介
       <template #sub>
         Arcade
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
     <p class="description">
       「音札」は、リズムに乗って演奏する爽快な音楽ゲームに、花札をモチーフにした「音札」によるカードバトルを組み合わせたゲームです。
     </p>
@@ -136,27 +140,32 @@ useSeoMeta({
       <dt>プラットフォーム</dt>
       <dd>アーケード</dd>
     </dl>
-    <iframe
+    <CommonYouTube
       class="video"
-      src="https://www.youtube-nocookie.com/embed/94LRZjHgpM0?si=476AppZZNFs0jQPY&amp;controls=0"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
+      video-id="94LRZjHgpM0"
     />
 
-    <HeadingTitle>
+    <CommonHeadingTitle>
       「音札Étude」紹介
       <template #sub>
         Mobile
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
     <p class="description">
       「音札Étude」はスマホやPCで一人で手軽に遊べる対戦音楽ゲームです。<br>
       敵との勝敗を決めるのは、音ゲーの上手さとカードゲームの上手さ！「音札」を使って敵を妨害し、音ゲーを有利に進めよう！
     </p>
-    <a class="etude-link" href="https://etude.otofuda.com/" target="_blank">
-      <NuxtImg format="webp" :width="500" class="--etude" src="/assets/button_etude.png" />
+    <a
+      class="etude-link"
+      href="https://etude.otofuda.com/"
+      target="_blank"
+    >
+      <NuxtImg
+        format="webp"
+        :width="500"
+        class="--etude"
+        src="/assets/button_etude.png"
+      />
     </a>
     <p class="description">
       デッキ編成や戦略を研究する、同じ譜面を繰り返し練習する、好きな楽曲をひたすらリピートする、など楽しみ方はあなた次第！
@@ -171,22 +180,18 @@ useSeoMeta({
       <dt>プラットフォーム</dt>
       <dd>Android, iOS, iPad OS, Windows</dd>
     </dl>
-    <iframe
+    <CommonYouTube
       class="video"
-      src="https://www.youtube-nocookie.com/embed/nQ7wnzQEDpM?si=_AQUAGihH8h7sCQl&amp;controls=0"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
+      video-id="nQ7wnzQEDpM"
     />
 
     <!-- バナー -->
-    <HeadingTitle>
+    <CommonHeadingTitle>
       コンテンツ
       <template #sub>
         Contents
       </template>
-    </HeadingTitle>
+    </CommonHeadingTitle>
     <div class="banners">
       <NuxtLink to="comics">
         <NuxtImg
@@ -217,41 +222,6 @@ useSeoMeta({
 .heading {
   margin: 1rem 0;
   justify-content: center;
-}
-
-.slider {
-  margin-bottom: 2rem;
-  --vc-pgn-margin: 0 2px;
-  --vc-pgn-width: 8px;
-  --vc-pgn-active-color: rgb(var(--color-primary-DEFAULT));
-  --vc-pgn-background-color: rgb(var(--color-primary-100));
-  --vc-nav-color: rgb(var(--color-primary-DEFAULT));
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 1rem;
-    height: 100%;
-    background: linear-gradient(to right, #ffffff88, #ffffff00);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    width: 1rem;
-    height: 100%;
-    background: linear-gradient(to left, #ffffff88, #ffffff00);
-  }
-
-  .carousel__slide {
-    padding: 1rem;
-  }
 }
 
 .description {
@@ -316,11 +286,13 @@ useSeoMeta({
   margin: 2rem 0;
   border-radius: 1rem;
   box-shadow: 0 0.25rem 0.5rem 0 rgba(vars.$text, 0.125);
+  overflow: hidden;
 }
 
 .banners {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.5rem;
   padding: 0 1rem;
   margin: 1rem 0 2rem 0;
@@ -328,6 +300,7 @@ useSeoMeta({
   a {
     border-radius: 0.5rem;
     box-shadow: 0 0.25rem 0.5rem 0 rgba(vars.$border, 0.5);
+    max-width: 500px;
 
     img {
       border-radius: 0.5rem;

@@ -2,7 +2,10 @@
 
 <template>
   <h1 class="heading">
-    <span v-if="$slots['sub']" class="sub">
+    <span
+      v-if="$slots['sub']"
+      class="sub"
+    >
       <slot name="sub" />
     </span>
 

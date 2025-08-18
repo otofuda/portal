@@ -2,8 +2,8 @@
 import type { SongInfo, SongSort } from '~/types/songs'
 
 const props = defineProps<{
-  song: SongInfo;
-  sort?: SongSort;
+  song: SongInfo
+  sort?: SongSort
 }>()
 
 const jacketSrc = computed<string>(() => {
@@ -13,7 +13,10 @@ const jacketSrc = computed<string>(() => {
 </script>
 
 <template>
-  <NuxtLink :to="`songs/${props.song.song_id}`" class="song-link">
+  <NuxtLink
+    :to="`songs/${props.song.song_id}`"
+    class="song-link"
+  >
     <!-- ジャケット -->
     <NuxtPicture
       class="jacket"
@@ -29,38 +32,65 @@ const jacketSrc = computed<string>(() => {
     </div>
 
     <!-- 特殊なソート適用時 -->
-    <div v-if="sort?.type === 'level' || sort?.type === 'notes'" class="info">
+    <div
+      v-if="sort?.type === 'level' || sort?.type === 'notes'"
+      class="info"
+    >
       <!-- 難易度情報 -->
-      <div v-if="sort.difficulty === 'e'" class="difficulty --e">
+      <div
+        v-if="sort.difficulty === 'e'"
+        class="difficulty --e"
+      >
         {{ props.song.easy }}
       </div>
-      <div v-else-if="sort.difficulty === 'n'" class="difficulty --n">
+      <div
+        v-else-if="sort.difficulty === 'n'"
+        class="difficulty --n"
+      >
         {{ props.song.normal }}
       </div>
-      <div v-else-if="sort.difficulty === 'h'" class="difficulty --h">
+      <div
+        v-else-if="sort.difficulty === 'h'"
+        class="difficulty --h"
+      >
         {{ props.song.hard }}
       </div>
       <!-- ノーツ数情報 -->
-      <div v-if="sort.difficulty === 'e'" class="number">
+      <div
+        v-if="sort.difficulty === 'e'"
+        class="number"
+      >
         {{ props.song.easy_notes }} Notes
       </div>
-      <div v-else-if="sort.difficulty === 'n'" class="number">
+      <div
+        v-else-if="sort.difficulty === 'n'"
+        class="number"
+      >
         {{ props.song.normal_notes }} Notes
       </div>
-      <div v-else-if="sort.difficulty === 'h'" class="number">
+      <div
+        v-else-if="sort.difficulty === 'h'"
+        class="number"
+      >
         {{ props.song.hard_notes }} Notes
       </div>
     </div>
 
     <!-- BPMソート適用時 -->
-    <div v-else-if="sort?.type === 'bpm'" class="info">
+    <div
+      v-else-if="sort?.type === 'bpm'"
+      class="info"
+    >
       <div class="number">
         BPM: {{ props.song.dispbpm }}
       </div>
     </div>
 
     <!-- 通常時 -->
-    <div v-else class="info">
+    <div
+      v-else
+      class="info"
+    >
       <!-- 難易度情報 -->
       <div class="difficulty --e">
         {{ props.song.easy }}
@@ -76,21 +106,40 @@ const jacketSrc = computed<string>(() => {
     <!-- 収録タイトル情報 -->
     <div class="titles">
       <!-- 音札(AC) -->
-      <UBadge v-if="props.song.for_ac" variant="subtle" class="badge">
+      <UBadge
+        v-if="props.song.for_ac"
+        variant="subtle"
+        class="badge"
+      >
         <UIcon name="i-heroicons-musical-note" />
         音札
       </UBadge>
-      <UBadge v-else color="gray" variant="soft" class="badge --d">
+      <UBadge
+        v-else
+        color="neutral"
+        variant="soft"
+        class="badge --d"
+      >
         <UIcon name="i-heroicons-minus" />
         音札
       </UBadge>
 
       <!-- 音札Étude -->
-      <UBadge v-if="props.song.for_mb" color="teal" variant="subtle" class="badge">
+      <UBadge
+        v-if="props.song.for_mb"
+        color="success"
+        variant="subtle"
+        class="badge"
+      >
         <UIcon name="i-heroicons-musical-note" />
         音札Étude
       </UBadge>
-      <UBadge v-else color="gray" variant="soft" class="badge --d">
+      <UBadge
+        v-else
+        color="neutral"
+        variant="soft"
+        class="badge --d"
+      >
         <UIcon name="i-heroicons-minus" />
         音札Étude
       </UBadge>

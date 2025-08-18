@@ -1,21 +1,14 @@
 <script lang="ts" setup>
-import type { BreadcrumbLink } from '#ui/types'
-import type { SongInfo, SongsPayload } from '@/types/songs'
+import type { BreadcrumbItem } from '#ui/types'
+import type { SongInfo } from '@/types/songs'
 
-const route = useRoute()
-const runtimeConfig = useRuntimeConfig()
+const route = useRoute('songs-id')
 
-const { data, pending } = await useAsyncData<SongsPayload>('songs', () => {
-  return $fetch(`${runtimeConfig.public.apiBase}api/v1/songs`, {
-    params: { limit: 1000 },
-    headers: { 'X-MICROCMS-API-KEY': runtimeConfig.public.apiToken }
-  })
-})
+const { data, pending } = await useFetch('/api/songs')
 
 const content = computed<SongInfo | null>(() => {
   if (!data.value) { return null }
-  // @ts-expect-error
-  const id = route.params.id as string
+  const id = route.params.id || []
   return data.value.contents.find((song) => {
     return id.includes(song.song_id)
   }) || null
@@ -23,12 +16,33 @@ const content = computed<SongInfo | null>(() => {
 
 const title = ref(`${content.value?.name} - 楽曲情報`)
 
-const links = computed<BreadcrumbLink[]>(() => {
+const links = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'TOP', icon: 'i-heroicons-home', to: '/' },
     { label: '楽曲一覧', to: '/songs' },
-    { label: content.value?.name || '' }
+    { label: content.value?.name || '' },
   ]
+})
+
+/** SEO用説明文 */
+const description = computed(() => {
+  return `音札の収録楽曲「${content.value?.name} - ${content.value?.artist}」をご紹介します`
+})
+
+/** SEO用ジャケット画像 */
+const jacketImage = computed<string | null>(() => {
+  if (!content.value) { return null }
+  const size = Math.min(640, content.value.jacket.width)
+  return `${content.value.jacket.url}?w=${size}`
+})
+
+useSeoMeta({
+  title: title.value,
+  ogTitle: title.value,
+  description,
+  ogDescription: description,
+  ogImage: jacketImage.value,
+  twitterCard: 'summary',
 })
 </script>
 
@@ -39,14 +53,17 @@ const links = computed<BreadcrumbLink[]>(() => {
     </Head>
 
     <div class="breadcrumb">
-      <UBreadcrumb :links="links" />
+      <UBreadcrumb :items="links" />
     </div>
 
     <div v-if="pending">
       Loading...
     </div>
 
-    <SongDetail v-else-if="content" :song="content" />
+    <SongDetail
+      v-else-if="content"
+      :song="content"
+    />
 
     <div v-else>
       Not Found

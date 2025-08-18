@@ -2,12 +2,15 @@
 import type { ComicInfo } from '~/types/comics'
 
 const props = defineProps<{
-  comic: ComicInfo;
+  comic: ComicInfo
 }>()
 </script>
 
 <template>
-  <NuxtLink :to="`comics/${props.comic.id}`" class="comic-link">
+  <NuxtLink
+    :to="`comics/${props.comic.id}`"
+    class="comic-link"
+  >
     <NuxtImg
       class="thumbnail"
       :src="props.comic.image.url.replace('https://images.microcms-assets.io', 'microcms')"

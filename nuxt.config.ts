@@ -1,4 +1,33 @@
+import type SimpleParallax from 'simple-parallax-js'
+
 export default defineNuxtConfig({
+  // 使用するモジュール
+  modules: [
+    ['@nuxt/ui', {
+      icons: ['fa6-brands'],
+      theme: {
+        colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error', 'rose', 'emerald', 'blue', 'orange', 'lime', 'cyan', 'purple']
+      }
+    }],
+    ['@nuxt/image', {
+      provider: process.env.VERCEL_ENV ? 'vercel' : 'ipx',
+      quality: 100,
+      format: ['webp', 'png'],
+      domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
+      alias: {
+        microcms: 'https://images.microcms-assets.io',
+        twimg: 'https://pbs.twimg.com'
+      }
+    }],
+    ['@nuxtjs/seo', {}],
+    ['@nuxt/scripts', {}],
+    ['@nuxt/eslint', {
+      config: {
+        stylistic: true
+      }
+    }]
+  ],
+
   app: {
     // ページ遷移時のアニメーション
     pageTransition: {
@@ -8,6 +37,7 @@ export default defineNuxtConfig({
     // <head> の内容
     head: {
       titleTemplate: '%s | 音札ポータル',
+      title: '音札ポータル',
       meta: [
         { name: 'description', content: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。' },
         { name: 'thumbnail', content: '/thumb.png' },
@@ -23,33 +53,9 @@ export default defineNuxtConfig({
     }
   },
 
-  experimental: {
-    typedPages: true,
-    sharedPrerenderData: true
-  },
-
   vue: {
     compilerOptions: {}
   },
-
-  // 使用するモジュール
-  modules: [
-    // ['@nuxtjs/eslint-module', { lintOnStart: false }],
-    ['@nuxt/ui', {
-      icons: ['fa6-brands']
-    }],
-    ['@nuxt/image', {
-      provider: process.env.VERCEL_ENV ? 'vercel' : undefined,
-      quality: 100,
-      format: ['webp', 'png'],
-      domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
-      alias: {
-        microcms: 'https://images.microcms-assets.io',
-        twimg: 'https://pbs.twimg.com'
-      }
-    }],
-    ['@nuxtjs/seo', {}]
-  ],
 
   // Nuxt SEO 関連
   site: {
@@ -57,10 +63,10 @@ export default defineNuxtConfig({
     name: '音札ポータル',
     description: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。'
   },
-  ogImage: { enabled: false },
-  linkChecker: { enabled: false },
 
-  devServer: { port: 8080 },
+  colorMode: {
+    preference: 'light'
+  },
 
   // 環境変数
   runtimeConfig: {
@@ -70,9 +76,14 @@ export default defineNuxtConfig({
     }
   },
 
-  colorMode: {
-    preference: 'light'
+  devServer: { port: 8080 },
+
+  experimental: {
+    typedPages: true,
+    sharedPrerenderData: true
   },
+
+  compatibilityDate: '2024-07-19',
 
   vite: {
     css: {
@@ -84,6 +95,12 @@ export default defineNuxtConfig({
       }
     }
   },
-
-  compatibilityDate: '2024-07-19'
+  linkChecker: { enabled: false },
+  ogImage: { enabled: false }
 })
+
+declare global {
+  interface Window {
+    simpleParallax: typeof SimpleParallax
+  }
+}
