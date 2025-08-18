@@ -28,6 +28,10 @@ const latestNews = computed<NewsArticle[]>(() => {
   return newsData.data.value ? newsData.data.value.contents.slice(0, 5) : []
 })
 
+useHead({
+  titleTemplate: '音札ポータル',
+})
+
 useSeoMeta({
   title: '音札ポータル',
   ogTitle: '音札ポータル',
@@ -41,7 +45,7 @@ useSeoMeta({
 <template>
   <div>
     <Head>
-      <Title>{{ title }}</Title>
+      <Title>{{ '' }}</Title>
     </Head>
 
     <Teleport to="#hero">
@@ -288,6 +292,7 @@ useSeoMeta({
 .banners {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.5rem;
   padding: 0 1rem;
   margin: 1rem 0 2rem 0;
@@ -295,6 +300,7 @@ useSeoMeta({
   a {
     border-radius: 0.5rem;
     box-shadow: 0 0.25rem 0.5rem 0 rgba(vars.$border, 0.5);
+    max-width: 500px;
 
     img {
       border-radius: 0.5rem;

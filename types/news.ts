@@ -1,6 +1,6 @@
 import type { ButtonProps } from '#ui/types'
 
-export type NewsTagString = 'お知らせ' | 'ゲーム情報' | '音札Étude' | 'アーケード版' | 'イベント情報' | 'おとふだNET' | '音札ポータル' | 'おとふだびより♪'
+export type NewsTagString = 'お知らせ' | 'ゲーム情報' | '音札Étude' | 'アーケード版' | 'イベント情報' | 'おとふだNET' | '音札ポータル' | 'おとふだびより♪' | '開発日記'
 
 export interface NewsTag {
   label: NewsTagString
@@ -60,4 +60,8 @@ export const newsTags = new Map<NewsTagString, NewsTag>([
     'おとふだびより♪',
     { label: 'おとふだびより♪', color: 'cyan' },
   ],
+  [
+    '開発日記',
+    { label: '開発日記', color: 'purple' },
+  ]
 ])

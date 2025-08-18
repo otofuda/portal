@@ -22,6 +22,8 @@ useSeoMeta({
   ogTitle: 'マンガ一覧｜音札ポータル',
   description: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！',
   ogDescription: '音札の世界をゆる〜くお届けする4コマ漫画「おとふだびより♪」のアーカイブを掲載中！',
+  ogImage: '/thumb.png',
+  twitterCard: 'summary_large_image',
 })
 </script>
 

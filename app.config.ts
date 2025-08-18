@@ -9,6 +9,7 @@ export default defineAppConfig({
       orange: 'orange',
       lime: 'lime',
       cyan: 'cyan',
+      purple: 'purple',
       neutral: 'zinc'
     }
   }

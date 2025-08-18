@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     ['@nuxt/ui', {
       icons: ['fa6-brands'],
       theme: {
-        colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error', 'rose', 'emerald', 'blue', 'orange', 'lime', 'cyan']
+        colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error', 'rose', 'emerald', 'blue', 'orange', 'lime', 'cyan', 'purple']
       }
     }],
     ['@nuxt/image', {
@@ -37,6 +37,7 @@ export default defineNuxtConfig({
     // <head> の内容
     head: {
       titleTemplate: '%s | 音札ポータル',
+      title: '音札ポータル',
       meta: [
         { name: 'description', content: '音札ポータルは、アーケード版「音札」やスマホ・PCで遊べる「音札Étude」の最新情報をお届けするポータルサイトです。' },
         { name: 'thumbnail', content: '/thumb.png' },

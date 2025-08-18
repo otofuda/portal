@@ -48,6 +48,15 @@ const onClickTag = (tag: NewsTagString) => {
     searchTag.value = tag
   }
 }
+
+useSeoMeta({
+  title: 'お知らせ一覧｜音札ポータル',
+  ogTitle: 'お知らせ一覧｜音札ポータル',
+  description: '音札シリーズの最新情報はこちら！',
+  ogDescription: '音札シリーズの最新情報はこちら！',
+  ogImage: '/thumb.png',
+  twitterCard: 'summary_large_image',
+})
 </script>
 
 <template>

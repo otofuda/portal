@@ -37,9 +37,9 @@ onMounted(() => {
   })
 })
 
-// onUnmounted(() => {
-//   instances.forEach(instance => instance.destroy())
-// })
+onUnmounted(() => {
+  instances.forEach(instance => instance.destroy())
+})
 </script>
 
 <template>

@@ -91,6 +91,15 @@ const allCopyrights = computed(() => {
   }
   return Array.from(result)
 })
+
+useSeoMeta({
+  title: '収録楽曲一覧｜音札ポータル',
+  ogTitle: '収録楽曲一覧｜音札ポータル',
+  description: '音札シリーズに収録されている楽曲を全曲紹介中！',
+  ogDescription: '音札シリーズに収録されている楽曲を全曲紹介中！',
+  ogImage: '/thumb.png',
+  twitterCard: 'summary_large_image',
+})
 </script>
 
 <template>

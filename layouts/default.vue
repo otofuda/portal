@@ -150,6 +150,14 @@ const showSpNav = ref<boolean>(false)
           target="_blank"
         />
         <UButton
+          icon="i-fa6-brands-youtube"
+          size="lg"
+          color="neutral"
+          variant="ghost"
+          to="https://www.youtube.com/@otofuda"
+          target="_blank"
+        />
+        <UButton
           icon="i-fa6-brands-instagram"
           size="lg"
           color="neutral"
@@ -158,11 +166,11 @@ const showSpNav = ref<boolean>(false)
           target="_blank"
         />
         <UButton
-          icon="i-fa6-brands-youtube"
+          icon="i-fa6-brands-facebook"
           size="lg"
           color="neutral"
           variant="ghost"
-          to="https://www.youtube.com/@youtube"
+          to="https://www.facebook.com/profile.php?id=61578734092510"
           target="_blank"
         />
         <UButton

@@ -288,7 +288,7 @@ const levels = computed<LevelInfo[]>(() => {
   }
 
   .detail {
-    justify-self: center;
+    justify-self: stretch;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
