@@ -211,6 +211,10 @@ useSeoMeta({
     line-height: 2;
     margin-left: 1rem;
   }
+
+  :deep(.embedly-embed) {
+    max-width: 100%;
+  }
 }
 
 .article-menu {
