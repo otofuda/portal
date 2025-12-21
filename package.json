@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.2.2",
-    "@nuxt/eslint": "^1.8.0",
+    "@nuxt/eslint": "^1.12.1",
     "@nuxt/image": "^2.0.0",
     "@nuxt/scripts": "^0.11.10",
     "@unhead/vue": "^2.0.5",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@iconify-json/fa6-brands": "^1.1.18",
-    "@nuxt/ui": "^3.3.4",
+    "@nuxt/ui": "^4.3.0",
     "@nuxtjs/seo": "^3.1.0",
     "sharp": "^0.33.5",
     "simple-parallax-js": "^5.6.2"

@@ -141,7 +141,7 @@ useSeoMeta({
     <!-- ならびかえ -->
     <div class="sort-form">
       <span>ならびかえ</span>
-      <UButtonGroup
+      <UFieldGroup
         size="lg"
         orientation="horizontal"
       >
@@ -183,7 +183,7 @@ useSeoMeta({
           variant="outline"
           @click="isDesc = true"
         />
-      </UButtonGroup>
+      </UFieldGroup>
     </div>
 
     <div
