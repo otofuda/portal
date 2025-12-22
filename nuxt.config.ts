@@ -93,6 +93,9 @@ export default defineNuxtConfig({
           // additionalData: '@use "@/assets/_vars.scss" as vars;'
         }
       }
+    },
+    build: {
+      target: 'es2015'
     }
   },
   linkChecker: { enabled: false },
