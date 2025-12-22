@@ -78,6 +78,10 @@ export default defineNuxtConfig({
 
   devServer: { port: 8080 },
 
+  future: {
+    compatibilityVersion: 5
+  },
+
   experimental: {
     typedPages: true,
     sharedPrerenderData: true
@@ -93,7 +97,13 @@ export default defineNuxtConfig({
           // additionalData: '@use "@/assets/_vars.scss" as vars;'
         }
       }
+    },
+    build: {
+      target: 'es2015'
     }
+    // esbuild: {
+    //   target: 'es2015'
+    // }
   },
   linkChecker: { enabled: false },
   ogImage: { enabled: false }
