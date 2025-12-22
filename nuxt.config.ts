@@ -100,10 +100,10 @@ export default defineNuxtConfig({
     },
     build: {
       target: 'es2015'
-    },
-    esbuild: {
-      target: 'es2015'
     }
+    // esbuild: {
+    //   target: 'es2015'
+    // }
   },
   linkChecker: { enabled: false },
   ogImage: { enabled: false }
