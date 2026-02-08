@@ -14,7 +14,7 @@ const jacketSrc = computed<string>(() => {
 
 <template>
   <NuxtLink
-    :to="`songs/${props.song.song_id}`"
+    :to="`/songs/${props.song.song_id}`"
     class="song-link"
   >
     <!-- ジャケット -->

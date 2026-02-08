@@ -3,29 +3,12 @@ import type SimpleParallax from 'simple-parallax-js'
 export default defineNuxtConfig({
   // 使用するモジュール
   modules: [
-    ['@nuxt/ui', {
-      icons: ['fa6-brands'],
-      theme: {
-        colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error', 'rose', 'emerald', 'blue', 'orange', 'lime', 'cyan', 'purple']
-      }
-    }],
-    ['@nuxt/image', {
-      provider: process.env.VERCEL_ENV ? 'vercel' : 'ipx',
-      quality: 100,
-      format: ['webp', 'png'],
-      domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
-      alias: {
-        microcms: 'https://images.microcms-assets.io',
-        twimg: 'https://pbs.twimg.com'
-      }
-    }],
-    ['@nuxtjs/seo', {}],
-    ['@nuxt/scripts', {}],
-    ['@nuxt/eslint', {
-      config: {
-        stylistic: true
-      }
-    }]
+    '@nuxt/ui',
+    '@nuxt/image',
+    '@nuxtjs/seo',
+    '@nuxt/scripts',
+    '@nuxt/eslint',
+    '@nuxt/fonts'
   ],
 
   app: {
@@ -53,6 +36,8 @@ export default defineNuxtConfig({
     }
   },
 
+  css: ['~/assets/main.css'],
+
   vue: {
     compilerOptions: {}
   },
@@ -68,6 +53,13 @@ export default defineNuxtConfig({
     preference: 'light'
   },
 
+  ui: {
+    // icons: ['fa6-brands'],
+    theme: {
+      colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error', 'rose', 'emerald', 'blue', 'orange', 'lime', 'cyan', 'purple']
+    }
+  },
+
   // 環境変数
   runtimeConfig: {
     public: {
@@ -77,10 +69,6 @@ export default defineNuxtConfig({
   },
 
   devServer: { port: 8080 },
-
-  future: {
-    compatibilityVersion: 5
-  },
 
   experimental: {
     typedPages: true,
@@ -101,9 +89,23 @@ export default defineNuxtConfig({
     build: {
       target: 'es2015'
     }
-    // esbuild: {
-    //   target: 'es2015'
-    // }
+  },
+
+  eslint: {
+    config: {
+      stylistic: true
+    }
+  },
+
+  image: {
+    provider: process.env.VERCEL_ENV ? 'vercel' : 'ipx',
+    quality: 100,
+    format: ['webp', 'png'],
+    domains: ['images.microcms-assets.io', 'pbs.twimg.com'],
+    alias: {
+      microcms: 'https://images.microcms-assets.io',
+      twimg: 'https://pbs.twimg.com'
+    }
   },
   linkChecker: { enabled: false },
   ogImage: { enabled: false }

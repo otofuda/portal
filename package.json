@@ -12,16 +12,17 @@
     "@iconify-json/heroicons": "^1.2.2",
     "@nuxt/eslint": "^1.12.1",
     "@nuxt/image": "^2.0.0",
-    "@nuxt/scripts": "^0.11.10",
+    "@nuxt/scripts": "^0.13.2",
     "@unhead/vue": "^2.0.5",
     "eslint": "^9.33.0",
-    "nuxt": "^4.2.2",
+    "nuxt": "^4.3.1",
     "sass": "^1.90.0"
   },
   "dependencies": {
     "@iconify-json/fa6-brands": "^1.1.18",
-    "@nuxt/ui": "^4.3.0",
-    "@nuxtjs/seo": "^3.1.0",
+    "@nuxt/fonts": "^0.13.0",
+    "@nuxt/ui": "^4.4.0",
+    "@nuxtjs/seo": "^3.4.0",
     "sharp": "^0.33.5",
     "simple-parallax-js": "^5.6.2"
   },

@@ -72,7 +72,7 @@ useSeoMeta({
         :src="content.image.url.replace('https://images.microcms-assets.io', 'microcms')"
         :alt="title"
         format="webp"
-        sizes="320"
+        sizes="320px"
       />
     </div>
 

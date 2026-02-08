@@ -8,7 +8,7 @@ const props = defineProps<{
 
 <template>
   <NuxtLink
-    :to="`comics/${props.comic.id}`"
+    :to="`/comics/${props.comic.id}`"
     class="comic-link"
   >
     <NuxtImg

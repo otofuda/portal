@@ -31,7 +31,7 @@ const tags = computed<NewsTag[]>(() => {
 
 <template>
   <NuxtLink
-    :to="`news/${props.article.id}`"
+    :to="`/news/${props.article.id}`"
     class="news-link"
   >
     <NuxtImg
@@ -78,7 +78,10 @@ const tags = computed<NewsTag[]>(() => {
   .image {
     grid-row: 1 / 4;
     max-height: 25vh;
-    min-width: 100%;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
     object-fit: contain;
     align-self: stretch;
     justify-self: center;

@@ -78,11 +78,12 @@ useSeoMeta({
         :to="topic.link"
         target="_blank"
         class="flex justify-center"
+        rel="noopener noreferrer"
       >
         <NuxtPicture
           format="webp"
           :src="`${topic.image.replace('https://pbs.twimg.com', 'twimg')}?format=jpg`"
-          sizes="500"
+          sizes="500px"
           :alt="topic.alt"
         />
       </NuxtLink>
