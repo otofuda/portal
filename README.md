@@ -1,8 +1,8 @@
 # Otofuda Portal
 
 - Nuxt v4
-- Node.js v22
-- npm v10
+- Node.js v24
+- npm v11
 
 ![Otofuda Portal](public/thumb.png)
 

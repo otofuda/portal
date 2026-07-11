@@ -79,13 +79,13 @@ useSeoMeta({
         <NuxtPicture
           format="webp"
           class="intro-image-picture"
-          sizes="640"
+          sizes="640px"
           :src="character.image"
         />
         <NuxtPicture
           format="webp"
           class="intro-image-battle"
-          sizes="160"
+          sizes="160px"
           :src="character.battleImage"
         />
       </div>
@@ -156,12 +156,31 @@ useSeoMeta({
 
     .intro-image {
       position: relative;
+      margin-top: -20%;
+
+      .intro-image-picture {
+        width: 100%;
+
+        :deep(img) {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          display: block;
+        }
+      }
 
       .intro-image-battle {
         width: 7rem;
         position: absolute;
         bottom: 0;
         right: 0;
+
+        :deep(img) {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          display: block;
+        }
 
         &::before {
           position: absolute;

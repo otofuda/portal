@@ -47,31 +47,31 @@ onUnmounted(() => {
     <NuxtPicture
       format="webp"
       class="character --kanon"
-      sizes="640"
+      sizes="640px"
       src="/characters/kanon.png"
     />
     <NuxtPicture
       format="webp"
       class="character --kadone"
-      sizes="640"
+      sizes="640px"
       src="/characters/kadone.png"
     />
     <NuxtPicture
       format="webp"
       class="character --kunon"
-      sizes="640"
+      sizes="640px"
       src="/characters/kunon.png"
     />
     <NuxtPicture
       format="webp"
       class="character --hirono"
-      sizes="640"
+      sizes="640px"
       src="/characters/hirono.png"
     />
     <NuxtPicture
       format="webp"
       class="character --shuon"
-      sizes="640"
+      sizes="640px"
       src="/characters/shuon.png"
     />
 
@@ -90,7 +90,7 @@ onUnmounted(() => {
       >
         <NuxtImg
           format="webp"
-          :width="500"
+          width="500px"
           class="--arcade"
           src="/assets/button_arcade.png"
         />
@@ -101,7 +101,7 @@ onUnmounted(() => {
       >
         <NuxtImg
           format="webp"
-          :width="500"
+          width="500px"
           class="--etude"
           src="/assets/button_etude.png"
         />
@@ -124,7 +124,9 @@ onUnmounted(() => {
     position: relative;
     justify-self: center;
     min-width: 125%;
+    width: 100%;
     aspect-ratio: 1 / 2;
+    display: flex;
 
     &.--kanon,
     &.--shuon {
@@ -140,9 +142,13 @@ onUnmounted(() => {
       top: -15%;
     }
 
-    img {
+    :deep(img) {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
       aspect-ratio: 1 / 2;
       object-fit: contain;
+      display: block;
     }
   }
 
@@ -180,7 +186,7 @@ onUnmounted(() => {
 
   .buttons {
     position: absolute;
-    width: 100%;
+    max-width: 100%;
     bottom: 2rem;
     display: grid;
     grid-template-columns: 50% 50%;
@@ -194,6 +200,13 @@ onUnmounted(() => {
 
     img.--etude {
       filter: drop-shadow(0 0.25rem 0.5rem rgba(vars.$green, 0.2));
+    }
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
     }
   }
 }

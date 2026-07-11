@@ -70,25 +70,25 @@ useSeoMeta({
       <NuxtPicture
         format="webp"
         class="character --kanon"
-        sizes="640"
+        sizes="640px"
         src="/characters/ac/kanon.png"
       />
       <NuxtPicture
         format="webp"
         class="character --kadone"
-        sizes="640"
+        sizes="640px"
         src="/characters/ac/kadone.png"
       />
       <NuxtPicture
         format="webp"
         class="character --kunon"
-        sizes="640"
+        sizes="640px"
         src="/characters/ac/kunon.png"
       />
       <NuxtPicture
         format="webp"
         class="character --hirono"
-        sizes="640"
+        sizes="640px"
         src="/characters/ac/hirono.png"
       />
     </div>
@@ -134,7 +134,7 @@ useSeoMeta({
       >
         <NuxtPicture
           format="webp"
-          sizes="250"
+          sizes="250px"
           :src="`/characters/button/${character.id}.png`"
         />
       </NuxtLink>
@@ -156,6 +156,7 @@ useSeoMeta({
       position: relative;
       justify-self: center;
       min-width: 175%;
+      width: 100%;
       aspect-ratio: 1 / 2;
 
       &.--kanon,
@@ -168,9 +169,13 @@ useSeoMeta({
         top: 5%;
       }
 
-      img {
+      :deep(img) {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
         aspect-ratio: 1 / 2;
         object-fit: contain;
+        display: block;
       }
     }
   }
@@ -217,8 +222,8 @@ useSeoMeta({
     grid-template-columns: 50% 50%;
     grid-template-rows: auto auto auto auto auto;
     padding: 0 15%;
-    margin-top: -15%;
-    margin-bottom: -120%;
+    margin-top: -30%;
+    margin-bottom: -100%;
     overflow: hidden;
 
     > .character {
